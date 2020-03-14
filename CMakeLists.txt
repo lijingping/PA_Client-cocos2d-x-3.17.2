@@ -49,11 +49,84 @@ if(APPLE OR VS)
 endif()
 
 # record sources, headers
-set(GAME_HEADER ${RUNTIME_SRC_ROOT}/Classes/AppDelegate.h)
-set(GAME_SOURCE ${RUNTIME_SRC_ROOT}/Classes/AppDelegate.cpp)
+set(GAME_HEADER 
+    ${RUNTIME_SRC_ROOT}/Classes/AppDelegate.h
+    ${RUNTIME_SRC_ROOT}/Classes/CCPomelo.h
+    ${RUNTIME_SRC_ROOT}/Classes/export.h
+    ${RUNTIME_SRC_ROOT}/Classes/lua-bindings/lua_pomelo_auto.hpp
+    ${RUNTIME_SRC_ROOT}/Classes/include/Battle.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/BaseClass.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/BaseData.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/Bullet.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/BulletBase.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/BulletMgr.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/BulletNormal.h
+    # ${RUNTIME_SRC_ROOT}/Classes/include/ClientKernel.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/CommonData.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/Define.h
+    # ${RUNTIME_SRC_ROOT}/Classes/include/DownAsset.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/EnergyBody.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/Event.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/Fort.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/FortMgr.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/InitialData.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json_batchallocator.h
+    # ${RUNTIME_SRC_ROOT}/Classes/include/MCKernel.h
+    # ${RUNTIME_SRC_ROOT}/Classes/include/MobileClientKernel.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/Player.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/Shape.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/Ship.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/stdafx.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/TimeTool.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/Tool.h
+    # ${RUNTIME_SRC_ROOT}/Classes/include/UnZipAsset.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json/writer.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json/value.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json/reader.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json/json.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json/forwards.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json/features.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json/config.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/json/autolink.h
+)
+set(GAME_SOURCE
+    ${RUNTIME_SRC_ROOT}/Classes/AppDelegate.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/CCPomelo.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/export.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/lua-bindings/lua_pomelo_auto.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/BaseData.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/BaseClass.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/Battle.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/Bullet.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/BulletBase.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/BulletMgr.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/BulletNormal.cpp
+    # ${RUNTIME_SRC_ROOT}/Classes/src/ClientKernel.cpp
+    # ${RUNTIME_SRC_ROOT}/Classes/src/DownAsset.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/EnergyBody.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/Fort.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/FortMgr.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/json_reader.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/json_value.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/json_writer.cpp
+    # ${RUNTIME_SRC_ROOT}/Classes/src/MCKernel.cpp
+    # ${RUNTIME_SRC_ROOT}/Classes/src/MobileClientKernel.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/Player.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/Shape.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/Ship.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/stdafx.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/TimeTool.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/Tool.cpp
+    # ${RUNTIME_SRC_ROOT}/Classes/src/UnZipAsset.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/json_internalarray.inl
+    ${RUNTIME_SRC_ROOT}/Classes/src/json_internalmap.inl
+    ${RUNTIME_SRC_ROOT}/Classes/src/json_valueiterator.inl
+)
+
 # sources need to compile info, include dirs and source files
 include_directories(
         ${RUNTIME_SRC_ROOT}/Classes
+        ${RUNTIME_SRC_ROOT}/Classes/include
         ${COCOS2DX_ROOT_PATH}/cocos/scripting/lua-bindings/auto
         ${COCOS2DX_ROOT_PATH}/cocos/scripting/lua-bindings/manual
         ${COCOS2DX_ROOT_PATH}/external/lua/luajit/include

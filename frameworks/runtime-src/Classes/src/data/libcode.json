@@ -1,0 +1,26 @@
+{
+  "success": 1,
+  "error": 0,
+  "battle": {
+    "request_skill": {
+      "fort_die_skill": 1908273631,
+      "fort_paralysis_skill": 1436443798,
+      "fort_unenergy": 2044709836,
+      "fort_energy_not_enough": 868166208,
+      "fort_skilling": 1292530664
+    },
+    "request_prop": {
+      "prop_not_enough": 1404966145,
+      "player_unmissile": 880866513,
+      "fort_die_prop": 1178852316,
+      "fort_is_life_relive": 28891869,
+      "energy_is_die": 20874498,
+      "fort_unenergy_prop": 1351660893,
+      "fort_unrepaire_prop": 707724232,
+      "fort_armor_prop": 52587218
+    },
+    "request_surrender": {
+      "surrender_field": 175573517
+    }
+  }
+}

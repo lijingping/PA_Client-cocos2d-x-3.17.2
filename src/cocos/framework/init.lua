@@ -1,6 +1,6 @@
 --[[
 
-Copyright (c) 2014-2017 Chukong Technologies Inc.
+Copyright (c) 2011-2015 chukong-incc.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +25,9 @@ THE SOFTWARE.
 if type(DEBUG) ~= "number" then DEBUG = 0 end
 
 -- load framework
-printInfo("")
-printInfo("# DEBUG                        = " .. DEBUG)
-printInfo("#")
+-- printInfo("")
+-- printInfo("# DEBUG                        = " .. DEBUG)
+-- printInfo("#")
 
 device     = require("cocos.framework.device")
 display    = require("cocos.framework.display")
@@ -38,6 +38,7 @@ require("cocos.framework.extends.NodeEx")
 require("cocos.framework.extends.SpriteEx")
 require("cocos.framework.extends.LayerEx")
 require("cocos.framework.extends.MenuEx")
+require("cocos.framework.luaExtends.tableEx")
 
 if ccui then
 require("cocos.framework.extends.UIWidget")
@@ -75,6 +76,14 @@ function cc.disable_global()
             error(string.format("USE \" cc.exports.%s = value \" INSTEAD OF SET GLOBAL VARIABLE", name), 0)
         end
     })
+end
+
+function global(name)
+    if nil == rawget(__g, name) then
+        rawset(__g, name, false)
+    else
+        error("The global name \"" .. name .. "\" has be used")
+    end
 end
 
 if CC_DISABLE_GLOBAL then

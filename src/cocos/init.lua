@@ -1,6 +1,6 @@
 --[[
 
-Copyright (c) 2014-2017 Chukong Technologies Inc.
+Copyright (c) 2011-2015 chukong-incc.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,6 +56,12 @@ if nil ~= sp then
     require "cocos.spine.SpineConstants"
 end
 
+-- pomelo
+-- if nil ~= pomelo then
+--     print("Loaded Pomelo")
+--     require "cocos.network.pomelo"
+-- end
+
 require "cocos.cocos2d.deprecated"
 require "cocos.cocos2d.DrawPrimitives"
 
@@ -92,14 +98,15 @@ require "cocos.network.DeprecatedNetworkClass"
 require "cocos.network.DeprecatedNetworkEnum"
 require "cocos.network.DeprecatedNetworkFunc"
 
--- register_ui_module
+-- register_ui_moudle
 if nil ~= ccui then
     require "cocos.ui.DeprecatedUIEnum"
     require "cocos.ui.DeprecatedUIFunc"
 end
 
 -- cocosbuilder
-require "cocos.cocosbuilder.CCBReaderLoad"
+-- require "cocos.cocosbuilder.CCBReaderLoad"
+require "cocos.cocosbuilder.CCBLoader"
 
 -- physics3d
 require "cocos.physics3d.physics3d-constants"

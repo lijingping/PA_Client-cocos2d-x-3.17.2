@@ -1,6 +1,6 @@
 --[[
 
-Copyright (c) 2014-2017 Chukong Technologies Inc.
+Copyright (c) 2011-2014 chukong-inc.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,15 @@ THE SOFTWARE.
 
 local display = {}
 
+-- View Z Order
+display.Z_BACKGROUND    = 0
+display.Z_UILAYER       = 10
+display.Z_BLURLAYER     = 11
+display.Z_MESSAGE_HINT  = 20
+display.Z_ITEM_TIPS     = 30
+display.Z_STR_TIPS      = 40
+display.Z_LOADING       = 50
+
 local director = cc.Director:getInstance()
 local view = director:getOpenGLView()
 
@@ -38,6 +47,7 @@ if not view then
             height = CC_DESIGN_RESOLUTION.height
         end
     end
+    --local framesize = cc.Director:getInstance():getOpenGLView():getFrameSize()
     view = cc.GLViewImpl:createWithRect("Cocos2d-Lua", cc.rect(0, 0, width, height))
     director:setOpenGLView(view)
 end
@@ -72,9 +82,11 @@ local function setDesignResolution(r, framesize)
             view:setDesignResolutionSize(width, height, cc.ResolutionPolicy.NO_BORDER)
         elseif r.autoscale == "EXACT_FIT" then
             view:setDesignResolutionSize(r.width, r.height, cc.ResolutionPolicy.EXACT_FIT)
-        elseif r.autoscale == "NO_BORDER" then
+        elseif r.autoscale == "NO_BORDER" then 
+
             view:setDesignResolutionSize(r.width, r.height, cc.ResolutionPolicy.NO_BORDER)
         elseif r.autoscale == "SHOW_ALL" then
+            print("SHOW_ALL", width, height)
             view:setDesignResolutionSize(r.width, r.height, cc.ResolutionPolicy.SHOW_ALL)
         else
             printError(string.format("display - invalid r.autoscale \"%s\"", r.autoscale))
@@ -87,6 +99,7 @@ local function setConstants()
     display.sizeInPixels = {width = sizeInPixels.width, height = sizeInPixels.height}
 
     local viewsize = director:getWinSize()
+    -- print("设计分辨率："); dump(viewsize)---config里设计分辨率
     display.contentScaleFactor = director:getContentScaleFactor()
     display.size               = {width = viewsize.width, height = viewsize.height}
     display.width              = display.size.width
@@ -111,6 +124,29 @@ local function setConstants()
     display.top_center         = cc.p(display.cx, display.top)
     display.top_bottom         = cc.p(display.cx, display.bottom)
 
+    -----begin--------
+    --add by kehan 2017/11/1 
+    display.designResolutionWidth        = 1280
+    display.designResolutionHeight       = 720
+    --偏移量
+    display.offsetX        = display.width * 0.5 - display.designResolutionWidth * 0.5
+    display.offsetY        = display.height * 0.5 - display.designResolutionHeight * 0.5
+    print("displayoffset = ", display.offsetX, display.offsetY);
+  
+    display.scale = display.width / display.designResolutionWidth;
+    display.scaleY = display.height/ display.designResolutionHeight;
+
+    resolution = framesize.width/framesize.height;
+    display.resolution = resolution;
+    local designResoultion = 1280/720;
+    print("手机的长宽比:", resolution);
+    if resolution >= 2.0 then
+        local reduce =  designResoultion / resolution;
+        display.reduce = reduce
+        print("全面屏缩放",reduce)
+    end
+    ----end------------
+
     printInfo(string.format("# display.sizeInPixels         = {width = %0.2f, height = %0.2f}", display.sizeInPixels.width, display.sizeInPixels.height))
     printInfo(string.format("# display.size                 = {width = %0.2f, height = %0.2f}", display.size.width, display.size.height))
     printInfo(string.format("# display.contentScaleFactor   = %0.2f", display.contentScaleFactor))
@@ -126,6 +162,8 @@ local function setConstants()
     printInfo(string.format("# display.c_right              = %0.2f", display.c_right))
     printInfo(string.format("# display.c_top                = %0.2f", display.c_top))
     printInfo(string.format("# display.c_bottom             = %0.2f", display.c_bottom))
+    printInfo(string.format("# display.designWidth          = %0.2f", display.designResolutionWidth))
+    printInfo(string.format("# display.designHeight         = %0.2f", display.designResolutionHeight))
     printInfo(string.format("# display.center               = {x = %0.2f, y = %0.2f}", display.center.x, display.center.y))
     printInfo(string.format("# display.left_top             = {x = %0.2f, y = %0.2f}", display.left_top.x, display.left_top.y))
     printInfo(string.format("# display.left_bottom          = {x = %0.2f, y = %0.2f}", display.left_bottom.x, display.left_bottom.y))
@@ -140,7 +178,6 @@ end
 
 function display.setAutoScale(configs)
     if type(configs) ~= "table" then return end
-
     checkResolution(configs)
     if type(configs.callback) == "function" then
         local c = configs.callback(framesize)
@@ -150,10 +187,10 @@ function display.setAutoScale(configs)
         checkResolution(configs)
     end
 
-    setDesignResolution(configs, framesize)
+    setDesignResolution(configs, framesize) --分辨率适配
 
-    printInfo(string.format("# design resolution size       = {width = %0.2f, height = %0.2f}", configs.width, configs.height))
-    printInfo(string.format("# design resolution autoscale  = %s", configs.autoscale))
+    -- printInfo(string.format("# design resolution size       = {width = %0.2f, height = %0.2f}", configs.width, configs.height))
+    -- printInfo(string.format("# design resolution autoscale  = %s", configs.autoscale))
     setConstants()
 end
 
@@ -185,31 +222,31 @@ display.CENTER_TOP    = cc.p(0.5, 1)
 display.CENTER_BOTTOM = cc.p(0.5, 0)
 
 display.SCENE_TRANSITIONS = {
-    CROSSFADE       = {cc.TransitionCrossFade},
+    CROSSFADE       = cc.TransitionCrossFade,
     FADE            = {cc.TransitionFade, cc.c3b(0, 0, 0)},
-    FADEBL          = {cc.TransitionFadeBL},
-    FADEDOWN        = {cc.TransitionFadeDown},
-    FADETR          = {cc.TransitionFadeTR},
-    FADEUP          = {cc.TransitionFadeUp},
+    FADEBL          = cc.TransitionFadeBL,
+    FADEDOWN        = cc.TransitionFadeDown,
+    FADETR          = cc.TransitionFadeTR,
+    FADEUP          = cc.TransitionFadeUp,
     FLIPANGULAR     = {cc.TransitionFlipAngular, cc.TRANSITION_ORIENTATION_LEFT_OVER},
     FLIPX           = {cc.TransitionFlipX, cc.TRANSITION_ORIENTATION_LEFT_OVER},
     FLIPY           = {cc.TransitionFlipY, cc.TRANSITION_ORIENTATION_UP_OVER},
-    JUMPZOOM        = {cc.TransitionJumpZoom},
-    MOVEINB         = {cc.TransitionMoveInB},
-    MOVEINL         = {cc.TransitionMoveInL},
-    MOVEINR         = {cc.TransitionMoveInR},
-    MOVEINT         = {cc.TransitionMoveInT},
+    JUMPZOOM        = cc.TransitionJumpZoom,
+    MOVEINB         = cc.TransitionMoveInB,
+    MOVEINL         = cc.TransitionMoveInL,
+    MOVEINR         = cc.TransitionMoveInR,
+    MOVEINT         = cc.TransitionMoveInT,
     PAGETURN        = {cc.TransitionPageTurn, false},
-    ROTOZOOM        = {cc.TransitionRotoZoom},
-    SHRINKGROW      = {cc.TransitionShrinkGrow},
-    SLIDEINB        = {cc.TransitionSlideInB},
-    SLIDEINL        = {cc.TransitionSlideInL},
-    SLIDEINR        = {cc.TransitionSlideInR},
-    SLIDEINT        = {cc.TransitionSlideInT},
-    SPLITCOLS       = {cc.TransitionSplitCols},
-    SPLITROWS       = {cc.TransitionSplitRows},
-    TURNOFFTILES    = {cc.TransitionTurnOffTiles},
-    ZOOMFLIPANGULAR = {cc.TransitionZoomFlipAngular},
+    ROTOZOOM        = cc.TransitionRotoZoom,
+    SHRINKGROW      = cc.TransitionShrinkGrow,
+    SLIDEINB        = cc.TransitionSlideInB,
+    SLIDEINL        = cc.TransitionSlideInL,
+    SLIDEINR        = cc.TransitionSlideInR,
+    SLIDEINT        = cc.TransitionSlideInT,
+    SPLITCOLS       = cc.TransitionSplitCols,
+    SPLITROWS       = cc.TransitionSplitRows,
+    TURNOFFTILES    = cc.TransitionTurnOffTiles,
+    ZOOMFLIPANGULAR = cc.TransitionZoomFlipAngular,
     ZOOMFLIPX       = {cc.TransitionZoomFlipX, cc.TRANSITION_ORIENTATION_LEFT_OVER},
     ZOOMFLIPY       = {cc.TransitionZoomFlipY, cc.TRANSITION_ORIENTATION_UP_OVER},
 }
@@ -252,13 +289,12 @@ function display.wrapScene(scene, transition, time, more)
 
     if display.SCENE_TRANSITIONS[key] then
         local t = display.SCENE_TRANSITIONS[key]
-        local cls = t[1]
         time = time or 0.2
         more = more or t[2]
-        if more ~= nil then
-            scene = cls:create(time, scene, more)
+        if type(t) == "table" then
+            scene = t[1]:create(time, scene, more)
         else
-            scene = cls:create(time, scene)
+            scene = t:create(time, scene)
         end
     else
         error(string.format("display.wrapScene() - invalid transition %s", tostring(transition)))
@@ -537,6 +573,61 @@ end
 function display.removeUnusedSpriteFrames()
     spriteFrameCache:removeUnusedSpriteFrames()
     textureCache:removeUnusedTextures()
+end
+
+--往下都是加的东西
+function display.containsPoint(node, point)
+    if not node or not point then
+        return false
+    end
+
+    local size = node:getContentSize()
+    if not size then
+        return false
+    end
+    
+    if point.x > 0 and point.x < size.width and point.y > 0 and point.y < size.height then
+        return true
+    end
+
+    return false
+end
+
+--加的东西
+function display.getFullScreenSize()
+    local visibleSize = cc.Director:getInstance():getVisibleSize()
+    local width = visibleSize.width / display.scale
+    local height = visibleSize.height / display.scale
+    -- print("可见区域的Size大小是:")
+    -- dump(visibleSize)
+
+    return width, height
+end
+
+--按钮置灰
+function display.setGray(sprite)
+    if not sprite then return end
+
+    -- local program = cc.GLProgram:create("shaders/gray.vsh", "shaders/gray.fsh")
+    -- program:bindAttribLocation(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION) 
+    -- program:bindAttribLocation(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR)
+    -- program:bindAttribLocation(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS)
+    -- program:link()
+    -- program:updateUniforms()
+
+    -- sprite:setGLProgram(program)
+
+    local program = cc.GLProgramCache:getInstance():getGLProgram("ShaderUIGrayScale")
+    sprite:setGLProgram(program)
+    
+end
+
+--移除置灰
+function display.removeShader(sprite)
+    if not sprite then return end
+
+    local originGLProgram = cc.GLProgramCache:getInstance():getGLProgram("ShaderPositionTextureColor_noMVP")
+    sprite:setGLProgram(originGLProgram)
 end
 
 return display

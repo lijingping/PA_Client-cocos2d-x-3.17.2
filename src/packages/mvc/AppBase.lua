@@ -1,67 +1,86 @@
-
 local AppBase = class("AppBase")
 
-function AppBase:ctor(configs)
-    self.configs_ = {
-        viewsRoot  = "app.views",
-        modelsRoot = "app.models",
-        defaultSceneName = "MainScene",
-    }
+local SCENE_ROOT = "app.scenes"
+-- local DEFAULT_SCENE = (CC_ENABLE_HOT_UPDATE and "WelcomeScene" or "LoginScene")
+local DEFAULT_SCENE = "LoginScene"
 
-    for k, v in pairs(configs or {}) do
-        self.configs_[k] = v
-    end
+function AppBase:ctor()
+    self.m_runningScene = nil;      --当前的场景
+    self.m_runningSceneName = "";   --当前场景的名称
 
-    if type(self.configs_.viewsRoot) ~= "table" then
-        self.configs_.viewsRoot = {self.configs_.viewsRoot}
-    end
-    if type(self.configs_.modelsRoot) ~= "table" then
-        self.configs_.modelsRoot = {self.configs_.modelsRoot}
-    end
+    -- self.m_lastScene = nil;      --上一个场景
+    self.m_lastSceneName = "";   --上一个场景的名称
 
-    if DEBUG > 1 then
-        dump(self.configs_, "AppBase configs")
-    end
+    -- if CC_SHOW_FPS then
+        cc.Director:getInstance():setDisplayStats(CC_SHOW_FPS);
+    -- end
 
-    if CC_SHOW_FPS then
-        cc.Director:getInstance():setDisplayStats(true)
+    if self.onCreate then
+        self:onCreate()
     end
-
-    -- event
-    self:onCreate()
 end
 
-function AppBase:run(initSceneName)
-    initSceneName = initSceneName or self.configs_.defaultSceneName
-    self:enterScene(initSceneName)
+-- 启动应用
+function AppBase:run()
+    self:enterScene(DEFAULT_SCENE)
 end
 
+function AppBase:getRunningScene()
+    return self.m_runningScene;
+end
+
+function AppBase:getRunningSceneName()
+    return self.m_runningSceneName;
+end
+
+-- function AppBase:getLastScene()
+--     return self.m_lastScene;
+-- end
+
+function AppBase:getLastSceneName()
+    return self.m_lastSceneName;
+end
+
+-- 进入场景
 function AppBase:enterScene(sceneName, transition, time, more)
-    local view = self:createView(sceneName)
-    view:showWithScene(transition, time, more)
-    return view
-end
-
-function AppBase:createView(name)
-    for _, root in ipairs(self.configs_.viewsRoot) do
-        local packageName = string.format("%s.%s", root, name)
-        local status, view = xpcall(function()
-                return require(packageName)
-            end, function(msg)
-            if not string.find(msg, string.format("'%s' not found:", packageName)) then
-                print("load view error: ", msg)
-            end
-        end)
-        local t = type(view)
-        if status and (t == "table" or t == "userdata") then
-            return view:create(self, name)
-        end
+    local scene = self:createScene(sceneName)
+    if scene == nil then
+        print("创建场景" .. sceneName .. "失败。")
+        return
     end
-    error(string.format("AppBase:createView() - not found view \"%s\" in search paths \"%s\"",
-        name, table.concat(self.configs_.viewsRoot, ",")), 0)
+    
+    if self.m_runningScene and self.m_runningSceneName ~= "" then
+        --self.m_lastScene = self.m_runningScene;
+        self.m_lastSceneName = self.m_runningSceneName;
+    end
+
+    self.m_runningScene = scene;
+    self.m_runningSceneName = sceneName;
+
+    display.runScene(scene, transition, time, more)
+    return scene
 end
 
-function AppBase:onCreate()
+function AppBase:createScene(name)
+    local packageName = string.format("%s.%s", SCENE_ROOT, name)
+    local status, scene = xpcall(
+        function()
+            return require(packageName)
+        end, 
+        function(msg)
+            print(string.format("%s相关的Lua文件读取失败，文件存在问题。", packageName))--查看是否有中文符号或者多余的符号，是否多存在多余字母，再查语法错误
+        end
+    )
+
+    if not status then
+        return nil
+    end
+
+    local t = type(scene)
+    if t == "table" or t == "userdata" then
+        return scene:create(name)
+    end
 end
+
 
 return AppBase

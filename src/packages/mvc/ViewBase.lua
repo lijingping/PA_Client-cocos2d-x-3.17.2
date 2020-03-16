@@ -1,68 +1,78 @@
-
 local ViewBase = class("ViewBase", cc.Node)
 
-function ViewBase:ctor(app, name)
+function ViewBase:ctor(scene, name)
     self:enableNodeEvents()
-    self.app_ = app
-    self.name_ = name
+    self.m_strFullName = name   --这个view的name有点鸡肋
+   
+    self:setPosition(cc.p(0,0))
 
-    -- check CSB resource file
-    local res = rawget(self.class, "RESOURCE_FILENAME")
-    if res then
-        self:createResourceNode(res)
+    self.m_bottom = 0;
+    self.m_top = display.size.height;
+    self.m_left = 0;
+    self.m_right = display.size.width;
+
+    self.m_height = display.size.height;
+    self.m_width = display.size.width;
+
+    if self.onCreate then 
+        self:onCreate()
     end
-
-    local binding = rawget(self.class, "RESOURCE_BINDING")
-    if res and binding then
-        self:createResourceBinding(binding)
-    end
-
-    if self.onCreate then self:onCreate() end
-end
-
-function ViewBase:getApp()
-    return self.app_
 end
 
 function ViewBase:getName()
-    return self.name_
-end
-
-function ViewBase:getResourceNode()
-    return self.resourceNode_
-end
-
-function ViewBase:createResourceNode(resourceFilename)
-    if self.resourceNode_ then
-        self.resourceNode_:removeSelf()
-        self.resourceNode_ = nil
+    local function split(szFullString, szSeparator)
+        local nFindStartIndex = 1  
+        local nSplitIndex = 1  
+        local nSplitArray = {}  
+        while true do  
+           local nFindLastIndex = string.find(szFullString, szSeparator, nFindStartIndex)  
+           if not nFindLastIndex then  
+            nSplitArray[nSplitIndex] = string.sub(szFullString, nFindStartIndex, string.len(szFullString))  
+            break  
+           end  
+           nSplitArray[nSplitIndex] = string.sub(szFullString, nFindStartIndex, nFindLastIndex - 1)  
+           nFindStartIndex = nFindLastIndex + 1 --点号为特殊符号，长度设为1，其他情况用string.len(szSeparator)  
+           nSplitIndex = nSplitIndex + 1  
+        end  
+        return nSplitArray 
     end
-    self.resourceNode_ = cc.CSLoader:createNode(resourceFilename)
-    assert(self.resourceNode_, string.format("ViewBase:createResourceNode() - load resouce node from file \"%s\" failed", resourceFilename))
-    self:addChild(self.resourceNode_)
+    -- 传过来的name一般格式为"***.***"，例如"loginView.LoginView"，后半部分为view的lua文件名
+    local nameList = split(self.m_strFullName, "%.");
+    return nameList[2];
 end
 
-function ViewBase:createResourceBinding(binding)
-    assert(self.resourceNode_, "ViewBase:createResourceBinding() - not load resource node")
-    for nodeName, nodeBinding in pairs(binding) do
-        local node = self.resourceNode_:getChildByName(nodeName)
-        if nodeBinding.varname then
-            self[nodeBinding.varname] = node
-        end
-        for _, event in ipairs(nodeBinding.events or {}) do
-            if event.event == "touch" then
-                node:onTouch(handler(self, self[event.method]))
-            end
-        end
-    end
+function ViewBase:addContent(contentNode)
+	self:add(contentNode)
 end
 
-function ViewBase:showWithScene(transition, time, more)
-    self:setVisible(true)
-    local scene = display.newScene(self.name_)
-    scene:addChild(self)
-    display.runScene(scene, transition, time, more)
-    return self
+function ViewBase:createFrameLayer()
+    print("ViewBase:createFrameLayer()")
+
+    local width, height = display.getFullScreenSize() -- 1280 720
+
+    local frameLayer = cc.Layer:create()
+    frameLayer:setContentSize(cc.size(width, 960))
+
+    frameLayer:ignoreAnchorPointForPosition(false)
+    frameLayer:setAnchorPoint(cc.p(0.5, 0.5))
+    frameLayer:move(cc.p(640, 480))
+    frameLayer:setScale(display.scale)
+
+    frameLayer.center = cc.p(512 , 384)
+
+    local configHeight = display.designHeight;
+    local heightDown = display.heightDown
+
+    frameLayer.bottom = 0 - heightDown*0.5
+    frameLayer.top = height + heightDown*0.5
+    
+    frameLayer.left = 0
+    frameLayer.right = display.size.width--1136
+
+    frameLayer.width = display.size.width
+    frameLayer.height = display.size.height
+
+    return frameLayer
 end
 
 return ViewBase

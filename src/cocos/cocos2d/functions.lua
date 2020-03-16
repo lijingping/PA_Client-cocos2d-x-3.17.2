@@ -1,6 +1,6 @@
 --[[
 
-Copyright (c) 2014-2017 Chukong Technologies Inc.
+Copyright (c) 2011-2014 chukong-inc.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ local function dump_value_(v)
     return tostring(v)
 end
 
-function dump(value, description, nesting)
+function dump(value, desciption, nesting)
     if type(nesting) ~= "number" then nesting = 3 end
 
     local lookupTable = {}
@@ -58,22 +58,22 @@ function dump(value, description, nesting)
     local traceback = string.split(debug.traceback("", 2), "\n")
     print("dump from: " .. string.trim(traceback[3]))
 
-    local function dump_(value, description, indent, nest, keylen)
-        description = description or "<var>"
+    local function dump_(value, desciption, indent, nest, keylen)
+        desciption = desciption or "<var>"
         local spc = ""
         if type(keylen) == "number" then
-            spc = string.rep(" ", keylen - string.len(dump_value_(description)))
+            spc = string.rep(" ", keylen - string.len(dump_value_(desciption)))
         end
         if type(value) ~= "table" then
-            result[#result +1 ] = string.format("%s%s%s = %s", indent, dump_value_(description), spc, dump_value_(value))
+            result[#result +1 ] = string.format("%s%s%s = %s", indent, dump_value_(desciption), spc, dump_value_(value))
         elseif lookupTable[tostring(value)] then
-            result[#result +1 ] = string.format("%s%s%s = *REF*", indent, dump_value_(description), spc)
+            result[#result +1 ] = string.format("%s%s%s = *REF*", indent, dump_value_(desciption), spc)
         else
             lookupTable[tostring(value)] = true
             if nest > nesting then
-                result[#result +1 ] = string.format("%s%s = *MAX NESTING*", indent, dump_value_(description))
+                result[#result +1 ] = string.format("%s%s = *MAX NESTING*", indent, dump_value_(desciption))
             else
-                result[#result +1 ] = string.format("%s%s = {", indent, dump_value_(description))
+                result[#result +1 ] = string.format("%s%s = {", indent, dump_value_(desciption))
                 local indent2 = indent.."    "
                 local keys = {}
                 local keylen = 0
@@ -99,7 +99,7 @@ function dump(value, description, nesting)
             end
         end
     end
-    dump_(value, description, "- ", 1)
+    dump_(value, desciption, "- ", 1)
 
     for i, line in ipairs(result) do
         print(line)
@@ -227,6 +227,7 @@ function class(classname, ...)
         -- add default constructor
         cls.ctor = function() end
     end
+
     cls.new = function(...)
         local instance
         if cls.__create then
@@ -239,6 +240,7 @@ function class(classname, ...)
         instance:ctor(...)
         return instance
     end
+    
     cls.create = function(_, ...)
         return cls.new(...)
     end
@@ -252,7 +254,7 @@ iskindof_ = function(cls, name)
     if type(__index) == "table" and rawget(__index, "__cname") == name then return true end
 
     if rawget(cls, "__cname") == name then return true end
-    local __supers = rawget(__index, "__supers")
+    local __supers = rawget(cls, "__supers")
     if not __supers then return false end
     for _, super in ipairs(__supers) do
         if iskindof_(super, name) then return true end
@@ -267,7 +269,7 @@ function iskindof(obj, classname)
     local mt
     if t == "userdata" then
         if tolua.iskindof(obj, classname) then return true end
-        mt = getmetatable(tolua.getpeer(obj))
+        mt = tolua.getpeer(obj)
     else
         mt = getmetatable(obj)
     end
@@ -338,8 +340,9 @@ function math.angle2radian(angle)
     return angle * pi_div_180
 end
 
+local pi_mul_180 = math.pi * 180
 function math.radian2angle(radian)
-    return radian * 180 / math.pi
+    return radian / pi_mul_180
 end
 
 function io.exists(path)

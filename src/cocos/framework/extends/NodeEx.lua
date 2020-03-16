@@ -1,6 +1,6 @@
 --[[
 
-Copyright (c) 2014-2017 Chukong Technologies Inc.
+Copyright (c) 2011-2014 chukong-inc.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -225,4 +225,15 @@ function Node:onCleanup_()
         return
     end
     self:onCleanupCallback_()
+end
+
+function Node:blink(duration)
+    self:stopAllActions()
+
+    local fadeTo = cc.FadeTo:create(duration, 50)
+    local fadeBack = cc.FadeTo:create(duration, 255)
+    local sequence = cc.Sequence:create(fadeTo, fadeBack)
+    local blinking = cc.RepeatForever:create(sequence)
+
+    self:runAction(blinking)
 end

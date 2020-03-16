@@ -2,7 +2,7 @@ local AppBase = class("AppBase")
 
 local SCENE_ROOT = "app.scenes"
 -- local DEFAULT_SCENE = (CC_ENABLE_HOT_UPDATE and "WelcomeScene" or "LoginScene")
-local DEFAULT_SCENE = "LoginScene"
+local DEFAULT_SCENE = "ZZTestScene"
 
 function AppBase:ctor()
     self.m_runningScene = nil;      --当前的场景

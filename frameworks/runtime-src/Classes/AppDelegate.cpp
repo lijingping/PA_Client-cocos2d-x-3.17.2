@@ -26,8 +26,9 @@
 #include "scripting/lua-bindings/manual/CCLuaEngine.h"
 #include "cocos2d.h"
 #include "scripting/lua-bindings/manual/lua_module_register.h"
+#include "scripting/lua-bindings/manual/network/lua_extensions.h"
 #include "lua-bindings/lua_pomelo_auto.hpp"
-#include "network/lua_extensions.h"
+
 
 #include <dirent.h>
 #include <sys/stat.h>
@@ -44,7 +45,7 @@ using namespace cocos2d::experimental;
 USING_NS_CC;
 using namespace std;
 
-extern "C" int luaopen_libpower(lua_State *L);
+//extern "C" int luaopen_libpower(lua_State *L);
 
 AppDelegate::AppDelegate()
 {
@@ -208,7 +209,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     //register_custom_function(stack->getLuaState());
 
     register_all_pomelo(L);
-    luaopen_libpower(L);
+    //luaopen_libpower(L);
     
 #if CC_64BITS
     FileUtils::getInstance()->addSearchPath("src/64bit");

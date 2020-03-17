@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Default|Win32">
+      <Configuration>Default</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2CD6A9F2-0A04-9D4F-41EC-BB0315C00BF5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>run-benchmarks</RootNamespace>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Locals">
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+  <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props"/>
+  <ImportGroup Label="ExtensionSettings"/>
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros"/>
+  <PropertyGroup>
+    <ExecutablePath>$(ExecutablePath);$(MSBuildProjectDirectory)\.\bin\;$(MSBuildProjectDirectory)\.\bin\</ExecutablePath>
+    <IntDir>$(Configuration)\obj\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetPath>$(OutDir)\$(ProjectName)$(TargetExt)</TargetPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Default|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>advapi32.lib;iphlpapi.lib;psapi.lib;shell32.lib;ws2_32.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="uv.gyp"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test\benchmark-list.h"/>
+    <ClInclude Include="test\runner.h"/>
+    <ClInclude Include="test\task.h"/>
+    <ClInclude Include="test\runner-win.h"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test\benchmark-async.c"/>
+    <ClCompile Include="test\benchmark-async-pummel.c"/>
+    <ClCompile Include="test\benchmark-fs-stat.c"/>
+    <ClCompile Include="test\benchmark-getaddrinfo.c"/>
+    <ClCompile Include="test\benchmark-loop-count.c"/>
+    <ClCompile Include="test\benchmark-million-async.c"/>
+    <ClCompile Include="test\benchmark-million-timers.c"/>
+    <ClCompile Include="test\benchmark-multi-accept.c"/>
+    <ClCompile Include="test\benchmark-ping-pongs.c"/>
+    <ClCompile Include="test\benchmark-pound.c"/>
+    <ClCompile Include="test\benchmark-pump.c"/>
+    <ClCompile Include="test\benchmark-sizes.c"/>
+    <ClCompile Include="test\benchmark-spawn.c"/>
+    <ClCompile Include="test\benchmark-thread.c"/>
+    <ClCompile Include="test\benchmark-tcp-write-batch.c"/>
+    <ClCompile Include="test\benchmark-udp-pummel.c"/>
+    <ClCompile Include="test\dns-server.c"/>
+    <ClCompile Include="test\echo-server.c"/>
+    <ClCompile Include="test\blackhole-server.c"/>
+    <ClCompile Include="test\run-benchmarks.c"/>
+    <ClCompile Include="test\runner.c"/>
+    <ClCompile Include="test\runner-win.c"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libuv.vcxproj">
+      <Project>{674B21F6-735E-5573-AE1F-4884F9201FF7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+  <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets"/>
+  <ImportGroup Label="ExtensionTargets"/>
+</Project>

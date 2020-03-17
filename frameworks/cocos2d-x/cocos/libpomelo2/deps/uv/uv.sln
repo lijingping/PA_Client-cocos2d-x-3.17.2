@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libuv", "libuv.vcxproj", "{674B21F6-735E-5573-AE1F-4884F9201FF7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "run-benchmarks", "run-benchmarks.vcxproj", "{2CD6A9F2-0A04-9D4F-41EC-BB0315C00BF5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{674B21F6-735E-5573-AE1F-4884F9201FF7} = {674B21F6-735E-5573-AE1F-4884F9201FF7}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "run-tests", "run-tests.vcxproj", "{E747959C-384A-D4AD-5CDF-C3B5CBF7B5C3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{674B21F6-735E-5573-AE1F-4884F9201FF7} = {674B21F6-735E-5573-AE1F-4884F9201FF7}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Win32 = Default|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CD6A9F2-0A04-9D4F-41EC-BB0315C00BF5}.Default|Win32.ActiveCfg = Default|Win32
+		{2CD6A9F2-0A04-9D4F-41EC-BB0315C00BF5}.Default|Win32.Build.0 = Default|Win32
+		{674B21F6-735E-5573-AE1F-4884F9201FF7}.Default|Win32.ActiveCfg = Default|Win32
+		{674B21F6-735E-5573-AE1F-4884F9201FF7}.Default|Win32.Build.0 = Default|Win32
+		{E747959C-384A-D4AD-5CDF-C3B5CBF7B5C3}.Default|Win32.ActiveCfg = Default|Win32
+		{E747959C-384A-D4AD-5CDF-C3B5CBF7B5C3}.Default|Win32.Build.0 = Default|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

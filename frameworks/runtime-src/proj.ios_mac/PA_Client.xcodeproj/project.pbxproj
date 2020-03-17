@@ -56,7 +56,6 @@
 		B8D33E1C241F0C44006F6173 /* CCPomelo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E15241F0C43006F6173 /* CCPomelo.cpp */; };
 		B8D33E1D241F0C44006F6173 /* CCPomelo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E15241F0C43006F6173 /* CCPomelo.cpp */; };
 		B8D33E21241F0F1D006F6173 /* libpomelo2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33E1E241F0F1D006F6173 /* libpomelo2.a */; };
-		B8D33E24241F0F7A006F6173 /* libpomelo2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33E1E241F0F1D006F6173 /* libpomelo2.a */; };
 		B8D33E7B242066E1006F6173 /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E30242066E0006F6173 /* export.cpp */; };
 		B8D33E7C242066E1006F6173 /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E30242066E0006F6173 /* export.cpp */; };
 		B8D33E7D242066E1006F6173 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E35242066E0006F6173 /* json_writer.cpp */; };
@@ -121,6 +120,8 @@
 		B8D33ED324208305006F6173 /* ClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECA24208304006F6173 /* ClientKernel.cpp */; };
 		B8D33ED424208305006F6173 /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECB24208304006F6173 /* DownAsset.cpp */; };
 		B8D33ED524208305006F6173 /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECB24208304006F6173 /* DownAsset.cpp */; };
+		B8D33ED62420A21F006F6173 /* libpomelo2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33E1E241F0F1D006F6173 /* libpomelo2.a */; };
+		B8D33EDA2420A655006F6173 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33ED92420A655006F6173 /* libcurl.a */; };
 		C07828F818B4D72E00BD2287 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C07828F418B4D72E00BD2287 /* main.m */; };
 		C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07828F718B4D72E00BD2287 /* SimulatorApp.mm */; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
@@ -350,6 +351,7 @@
 		B8D33EC924208304006F6173 /* MobileClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobileClientKernel.cpp; sourceTree = "<group>"; };
 		B8D33ECA24208304006F6173 /* ClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientKernel.cpp; sourceTree = "<group>"; };
 		B8D33ECB24208304006F6173 /* DownAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownAsset.cpp; sourceTree = "<group>"; };
+		B8D33ED92420A655006F6173 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "../../cocos2d-x/external/curl/prebuilt/ios/libcurl.a"; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C07828F418B4D72E00BD2287 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C07828F618B4D72E00BD2287 /* SimulatorApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulatorApp.h; sourceTree = "<group>"; };
@@ -399,7 +401,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8D33E24241F0F7A006F6173 /* libpomelo2.a in Frameworks */,
+				B8D33EDA2420A655006F6173 /* libcurl.a in Frameworks */,
+				B8D33ED62420A21F006F6173 /* libpomelo2.a in Frameworks */,
 				294D0D721D0D572600F7F5D4 /* CoreText.framework in Frameworks */,
 				9FA3AE4E1BE9BCC900FC9645 /* CFNetwork.framework in Frameworks */,
 				ED545A891B68A23E00C3958E /* libiconv.dylib in Frameworks */,
@@ -641,6 +644,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B8D33ED92420A655006F6173 /* libcurl.a */,
 				B8D33E20241F0F1D006F6173 /* libopenssl.a */,
 				B8D33E1E241F0F1D006F6173 /* libpomelo2.a */,
 				B8D33E1F241F0F1D006F6173 /* libuv.a */,
@@ -1175,8 +1179,10 @@
 					"$(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../cocos2d-x/external/curl/prebuilt/ios",
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
@@ -1192,7 +1198,7 @@
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(_COCOS_HEADER_IOS_BEGIN) $(_COCOS_HEADER_IOS_END)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d-x/external/curl/include/ios $(inherited) $(_COCOS_HEADER_IOS_BEGIN) $(_COCOS_HEADER_IOS_END)";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
@@ -1216,8 +1222,10 @@
 					"$(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../cocos2d-x/external/curl/prebuilt/ios",
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
@@ -1233,7 +1241,7 @@
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(_COCOS_HEADER_IOS_BEGIN) $(_COCOS_HEADER_IOS_END)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d-x/external/curl/include/ios $(inherited) $(_COCOS_HEADER_IOS_BEGIN) $(_COCOS_HEADER_IOS_END)";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;

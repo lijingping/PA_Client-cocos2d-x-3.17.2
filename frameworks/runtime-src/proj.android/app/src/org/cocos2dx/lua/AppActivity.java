@@ -30,6 +30,8 @@ import android.os.Bundle;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 public class AppActivity extends Cocos2dxActivity{
+    static AppActivity  instance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setEnableVirtualButton(false);
@@ -45,5 +47,45 @@ public class AppActivity extends Cocos2dxActivity{
 
         // DO OTHER INITIALIZATION BELOW
         
+        instance = this;
+    }
+
+    public static String getSDCardDocPath()
+    {
+        File file = instance.getExternalFilesDir(null);
+        if (null != file){
+            return file.getPath();
+        }
+
+        return instance.getFilesDir().getAbsolutePath();
+    }
+        
+    //install apk
+    public static void installClient(String apkPath)
+    {       
+        if(!"".equals(apkPath))
+        {
+            File apkFile = new File(apkPath);
+            if (null != apkFile && apkFile.exists()) 
+            {
+                Intent installIntent = new Intent(Intent.ACTION_VIEW);
+                installIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+                instance.startActivity(installIntent);
+            }
+        }
+    }
+    
+    //自动启动
+    public static void restart()
+    {
+        instance.restartApp();
+    }
+    public void restartApp()
+    {
+        finish();
+        Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());  
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
+        startActivity(i);
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

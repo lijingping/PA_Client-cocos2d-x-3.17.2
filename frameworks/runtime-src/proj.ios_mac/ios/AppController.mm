@@ -28,6 +28,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import <objc/runtime.h>
 
 @implementation AppController
 
@@ -123,6 +124,25 @@ static AppDelegate s_sharedApplication;
      */
 }
 
++ (void)suspend:(UIApplication *)application {
+    [[UIApplication sharedApplication] performSelector:@selector(suspend)];
+    
+    cocos2d::Director::getInstance()->purgeCachedData();
+    
+    cocos2d::Director::getInstance()->getTextureCache()->removeAllTextures();
+    cocos2d::SpriteFrameCache::getInstance()->removeSpriteFrames();
+    
+    //[self openApp];
+}
+
+//暴力打开某个APP,如果可以打开。直接打开不解释
++ (void)openApp:(UIApplication *)application {
+    NSString *appIdentifierName = [[NSBundle mainBundle]bundleIdentifier];
+    
+    Class LSApplicationWorkspace_class = objc_getClass("LSApplicationWorkspace");
+    NSObject* workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];
+    [workspace performSelector:@selector(openApplicationWithBundleID:) withObject:appIdentifierName];
+}
 
 #pragma mark -
 #pragma mark Memory management
@@ -143,5 +163,16 @@ static AppDelegate s_sharedApplication;
 }
 #endif
 
++ (void) updateBaseClient:(NSDictionary*) dict
+{
+    NSString *url = [dict objectForKey:@"url"];
+    if (nil != url)
+    {
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]])
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        }
+    }
+}
 
 @end

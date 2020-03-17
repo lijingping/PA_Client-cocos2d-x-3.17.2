@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "openssl", "openssl.vcxproj", "{CBC410B4-D89C-635C-2E7D-EDB1255836A7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "openssl-cli", "openssl-cli.vcxproj", "{AD62C679-368B-ED25-2FD2-3D623DB8B358}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CBC410B4-D89C-635C-2E7D-EDB1255836A7} = {CBC410B4-D89C-635C-2E7D-EDB1255836A7}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Win32 = Default|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD62C679-368B-ED25-2FD2-3D623DB8B358}.Default|Win32.ActiveCfg = Default|Win32
+		{AD62C679-368B-ED25-2FD2-3D623DB8B358}.Default|Win32.Build.0 = Default|Win32
+		{CBC410B4-D89C-635C-2E7D-EDB1255836A7}.Default|Win32.ActiveCfg = Default|Win32
+		{CBC410B4-D89C-635C-2E7D-EDB1255836A7}.Default|Win32.Build.0 = Default|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

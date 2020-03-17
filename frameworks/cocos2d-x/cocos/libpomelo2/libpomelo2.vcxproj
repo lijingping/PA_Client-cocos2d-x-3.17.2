@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Default|Win32">
+      <Configuration>Default</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7033137C-14A2-469F-0D11-D545BDED8736}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libpomelo2</RootNamespace>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Locals">
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <ExecutablePath>$(ExecutablePath);$(MSBuildProjectDirectory)\.\bin\;$(MSBuildProjectDirectory)\.\bin\</ExecutablePath>
+    <IntDir>$(Configuration)\obj\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetPath>$(OutDir)lib\$(ProjectName)$(TargetExt)</TargetPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Default|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>deps\uv\include;deps\openssl\openssl\include;include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)lib\$(ProjectName)$(TargetExt)</OutputFile>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>deps\uv\include;deps\openssl\openssl\include;include;src;deps\uv\include;deps\openssl\openssl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="pomelo.gyp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\pc_pomelo.c" />
+    <ClCompile Include="src\pc_lib.c" />
+    <ClCompile Include="src\pc_trans.c" />
+    <ClCompile Include="src\pc_trans_repo.c" />
+    <ClCompile Include="src\pc_JSON.c" />
+    <ClCompile Include="src\tr\dummy\tr_dummy.c" />
+    <ClCompile Include="src\tr\uv\pr_msg.c" />
+    <ClCompile Include="src\tr\uv\pr_msg_json.c" />
+    <ClCompile Include="src\tr\uv\pr_pkg.c" />
+    <ClCompile Include="src\tr\uv\tr_uv_tcp.c" />
+    <ClCompile Include="src\tr\uv\tr_uv_tcp_i.c" />
+    <ClCompile Include="src\tr\uv\tr_uv_tcp_aux.c" />
+    <ClCompile Include="src\tr\uv\pr_msg_pb.c" />
+    <ClCompile Include="src\tr\uv\pb_i.c" />
+    <ClCompile Include="src\tr\uv\pb_decode.c" />
+    <ClCompile Include="src\tr\uv\pb_encode.c" />
+    <ClCompile Include="src\tr\uv\tr_uv_tls.c" />
+    <ClCompile Include="src\tr\uv\tr_uv_tls_i.c" />
+    <ClCompile Include="src\tr\uv\tr_uv_tls_aux.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="deps\openssl\openssl.vcxproj">
+      <Project>{cbc410b4-d89c-635c-2e7d-edb1255836a7}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

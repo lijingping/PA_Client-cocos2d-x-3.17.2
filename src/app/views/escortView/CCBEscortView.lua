@@ -130,9 +130,9 @@ function CCBEscortView:showUI()
 	self.m_barSpriteSize = self.m_ccbSpriteProgressBar:getContentSize();
 	-- dump(self.m_barSpriteSize);
 	self.m_ccbSpriteProgressBar:setTextureRect(cc.rect(0, 0, 0, 0));
-
-	local shipTitle = cc.Sprite:create(ResourceMgr:getEscortShipLabelByLevel(1));
-	self.m_ccbNodeShipLevel:addChild(shipTitle);
+	--没有escort_ship_title资源
+	--local shipTitle = cc.Sprite:create(ResourceMgr:getEscortShipLabelByLevel(1));
+	--self.m_ccbNodeShipLevel:addChild(shipTitle);
 
 	self.m_lockShipSItem = self.m_lootConstData[tostring(15)].value;
 	local icon1ID = ItemDataMgr:getItemIconIDByItemID(self.m_lockShipSItem);
@@ -295,8 +295,9 @@ end
 function CCBEscortView:setEscortData()
 	local shipData = EscortDataMgr:getMerchantShipData(self.m_escortShipLevel);
 	self.m_ccbNodeShipLevel:removeAllChildren();
-	local shipTitle = cc.Sprite:create(ResourceMgr:getEscortShipLabelByLevel(self.m_escortShipLevel));
-	self.m_ccbNodeShipLevel:addChild(shipTitle);
+	--没有escort_ship_title资源
+	--local shipTitle = cc.Sprite:create(ResourceMgr:getEscortShipLabelByLevel(self.m_escortShipLevel));
+	--self.m_ccbNodeShipLevel:addChild(shipTitle);
 	self.m_ccbLabelEscortTime:setString(math.floor(shipData.time / 60) .. Str[10008]);
 	self.m_ccbNodeRewardCoinIcon:removeAllChildren();
 	self.m_ccbNodeRewardItemIcon:removeAllChildren();

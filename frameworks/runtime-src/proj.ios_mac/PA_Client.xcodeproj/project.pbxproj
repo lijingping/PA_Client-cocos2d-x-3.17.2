@@ -57,6 +57,60 @@
 		B8D33E1D241F0C44006F6173 /* CCPomelo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E15241F0C43006F6173 /* CCPomelo.cpp */; };
 		B8D33E21241F0F1D006F6173 /* libpomelo2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33E1E241F0F1D006F6173 /* libpomelo2.a */; };
 		B8D33E24241F0F7A006F6173 /* libpomelo2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33E1E241F0F1D006F6173 /* libpomelo2.a */; };
+		B8D33E7B242066E1006F6173 /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E30242066E0006F6173 /* export.cpp */; };
+		B8D33E7C242066E1006F6173 /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E30242066E0006F6173 /* export.cpp */; };
+		B8D33E7D242066E1006F6173 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E35242066E0006F6173 /* json_writer.cpp */; };
+		B8D33E7E242066E1006F6173 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E35242066E0006F6173 /* json_writer.cpp */; };
+		B8D33E7F242066E1006F6173 /* FortMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E36242066E0006F6173 /* FortMgr.cpp */; };
+		B8D33E80242066E1006F6173 /* FortMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E36242066E0006F6173 /* FortMgr.cpp */; };
+		B8D33E81242066E1006F6173 /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E37242066E0006F6173 /* json_internalmap.inl */; };
+		B8D33E82242066E1006F6173 /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E37242066E0006F6173 /* json_internalmap.inl */; };
+		B8D33E85242066E1006F6173 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E39242066E0006F6173 /* Player.cpp */; };
+		B8D33E86242066E1006F6173 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E39242066E0006F6173 /* Player.cpp */; };
+		B8D33E87242066E1006F6173 /* Battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3A242066E0006F6173 /* Battle.cpp */; };
+		B8D33E88242066E1006F6173 /* Battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3A242066E0006F6173 /* Battle.cpp */; };
+		B8D33E89242066E1006F6173 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3B242066E0006F6173 /* json_reader.cpp */; };
+		B8D33E8A242066E1006F6173 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3B242066E0006F6173 /* json_reader.cpp */; };
+		B8D33E8B242066E1006F6173 /* EnergyBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3C242066E0006F6173 /* EnergyBody.cpp */; };
+		B8D33E8C242066E1006F6173 /* EnergyBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3C242066E0006F6173 /* EnergyBody.cpp */; };
+		B8D33E8D242066E1006F6173 /* BaseClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3D242066E0006F6173 /* BaseClass.cpp */; };
+		B8D33E8E242066E1006F6173 /* BaseClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3D242066E0006F6173 /* BaseClass.cpp */; };
+		B8D33E93242066E1006F6173 /* BulletNormal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E40242066E0006F6173 /* BulletNormal.cpp */; };
+		B8D33E94242066E1006F6173 /* BulletNormal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E40242066E0006F6173 /* BulletNormal.cpp */; };
+		B8D33E95242066E1006F6173 /* BulletMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E41242066E0006F6173 /* BulletMgr.cpp */; };
+		B8D33E96242066E1006F6173 /* BulletMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E41242066E0006F6173 /* BulletMgr.cpp */; };
+		B8D33E97242066E1006F6173 /* TimeTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E42242066E0006F6173 /* TimeTool.cpp */; };
+		B8D33E98242066E1006F6173 /* TimeTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E42242066E0006F6173 /* TimeTool.cpp */; };
+		B8D33E99242066E1006F6173 /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E43242066E0006F6173 /* Shape.cpp */; };
+		B8D33E9A242066E1006F6173 /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E43242066E0006F6173 /* Shape.cpp */; };
+		B8D33EA1242066E1006F6173 /* Tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E47242066E0006F6173 /* Tool.cpp */; };
+		B8D33EA2242066E1006F6173 /* Tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E47242066E0006F6173 /* Tool.cpp */; };
+		B8D33EA3242066E1006F6173 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E48242066E0006F6173 /* stdafx.cpp */; };
+		B8D33EA4242066E1006F6173 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E48242066E0006F6173 /* stdafx.cpp */; };
+		B8D33EA5242066E1006F6173 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E49242066E0006F6173 /* json_value.cpp */; };
+		B8D33EA6242066E1006F6173 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E49242066E0006F6173 /* json_value.cpp */; };
+		B8D33EA9242066E1006F6173 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E4B242066E0006F6173 /* Bullet.cpp */; };
+		B8D33EAA242066E1006F6173 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E4B242066E0006F6173 /* Bullet.cpp */; };
+		B8D33EAB242066E1006F6173 /* libcode.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4D242066E0006F6173 /* libcode.json */; };
+		B8D33EAC242066E1006F6173 /* libcode.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4D242066E0006F6173 /* libcode.json */; };
+		B8D33EAD242066E1006F6173 /* ship_list.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4E242066E0006F6173 /* ship_list.json */; };
+		B8D33EAE242066E1006F6173 /* ship_list.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4E242066E0006F6173 /* ship_list.json */; };
+		B8D33EAF242066E1006F6173 /* skill_data.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4F242066E0006F6173 /* skill_data.json */; };
+		B8D33EB0242066E1006F6173 /* skill_data.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4F242066E0006F6173 /* skill_data.json */; };
+		B8D33EB1242066E1006F6173 /* combat.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E50242066E0006F6173 /* combat.json */; };
+		B8D33EB2242066E1006F6173 /* combat.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E50242066E0006F6173 /* combat.json */; };
+		B8D33EB3242066E1006F6173 /* Fort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E51242066E0006F6173 /* Fort.cpp */; };
+		B8D33EB4242066E1006F6173 /* Fort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E51242066E0006F6173 /* Fort.cpp */; };
+		B8D33EB5242066E1006F6173 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E52242066E0006F6173 /* json_valueiterator.inl */; };
+		B8D33EB6242066E1006F6173 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E52242066E0006F6173 /* json_valueiterator.inl */; };
+		B8D33EB7242066E1006F6173 /* BaseData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E53242066E0006F6173 /* BaseData.cpp */; };
+		B8D33EB8242066E1006F6173 /* BaseData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E53242066E0006F6173 /* BaseData.cpp */; };
+		B8D33EB9242066E1006F6173 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E54242066E0006F6173 /* Ship.cpp */; };
+		B8D33EBA242066E1006F6173 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E54242066E0006F6173 /* Ship.cpp */; };
+		B8D33EBB242066E1006F6173 /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E55242066E0006F6173 /* json_internalarray.inl */; };
+		B8D33EBC242066E1006F6173 /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E55242066E0006F6173 /* json_internalarray.inl */; };
+		B8D33EBD242066E1006F6173 /* BulletBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E56242066E0006F6173 /* BulletBase.cpp */; };
+		B8D33EBE242066E1006F6173 /* BulletBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E56242066E0006F6173 /* BulletBase.cpp */; };
 		C07828F818B4D72E00BD2287 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C07828F418B4D72E00BD2287 /* main.m */; };
 		C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07828F718B4D72E00BD2287 /* SimulatorApp.mm */; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
@@ -219,6 +273,63 @@
 		B8D33E1E241F0F1D006F6173 /* libpomelo2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpomelo2.a; path = "../../cocos2d-x/cocos/libpomelo2/prebuilt/libpomelo2.a"; sourceTree = "<group>"; };
 		B8D33E1F241F0F1D006F6173 /* libuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libuv.a; path = "../../cocos2d-x/cocos/libpomelo2/prebuilt/libuv.a"; sourceTree = "<group>"; };
 		B8D33E20241F0F1D006F6173 /* libopenssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopenssl.a; path = "../../cocos2d-x/cocos/libpomelo2/prebuilt/libopenssl.a"; sourceTree = "<group>"; };
+		B8D33E30242066E0006F6173 /* export.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = export.cpp; path = ../Classes/export.cpp; sourceTree = "<group>"; };
+		B8D33E33242066E0006F6173 /* export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = export.h; path = ../Classes/export.h; sourceTree = "<group>"; };
+		B8D33E35242066E0006F6173 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		B8D33E36242066E0006F6173 /* FortMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FortMgr.cpp; sourceTree = "<group>"; };
+		B8D33E37242066E0006F6173 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
+		B8D33E39242066E0006F6173 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		B8D33E3A242066E0006F6173 /* Battle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Battle.cpp; sourceTree = "<group>"; };
+		B8D33E3B242066E0006F6173 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
+		B8D33E3C242066E0006F6173 /* EnergyBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnergyBody.cpp; sourceTree = "<group>"; };
+		B8D33E3D242066E0006F6173 /* BaseClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseClass.cpp; sourceTree = "<group>"; };
+		B8D33E40242066E0006F6173 /* BulletNormal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletNormal.cpp; sourceTree = "<group>"; };
+		B8D33E41242066E0006F6173 /* BulletMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletMgr.cpp; sourceTree = "<group>"; };
+		B8D33E42242066E0006F6173 /* TimeTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeTool.cpp; sourceTree = "<group>"; };
+		B8D33E43242066E0006F6173 /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
+		B8D33E47242066E0006F6173 /* Tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tool.cpp; sourceTree = "<group>"; };
+		B8D33E48242066E0006F6173 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		B8D33E49242066E0006F6173 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
+		B8D33E4B242066E0006F6173 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		B8D33E4D242066E0006F6173 /* libcode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = libcode.json; sourceTree = "<group>"; };
+		B8D33E4E242066E0006F6173 /* ship_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ship_list.json; sourceTree = "<group>"; };
+		B8D33E4F242066E0006F6173 /* skill_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skill_data.json; sourceTree = "<group>"; };
+		B8D33E50242066E0006F6173 /* combat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = combat.json; sourceTree = "<group>"; };
+		B8D33E51242066E0006F6173 /* Fort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fort.cpp; sourceTree = "<group>"; };
+		B8D33E52242066E0006F6173 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
+		B8D33E53242066E0006F6173 /* BaseData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseData.cpp; sourceTree = "<group>"; };
+		B8D33E54242066E0006F6173 /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
+		B8D33E55242066E0006F6173 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
+		B8D33E56242066E0006F6173 /* BulletBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletBase.cpp; sourceTree = "<group>"; };
+		B8D33E58242066E1006F6173 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
+		B8D33E59242066E1006F6173 /* BulletNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletNormal.h; sourceTree = "<group>"; };
+		B8D33E5A242066E1006F6173 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		B8D33E5C242066E1006F6173 /* InitialData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialData.h; sourceTree = "<group>"; };
+		B8D33E5E242066E1006F6173 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		B8D33E5F242066E1006F6173 /* Battle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Battle.h; sourceTree = "<group>"; };
+		B8D33E60242066E1006F6173 /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		B8D33E61242066E1006F6173 /* CommonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonData.h; sourceTree = "<group>"; };
+		B8D33E63242066E1006F6173 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		B8D33E64242066E1006F6173 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		B8D33E65242066E1006F6173 /* FortMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FortMgr.h; sourceTree = "<group>"; };
+		B8D33E66242066E1006F6173 /* BaseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseData.h; sourceTree = "<group>"; };
+		B8D33E67242066E1006F6173 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		B8D33E69242066E1006F6173 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		B8D33E6A242066E1006F6173 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		B8D33E6B242066E1006F6173 /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
+		B8D33E6C242066E1006F6173 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		B8D33E6D242066E1006F6173 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		B8D33E6E242066E1006F6173 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		B8D33E6F242066E1006F6173 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		B8D33E70242066E1006F6173 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		B8D33E71242066E1006F6173 /* TimeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTool.h; sourceTree = "<group>"; };
+		B8D33E72242066E1006F6173 /* EnergyBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyBody.h; sourceTree = "<group>"; };
+		B8D33E73242066E1006F6173 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
+		B8D33E74242066E1006F6173 /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
+		B8D33E77242066E1006F6173 /* BaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseClass.h; sourceTree = "<group>"; };
+		B8D33E78242066E1006F6173 /* Fort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fort.h; sourceTree = "<group>"; };
+		B8D33E79242066E1006F6173 /* BulletBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletBase.h; sourceTree = "<group>"; };
+		B8D33E7A242066E1006F6173 /* BulletMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletMgr.h; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C07828F418B4D72E00BD2287 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C07828F618B4D72E00BD2287 /* SimulatorApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulatorApp.h; sourceTree = "<group>"; };
@@ -376,6 +487,93 @@
 			path = api;
 			sourceTree = "<group>";
 		};
+		B8D33E34242066E0006F6173 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				B8D33E35242066E0006F6173 /* json_writer.cpp */,
+				B8D33E36242066E0006F6173 /* FortMgr.cpp */,
+				B8D33E37242066E0006F6173 /* json_internalmap.inl */,
+				B8D33E39242066E0006F6173 /* Player.cpp */,
+				B8D33E3A242066E0006F6173 /* Battle.cpp */,
+				B8D33E3B242066E0006F6173 /* json_reader.cpp */,
+				B8D33E3C242066E0006F6173 /* EnergyBody.cpp */,
+				B8D33E3D242066E0006F6173 /* BaseClass.cpp */,
+				B8D33E40242066E0006F6173 /* BulletNormal.cpp */,
+				B8D33E41242066E0006F6173 /* BulletMgr.cpp */,
+				B8D33E42242066E0006F6173 /* TimeTool.cpp */,
+				B8D33E43242066E0006F6173 /* Shape.cpp */,
+				B8D33E47242066E0006F6173 /* Tool.cpp */,
+				B8D33E48242066E0006F6173 /* stdafx.cpp */,
+				B8D33E49242066E0006F6173 /* json_value.cpp */,
+				B8D33E4B242066E0006F6173 /* Bullet.cpp */,
+				B8D33E4C242066E0006F6173 /* data */,
+				B8D33E51242066E0006F6173 /* Fort.cpp */,
+				B8D33E52242066E0006F6173 /* json_valueiterator.inl */,
+				B8D33E53242066E0006F6173 /* BaseData.cpp */,
+				B8D33E54242066E0006F6173 /* Ship.cpp */,
+				B8D33E55242066E0006F6173 /* json_internalarray.inl */,
+				B8D33E56242066E0006F6173 /* BulletBase.cpp */,
+			);
+			name = src;
+			path = ../Classes/src;
+			sourceTree = "<group>";
+		};
+		B8D33E4C242066E0006F6173 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				B8D33E4D242066E0006F6173 /* libcode.json */,
+				B8D33E4E242066E0006F6173 /* ship_list.json */,
+				B8D33E4F242066E0006F6173 /* skill_data.json */,
+				B8D33E50242066E0006F6173 /* combat.json */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		B8D33E57242066E1006F6173 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				B8D33E58242066E1006F6173 /* Ship.h */,
+				B8D33E59242066E1006F6173 /* BulletNormal.h */,
+				B8D33E5A242066E1006F6173 /* stdafx.h */,
+				B8D33E5C242066E1006F6173 /* InitialData.h */,
+				B8D33E5E242066E1006F6173 /* Event.h */,
+				B8D33E5F242066E1006F6173 /* Battle.h */,
+				B8D33E60242066E1006F6173 /* Define.h */,
+				B8D33E61242066E1006F6173 /* CommonData.h */,
+				B8D33E63242066E1006F6173 /* Player.h */,
+				B8D33E64242066E1006F6173 /* Shape.h */,
+				B8D33E65242066E1006F6173 /* FortMgr.h */,
+				B8D33E66242066E1006F6173 /* BaseData.h */,
+				B8D33E67242066E1006F6173 /* Bullet.h */,
+				B8D33E68242066E1006F6173 /* json */,
+				B8D33E71242066E1006F6173 /* TimeTool.h */,
+				B8D33E72242066E1006F6173 /* EnergyBody.h */,
+				B8D33E73242066E1006F6173 /* json_batchallocator.h */,
+				B8D33E74242066E1006F6173 /* Tool.h */,
+				B8D33E77242066E1006F6173 /* BaseClass.h */,
+				B8D33E78242066E1006F6173 /* Fort.h */,
+				B8D33E79242066E1006F6173 /* BulletBase.h */,
+				B8D33E7A242066E1006F6173 /* BulletMgr.h */,
+			);
+			name = include;
+			path = ../Classes/include;
+			sourceTree = "<group>";
+		};
+		B8D33E68242066E1006F6173 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				B8D33E69242066E1006F6173 /* reader.h */,
+				B8D33E6A242066E1006F6173 /* config.h */,
+				B8D33E6B242066E1006F6173 /* features.h */,
+				B8D33E6C242066E1006F6173 /* value.h */,
+				B8D33E6D242066E1006F6173 /* autolink.h */,
+				B8D33E6E242066E1006F6173 /* json.h */,
+				B8D33E6F242066E1006F6173 /* writer.h */,
+				B8D33E70242066E1006F6173 /* forwards.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		C03781AF18BF654500FE4F13 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +645,10 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B8D33E30242066E0006F6173 /* export.cpp */,
+				B8D33E33242066E0006F6173 /* export.h */,
+				B8D33E57242066E1006F6173 /* include */,
+				B8D33E34242066E0006F6173 /* src */,
 				B8D33E15241F0C43006F6173 /* CCPomelo.cpp */,
 				B8D33E0C241F0C43006F6173 /* CCPomelo.h */,
 				B8D33E0F241F0C43006F6173 /* lua-bindings */,
@@ -608,10 +810,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FF504841A5E87B100AFDA55 /* ConsoleWindow.xib in Resources */,
+				B8D33EBC242066E1006F6173 /* json_internalarray.inl in Resources */,
+				B8D33EB6242066E1006F6173 /* json_valueiterator.inl in Resources */,
+				B8D33E82242066E1006F6173 /* json_internalmap.inl in Resources */,
 				1A8A4EDA1F6F9AEB0044495E /* config.json in Resources */,
+				B8D33EB0242066E1006F6173 /* skill_data.json in Resources */,
+				B8D33EAE242066E1006F6173 /* ship_list.json in Resources */,
 				B8D33E19241F0C44006F6173 /* lua_pomelo_auto_api.lua in Resources */,
 				5023817617EBBE3400990C9B /* Icon.icns in Resources */,
 				1A8A4EDE1F6F9AEF0044495E /* src in Resources */,
+				B8D33EAC242066E1006F6173 /* libcode.json in Resources */,
+				B8D33EB2242066E1006F6173 /* combat.json in Resources */,
 				1A8A4EDD1F6F9AEF0044495E /* res in Resources */,
 				B8D33E1B241F0C44006F6173 /* CCPomelo.lua in Resources */,
 				9FFC07361A4A764100AED399 /* MainMenu.xib in Resources */,
@@ -623,10 +832,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AF87BAB1F6F8733007BE51C /* LaunchScreenBackground.png in Resources */,
+				B8D33EBB242066E1006F6173 /* json_internalarray.inl in Resources */,
+				B8D33EB5242066E1006F6173 /* json_valueiterator.inl in Resources */,
+				B8D33E81242066E1006F6173 /* json_internalmap.inl in Resources */,
 				1AF87BAA1F6F8733007BE51C /* LaunchScreen.storyboard in Resources */,
+				B8D33EAF242066E1006F6173 /* skill_data.json in Resources */,
+				B8D33EAD242066E1006F6173 /* ship_list.json in Resources */,
 				B8D33E18241F0C44006F6173 /* lua_pomelo_auto_api.lua in Resources */,
 				1A8A4EDC1F6F9AEE0044495E /* src in Resources */,
 				1ACE45A31FC3F2D000F87E53 /* Images.xcassets in Resources */,
+				B8D33EAB242066E1006F6173 /* libcode.json in Resources */,
+				B8D33EB1242066E1006F6173 /* combat.json in Resources */,
 				1A8A4ED91F6F9AEB0044495E /* config.json in Resources */,
 				B8D33E1A241F0C44006F6173 /* CCPomelo.lua in Resources */,
 				1A8A4EDB1F6F9AEE0044495E /* res in Resources */,
@@ -656,12 +872,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8D33EB8242066E1006F6173 /* BaseData.cpp in Sources */,
+				B8D33E8A242066E1006F6173 /* json_reader.cpp in Sources */,
+				B8D33E80242066E1006F6173 /* FortMgr.cpp in Sources */,
 				C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */,
+				B8D33E7C242066E1006F6173 /* export.cpp in Sources */,
 				B8D33E17241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */,
+				B8D33E8C242066E1006F6173 /* EnergyBody.cpp in Sources */,
+				B8D33EA4242066E1006F6173 /* stdafx.cpp in Sources */,
+				B8D33E9A242066E1006F6173 /* Shape.cpp in Sources */,
+				B8D33EBA242066E1006F6173 /* Ship.cpp in Sources */,
+				B8D33E86242066E1006F6173 /* Player.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				9FF504851A5E87B100AFDA55 /* ConsoleWindowController.m in Sources */,
+				B8D33E94242066E1006F6173 /* BulletNormal.cpp in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
+				B8D33E96242066E1006F6173 /* BulletMgr.cpp in Sources */,
+				B8D33E7E242066E1006F6173 /* json_writer.cpp in Sources */,
+				B8D33E8E242066E1006F6173 /* BaseClass.cpp in Sources */,
+				B8D33EA2242066E1006F6173 /* Tool.cpp in Sources */,
 				B8D33E1D241F0C44006F6173 /* CCPomelo.cpp in Sources */,
+				B8D33EA6242066E1006F6173 /* json_value.cpp in Sources */,
+				B8D33EB4242066E1006F6173 /* Fort.cpp in Sources */,
+				B8D33EAA242066E1006F6173 /* Bullet.cpp in Sources */,
+				B8D33EBE242066E1006F6173 /* BulletBase.cpp in Sources */,
+				B8D33E98242066E1006F6173 /* TimeTool.cpp in Sources */,
+				B8D33E88242066E1006F6173 /* Battle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,12 +905,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8D33EB7242066E1006F6173 /* BaseData.cpp in Sources */,
+				B8D33E89242066E1006F6173 /* json_reader.cpp in Sources */,
+				B8D33E7F242066E1006F6173 /* FortMgr.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
+				B8D33E7B242066E1006F6173 /* export.cpp in Sources */,
 				B8D33E16241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */,
+				B8D33E8B242066E1006F6173 /* EnergyBody.cpp in Sources */,
+				B8D33EA3242066E1006F6173 /* stdafx.cpp in Sources */,
+				B8D33E99242066E1006F6173 /* Shape.cpp in Sources */,
+				B8D33EB9242066E1006F6173 /* Ship.cpp in Sources */,
+				B8D33E85242066E1006F6173 /* Player.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
+				B8D33E93242066E1006F6173 /* BulletNormal.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
+				B8D33E95242066E1006F6173 /* BulletMgr.cpp in Sources */,
+				B8D33E7D242066E1006F6173 /* json_writer.cpp in Sources */,
+				B8D33E8D242066E1006F6173 /* BaseClass.cpp in Sources */,
+				B8D33EA1242066E1006F6173 /* Tool.cpp in Sources */,
 				B8D33E1C241F0C44006F6173 /* CCPomelo.cpp in Sources */,
+				B8D33EA5242066E1006F6173 /* json_value.cpp in Sources */,
+				B8D33EB3242066E1006F6173 /* Fort.cpp in Sources */,
+				B8D33EA9242066E1006F6173 /* Bullet.cpp in Sources */,
+				B8D33EBD242066E1006F6173 /* BulletBase.cpp in Sources */,
+				B8D33E97242066E1006F6173 /* TimeTool.cpp in Sources */,
+				B8D33E87242066E1006F6173 /* Battle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,6 +1004,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../Classes/protobuf-lite",
 					"$(SRCROOT)/../Classes",
+					"$(SRCROOT)/../Classes/include",
 					"$(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib",
 				);
 				INFOPLIST_FILE = mac/Info.plist;
@@ -782,6 +1039,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../Classes/protobuf-lite",
 					"$(SRCROOT)/../Classes",
+					"$(SRCROOT)/../Classes/include",
 					"$(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib",
 				);
 				INFOPLIST_FILE = mac/Info.plist;
@@ -824,7 +1082,7 @@
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/prebuilt";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d-x $(SRCROOT)/../../cocos2d-x/cocos/audio/include $(SRCROOT)/../../cocos2d-x/cocos $(SRCROOT)/../../cocos2d-x/extensions $(SRCROOT)/../../cocos2d-x/external $(SRCROOT)/../../cocos2d-x/external/chipmunk/include/chipmunk $(SRCROOT)/../../cocos2d-x/external/lua/luajit/include $(SRCROOT)/../../cocos2d-x/external/lua/tolua $(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib $(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib/protobuf-lite $(SRCROOT)/../../cocos2d-x/cocos/editor-support $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/include $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/deps/openssl/include $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/deps/uv/include";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d-x $(SRCROOT)/../../cocos2d-x/cocos/audio/include $(SRCROOT)/../../cocos2d-x/cocos $(SRCROOT)/../Classes $(SRCROOT)/../Classes/include $(SRCROOT)/../../cocos2d-x/extensions $(SRCROOT)/../../cocos2d-x/external $(SRCROOT)/../../cocos2d-x/external/chipmunk/include/chipmunk $(SRCROOT)/../../cocos2d-x/external/lua/luajit/include $(SRCROOT)/../../cocos2d-x/external/lua/tolua $(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib $(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib/protobuf-lite $(SRCROOT)/../../cocos2d-x/cocos/editor-support $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/include $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/deps/openssl/include $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/deps/uv/include";
 			};
 			name = Debug;
 		};
@@ -847,7 +1105,7 @@
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/prebuilt";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d-x $(SRCROOT)/../../cocos2d-x/cocos/audio/include $(SRCROOT)/../../cocos2d-x/cocos $(SRCROOT)/../../cocos2d-x/extensions $(SRCROOT)/../../cocos2d-x/external $(SRCROOT)/../../cocos2d-x/external/chipmunk/include/chipmunk $(SRCROOT)/../../cocos2d-x/external/lua/luajit/include $(SRCROOT)/../../cocos2d-x/external/lua/tolua $(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib $(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib/protobuf-lite $(SRCROOT)/../../cocos2d-x/cocos/editor-support $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/include $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/deps/openssl/include $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/deps/uv/include";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2d-x $(SRCROOT)/../../cocos2d-x/cocos/audio/include $(SRCROOT)/../../cocos2d-x/cocos $(SRCROOT)/../Classes $(SRCROOT)/../Classes/include $(SRCROOT)/../../cocos2d-x/extensions $(SRCROOT)/../../cocos2d-x/external $(SRCROOT)/../../cocos2d-x/external/chipmunk/include/chipmunk $(SRCROOT)/../../cocos2d-x/external/lua/luajit/include $(SRCROOT)/../../cocos2d-x/external/lua/tolua $(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib $(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib/protobuf-lite $(SRCROOT)/../../cocos2d-x/cocos/editor-support $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/include $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/deps/openssl/include $(SRCROOT)/../../cocos2d-x/cocos/libpomelo2/deps/uv/include";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -867,6 +1125,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../Classes/protobuf-lite",
 					"$(SRCROOT)/../Classes",
+					"$(SRCROOT)/../Classes/include",
 					"$(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
@@ -906,6 +1165,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../Classes/protobuf-lite",
 					"$(SRCROOT)/../Classes",
+					"$(SRCROOT)/../Classes/include",
 					"$(SRCROOT)/../../cocos2d-x/tools/simulator/libsimulator/lib",
 				);
 				INFOPLIST_FILE = ios/Info.plist;

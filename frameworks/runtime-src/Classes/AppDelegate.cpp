@@ -45,7 +45,7 @@ using namespace cocos2d::experimental;
 USING_NS_CC;
 using namespace std;
 
-//extern "C" int luaopen_libpower(lua_State *L);
+extern "C" int luaopen_libpower(lua_State *L);
 
 AppDelegate::AppDelegate()
 {
@@ -209,7 +209,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     //register_custom_function(stack->getLuaState());
 
     register_all_pomelo(L);
-    //luaopen_libpower(L);
+    luaopen_libpower(L);
     
 #if CC_64BITS
     FileUtils::getInstance()->addSearchPath("src/64bit");

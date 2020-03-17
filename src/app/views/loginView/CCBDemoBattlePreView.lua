@@ -7,6 +7,8 @@ local ANIMA_RES_PATH = "res/anims/demo";
 local MAX_ARMS = 6;
 local table_insert = table.insert;
 
+local this
+
 local CCBDemoBattlePreView = class("CCBDemoBattlePreView", function ()
 	return CCBLoader("ccbi/loginView/CCBDemoBattlePreView.ccbi")
 end)
@@ -15,6 +17,9 @@ function CCBDemoBattlePreView:ctor()
 	if display.resolution >= 2 then
    		self.m_ccbNodeCenter:setScale(display.reduce);
    	end
+
+    self:enableNodeEvents();
+    this = self
 
 	local size = cc.size(636.0, 53);
 	local playerBox = cc.Scale9Sprite:create("res/resources/loginView/login_input.png");
@@ -59,6 +64,10 @@ function CCBDemoBattlePreView:ctor()
     self.m_ccbNodEnemy:addChild(self.m_enemyCount);
 end
 
+function CCBDemoBattlePreView:onExit()
+    this = nil;
+end
+
 function CCBDemoBattlePreView:onBtnEnter()
 	self.m_ccbNodeCenter:removeSelf();
     self:ViewLoad();
@@ -73,7 +82,7 @@ function CCBDemoBattlePreView:onBtnPlayer2()
 end
 
 function CCBDemoBattlePreView:onBtnPlayer3()
-	self.m_playerCount:setText(12);
+	self.m_playerCount:setText(36);
 end
 
 function CCBDemoBattlePreView:onBtnEnemy1()
@@ -85,7 +94,7 @@ function CCBDemoBattlePreView:onBtnEnemy2()
 end
 
 function CCBDemoBattlePreView:onBtnEnemy3()
-	self.m_enemyCount:setText(12);
+	self.m_enemyCount:setText(36);
 end
 
 function CCBDemoBattlePreView:loadingUI()
@@ -128,7 +137,9 @@ function CCBDemoBattlePreView:ViewLoad()
 	local image = getAllFileNameByDirectory(IMAGE_RES_PATH) or {};
 	for k,v in pairs(image) do
         display.loadImage(IMAGE_RES_PATH .. "/" .. v, function (args)
-        	self:loadingUI();
+            if this then
+        	   this:loadingUI();
+            end
         end);--//先异步加载纹理
     end
     self.m_resCount = #image;
@@ -136,7 +147,9 @@ function CCBDemoBattlePreView:ViewLoad()
 	local icon = getAllFileNameByDirectory(ICON_RES_PATH) or {};
 	for k,v in pairs(icon) do
         display.loadImage(ICON_RES_PATH .. "/" .. v, function()
-        	self:loadingUI();
+        	if this then
+               this:loadingUI();
+            end
         end);--//先异步加载纹理
     end
     self.m_resCount = self.m_resCount + #icon;
@@ -144,7 +157,9 @@ function CCBDemoBattlePreView:ViewLoad()
 	local bullet = getAllFileNameByDirectory(BULLET_RES_PATH) or {};
 	for k,v in pairs(bullet) do
         display.loadImage(BULLET_RES_PATH .. "/" .. v, function()
-        	self:loadingUI();
+        	if this then
+               this:loadingUI();
+            end
         end);--//先异步加载纹理
     end
     self.m_resCount = self.m_resCount + #bullet;
@@ -160,7 +175,9 @@ function CCBDemoBattlePreView:ViewLoad()
 	for k,v in pairs(exportJson) do
 		local animPath = ANIMA_RES_PATH .. "/" .. v .. "/" .. v .. ".ExportJson";
 		ArmatureDataManager:addArmatureFileInfoAsync(animPath, function()
-        	self:loadingUI();
+        	if this then
+               this:loadingUI();
+            end
         end);--//先异步加载纹理 
 	end
     self.m_resCount = self.m_resCount + #exportJson;

@@ -111,6 +111,16 @@
 		B8D33EBC242066E1006F6173 /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E55242066E0006F6173 /* json_internalarray.inl */; };
 		B8D33EBD242066E1006F6173 /* BulletBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E56242066E0006F6173 /* BulletBase.cpp */; };
 		B8D33EBE242066E1006F6173 /* BulletBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E56242066E0006F6173 /* BulletBase.cpp */; };
+		B8D33ECC24208305006F6173 /* UnZipAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC724208304006F6173 /* UnZipAsset.cpp */; };
+		B8D33ECD24208305006F6173 /* UnZipAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC724208304006F6173 /* UnZipAsset.cpp */; };
+		B8D33ECE24208305006F6173 /* MCKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC824208304006F6173 /* MCKernel.cpp */; };
+		B8D33ECF24208305006F6173 /* MCKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC824208304006F6173 /* MCKernel.cpp */; };
+		B8D33ED024208305006F6173 /* MobileClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC924208304006F6173 /* MobileClientKernel.cpp */; };
+		B8D33ED124208305006F6173 /* MobileClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC924208304006F6173 /* MobileClientKernel.cpp */; };
+		B8D33ED224208305006F6173 /* ClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECA24208304006F6173 /* ClientKernel.cpp */; };
+		B8D33ED324208305006F6173 /* ClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECA24208304006F6173 /* ClientKernel.cpp */; };
+		B8D33ED424208305006F6173 /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECB24208304006F6173 /* DownAsset.cpp */; };
+		B8D33ED524208305006F6173 /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECB24208304006F6173 /* DownAsset.cpp */; };
 		C07828F818B4D72E00BD2287 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C07828F418B4D72E00BD2287 /* main.m */; };
 		C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = C07828F718B4D72E00BD2287 /* SimulatorApp.mm */; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
@@ -330,6 +340,16 @@
 		B8D33E78242066E1006F6173 /* Fort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fort.h; sourceTree = "<group>"; };
 		B8D33E79242066E1006F6173 /* BulletBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletBase.h; sourceTree = "<group>"; };
 		B8D33E7A242066E1006F6173 /* BulletMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletMgr.h; sourceTree = "<group>"; };
+		B8D33EC2242082F5006F6173 /* UnZipAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnZipAsset.h; sourceTree = "<group>"; };
+		B8D33EC3242082F5006F6173 /* ClientKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientKernel.h; sourceTree = "<group>"; };
+		B8D33EC4242082F5006F6173 /* MCKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCKernel.h; sourceTree = "<group>"; };
+		B8D33EC5242082F5006F6173 /* DownAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownAsset.h; sourceTree = "<group>"; };
+		B8D33EC6242082F5006F6173 /* MobileClientKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileClientKernel.h; sourceTree = "<group>"; };
+		B8D33EC724208304006F6173 /* UnZipAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnZipAsset.cpp; sourceTree = "<group>"; };
+		B8D33EC824208304006F6173 /* MCKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCKernel.cpp; sourceTree = "<group>"; };
+		B8D33EC924208304006F6173 /* MobileClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobileClientKernel.cpp; sourceTree = "<group>"; };
+		B8D33ECA24208304006F6173 /* ClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientKernel.cpp; sourceTree = "<group>"; };
+		B8D33ECB24208304006F6173 /* DownAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownAsset.cpp; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C07828F418B4D72E00BD2287 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C07828F618B4D72E00BD2287 /* SimulatorApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimulatorApp.h; sourceTree = "<group>"; };
@@ -490,6 +510,11 @@
 		B8D33E34242066E0006F6173 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				B8D33ECA24208304006F6173 /* ClientKernel.cpp */,
+				B8D33ECB24208304006F6173 /* DownAsset.cpp */,
+				B8D33EC824208304006F6173 /* MCKernel.cpp */,
+				B8D33EC924208304006F6173 /* MobileClientKernel.cpp */,
+				B8D33EC724208304006F6173 /* UnZipAsset.cpp */,
 				B8D33E35242066E0006F6173 /* json_writer.cpp */,
 				B8D33E36242066E0006F6173 /* FortMgr.cpp */,
 				B8D33E37242066E0006F6173 /* json_internalmap.inl */,
@@ -532,6 +557,11 @@
 		B8D33E57242066E1006F6173 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				B8D33EC3242082F5006F6173 /* ClientKernel.h */,
+				B8D33EC5242082F5006F6173 /* DownAsset.h */,
+				B8D33EC4242082F5006F6173 /* MCKernel.h */,
+				B8D33EC6242082F5006F6173 /* MobileClientKernel.h */,
+				B8D33EC2242082F5006F6173 /* UnZipAsset.h */,
 				B8D33E58242066E1006F6173 /* Ship.h */,
 				B8D33E59242066E1006F6173 /* BulletNormal.h */,
 				B8D33E5A242066E1006F6173 /* stdafx.h */,
@@ -710,6 +740,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					F293B3C715EB7BE500256477 = {
+						DevelopmentTeam = YBC7J2GVHQ;
+					};
+				};
 			};
 			buildConfigurationList = F293B3C215EB7BE500256477 /* Build configuration list for PBXProject "PA_Client" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -878,11 +913,15 @@
 				C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */,
 				B8D33E7C242066E1006F6173 /* export.cpp in Sources */,
 				B8D33E17241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */,
+				B8D33ECF24208305006F6173 /* MCKernel.cpp in Sources */,
 				B8D33E8C242066E1006F6173 /* EnergyBody.cpp in Sources */,
+				B8D33ED524208305006F6173 /* DownAsset.cpp in Sources */,
 				B8D33EA4242066E1006F6173 /* stdafx.cpp in Sources */,
+				B8D33ED324208305006F6173 /* ClientKernel.cpp in Sources */,
 				B8D33E9A242066E1006F6173 /* Shape.cpp in Sources */,
 				B8D33EBA242066E1006F6173 /* Ship.cpp in Sources */,
 				B8D33E86242066E1006F6173 /* Player.cpp in Sources */,
+				B8D33ED124208305006F6173 /* MobileClientKernel.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				9FF504851A5E87B100AFDA55 /* ConsoleWindowController.m in Sources */,
 				B8D33E94242066E1006F6173 /* BulletNormal.cpp in Sources */,
@@ -893,6 +932,7 @@
 				B8D33EA2242066E1006F6173 /* Tool.cpp in Sources */,
 				B8D33E1D241F0C44006F6173 /* CCPomelo.cpp in Sources */,
 				B8D33EA6242066E1006F6173 /* json_value.cpp in Sources */,
+				B8D33ECD24208305006F6173 /* UnZipAsset.cpp in Sources */,
 				B8D33EB4242066E1006F6173 /* Fort.cpp in Sources */,
 				B8D33EAA242066E1006F6173 /* Bullet.cpp in Sources */,
 				B8D33EBE242066E1006F6173 /* BulletBase.cpp in Sources */,
@@ -911,11 +951,15 @@
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				B8D33E7B242066E1006F6173 /* export.cpp in Sources */,
 				B8D33E16241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */,
+				B8D33ECE24208305006F6173 /* MCKernel.cpp in Sources */,
 				B8D33E8B242066E1006F6173 /* EnergyBody.cpp in Sources */,
+				B8D33ED424208305006F6173 /* DownAsset.cpp in Sources */,
 				B8D33EA3242066E1006F6173 /* stdafx.cpp in Sources */,
+				B8D33ED224208305006F6173 /* ClientKernel.cpp in Sources */,
 				B8D33E99242066E1006F6173 /* Shape.cpp in Sources */,
 				B8D33EB9242066E1006F6173 /* Ship.cpp in Sources */,
 				B8D33E85242066E1006F6173 /* Player.cpp in Sources */,
+				B8D33ED024208305006F6173 /* MobileClientKernel.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				B8D33E93242066E1006F6173 /* BulletNormal.cpp in Sources */,
@@ -926,6 +970,7 @@
 				B8D33EA1242066E1006F6173 /* Tool.cpp in Sources */,
 				B8D33E1C241F0C44006F6173 /* CCPomelo.cpp in Sources */,
 				B8D33EA5242066E1006F6173 /* json_value.cpp in Sources */,
+				B8D33ECC24208305006F6173 /* UnZipAsset.cpp in Sources */,
 				B8D33EB3242066E1006F6173 /* Fort.cpp in Sources */,
 				B8D33EA9242066E1006F6173 /* Bullet.cpp in Sources */,
 				B8D33EBD242066E1006F6173 /* BulletBase.cpp in Sources */,
@@ -1117,6 +1162,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = YBC7J2GVHQ;
 				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1158,6 +1204,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = YBC7J2GVHQ;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;

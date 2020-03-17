@@ -27,13 +27,25 @@
 #include "cocos2d.h"
 #include "scripting/lua-bindings/manual/lua_module_register.h"
 #include "scripting/lua-bindings/manual/network/lua_extensions.h"
+#include "scripting/lua-bindings/manual/tolua_fix.h"
+#include "scripting/lua-bindings/manual/LuaBasicConversions.h"
 #include "lua-bindings/lua_pomelo_auto.hpp"
 
-
+//get All File Name By Directory
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "scripting/lua-bindings/manual/LuaBasicConversions.h"
+
+//hot upgrade downloading and unzip
+#include "MCKernel.h"
+#include "ClientKernel.h"
+#include "DownAsset.h"
+#include "UnZipAsset.h"
+
+//app restart
+#if CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+#include "AppEvent.h"
+#endif
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -74,6 +86,99 @@ void AppDelegate::initGLContextAttrs()
     GLView::setGLContextAttrs(glContextAttrs);
 }
 
+int toLua_AppDelegate_downFileAsync(lua_State* tolua_S)
+{
+    
+    int argc = lua_gettop(tolua_S);
+    if (argc == 4)
+    {
+        
+        const char* szUrl = lua_tostring(tolua_S, 1);
+        const char* szSaveName = lua_tostring(tolua_S, 2);
+        const char* szSavePath = lua_tostring(tolua_S, 3);
+        int handler = toluafix_ref_function(tolua_S, 4, 0);
+        if (handler != 0)
+        {
+            CDownAsset::DownFile(szUrl, szSaveName, szSavePath, handler);
+            lua_pushboolean(tolua_S, 1);
+            return 1;
+        }
+        else
+        {
+            CCLOG("toLua_AppDelegate_setHttpDownCallback hadler or listener is null");
+        }
+    }
+    else
+    {
+        CCLOG("toLua_AppDelegate_setHttpDownCallback arg error now is %d", argc);
+    }
+    
+    return 0;
+}
+
+int toLua_AppDelegate_nativeIsDebug(lua_State* tolua_S)
+{
+#if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
+    lua_pushboolean(tolua_S, 1);
+#else
+    lua_pushboolean(tolua_S, 0);
+#endif
+    return 1;
+}
+
+int toLua_AppDelegate_onUpDateBaseApp(lua_State* tolua_S)
+{
+    const char* path = lua_tostring(tolua_S, 1);
+    if (path != NULL)
+    {
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+        WCHAR wszClassName[256] = {};
+        MultiByteToWideChar(CP_ACP, 0, path, strlen(path) + 1, wszClassName, sizeof(wszClassName) / sizeof(wszClassName[0]));
+        ShellExecute(NULL, L"open", L"explorer.exe", wszCl=assName, NULL, SW_SHOW);
+#endif
+        lua_pushboolean(tolua_S, 1);
+        return 1;
+    }
+    return 0;
+}
+
+int toLua_AppDelegate_restart(lua_State* tolua_S)
+{
+#if CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+    AppEvent event(kAppEventName, APP_EVENT_MENU);
+    std::stringstream buf;
+    buf << "{\"data\":\"" << "REFRESH_MENU" << "\"";
+    buf << ",\"name\":" << "\"menuClicked\"" << "}";
+    event.setDataString(buf.str());
+    event.setUserData((void*)"REFRESH_MENU");
+    Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+#endif
+    return 0;
+}
+
+int toLua_AppDelegate_unZipAsync(lua_State* tolua_S)
+{
+    int argc = lua_gettop(tolua_S);
+    if (argc == 3)
+    {
+        const char* file = lua_tostring(tolua_S, 1);
+        const char* path = lua_tostring(tolua_S, 2);
+        int handler = toluafix_ref_function(tolua_S, 3, 0);
+        if (handler != 0)
+        {
+            CUnZipAsset::UnZipFile(file, path, handler);
+            lua_pushboolean(tolua_S, 1);
+            return 1;
+        }
+        else{
+            CCLOG("toLua_AppDelegate_unZipAsync error handler is null");
+        }
+    }
+    else{
+        CCLOG("toLua_AppDelegate_unZipAsync error argc is %d", argc);
+    }
+    return 0;
+}
 std::string toupperCase(const char* pString) {
     std::string copy(pString);
     std::transform(copy.begin(), copy.end(), copy.begin(), ::toupper);
@@ -182,7 +287,12 @@ static int register_all_packages()
 {
     lua_State* tolua_S = LuaEngine::getInstance()->getLuaStack()->getLuaState();
     luaopen_lua_extensions(tolua_S);
-    
+
+    lua_register(tolua_S, "downFileAsync", toLua_AppDelegate_downFileAsync);
+    lua_register(tolua_S, "onUpDateBaseApp", toLua_AppDelegate_onUpDateBaseApp);
+    lua_register(tolua_S, "isDebug", toLua_AppDelegate_nativeIsDebug);
+    lua_register(tolua_S, "restart", toLua_AppDelegate_restart);
+    lua_register(tolua_S, "unZipAsync", toLua_AppDelegate_unZipAsync);
     lua_register(tolua_S, "getAllFileNameByDirectory", toLua_AppDelegate_getAllFileNameByDirectory);
     
     return 0; //flag for packages manager
@@ -220,7 +330,19 @@ bool AppDelegate::applicationDidFinishLaunching()
     {
         return false;
     }
-
+    
+    IMCKernel *kernel = GetMCKernel();
+    if (kernel)
+    {
+        kernel->SetLogOut((ILog*)CClientKernel::GetInstance());
+        CCLOG("KERNEL SUCCEED:%s", kernel->GetVersion());
+    }
+    else{
+        CCLOG("Load MCKernel Faild************************************************");
+        return false;
+    }
+    Director::getInstance()->getScheduler()->schedule(CClientKernel::globalUpdate, this, 0, kRepeatForever, 0, false, "GlobalUpdate");
+    
     return true;
 }
 

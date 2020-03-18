@@ -61,25 +61,25 @@ set(GAME_HEADER
     ${RUNTIME_SRC_ROOT}/Classes/include/BulletBase.h
     ${RUNTIME_SRC_ROOT}/Classes/include/BulletMgr.h
     ${RUNTIME_SRC_ROOT}/Classes/include/BulletNormal.h
-    # ${RUNTIME_SRC_ROOT}/Classes/include/ClientKernel.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/ClientKernel.h
     ${RUNTIME_SRC_ROOT}/Classes/include/CommonData.h
     ${RUNTIME_SRC_ROOT}/Classes/include/Define.h
-    # ${RUNTIME_SRC_ROOT}/Classes/include/DownAsset.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/DownAsset.h
     ${RUNTIME_SRC_ROOT}/Classes/include/EnergyBody.h
     ${RUNTIME_SRC_ROOT}/Classes/include/Event.h
     ${RUNTIME_SRC_ROOT}/Classes/include/Fort.h
     ${RUNTIME_SRC_ROOT}/Classes/include/FortMgr.h
     ${RUNTIME_SRC_ROOT}/Classes/include/InitialData.h
     ${RUNTIME_SRC_ROOT}/Classes/include/json_batchallocator.h
-    # ${RUNTIME_SRC_ROOT}/Classes/include/MCKernel.h
-    # ${RUNTIME_SRC_ROOT}/Classes/include/MobileClientKernel.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/MCKernel.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/MobileClientKernel.h
     ${RUNTIME_SRC_ROOT}/Classes/include/Player.h
     ${RUNTIME_SRC_ROOT}/Classes/include/Shape.h
     ${RUNTIME_SRC_ROOT}/Classes/include/Ship.h
     ${RUNTIME_SRC_ROOT}/Classes/include/stdafx.h
     ${RUNTIME_SRC_ROOT}/Classes/include/TimeTool.h
     ${RUNTIME_SRC_ROOT}/Classes/include/Tool.h
-    # ${RUNTIME_SRC_ROOT}/Classes/include/UnZipAsset.h
+    ${RUNTIME_SRC_ROOT}/Classes/include/UnZipAsset.h
     ${RUNTIME_SRC_ROOT}/Classes/include/json/writer.h
     ${RUNTIME_SRC_ROOT}/Classes/include/json/value.h
     ${RUNTIME_SRC_ROOT}/Classes/include/json/reader.h
@@ -101,23 +101,23 @@ set(GAME_SOURCE
     ${RUNTIME_SRC_ROOT}/Classes/src/BulletBase.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/BulletMgr.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/BulletNormal.cpp
-    # ${RUNTIME_SRC_ROOT}/Classes/src/ClientKernel.cpp
-    # ${RUNTIME_SRC_ROOT}/Classes/src/DownAsset.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/ClientKernel.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/DownAsset.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/EnergyBody.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/Fort.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/FortMgr.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/json_reader.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/json_value.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/json_writer.cpp
-    # ${RUNTIME_SRC_ROOT}/Classes/src/MCKernel.cpp
-    # ${RUNTIME_SRC_ROOT}/Classes/src/MobileClientKernel.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/MCKernel.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/MobileClientKernel.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/Player.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/Shape.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/Ship.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/stdafx.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/TimeTool.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/Tool.cpp
-    # ${RUNTIME_SRC_ROOT}/Classes/src/UnZipAsset.cpp
+    ${RUNTIME_SRC_ROOT}/Classes/src/UnZipAsset.cpp
     ${RUNTIME_SRC_ROOT}/Classes/src/json_internalarray.inl
     ${RUNTIME_SRC_ROOT}/Classes/src/json_internalmap.inl
     ${RUNTIME_SRC_ROOT}/Classes/src/json_valueiterator.inl
@@ -129,6 +129,8 @@ include_directories(
         ${RUNTIME_SRC_ROOT}/Classes/include
         ${COCOS2DX_ROOT_PATH}/cocos/scripting/lua-bindings/auto
         ${COCOS2DX_ROOT_PATH}/cocos/scripting/lua-bindings/manual
+        ${COCOS2DX_ROOT_PATH}/cocos/libpomelo2/include
+        # ${COCOS2DX_ROOT_PATH}/external/curl/include/${PLATFORM_FOLDER}
         ${COCOS2DX_ROOT_PATH}/external/lua/luajit/include
         ${COCOS2DX_ROOT_PATH}/external/lua/tolua
         ${COCOS2DX_ROOT_PATH}/tools/simulator/libsimulator/lib

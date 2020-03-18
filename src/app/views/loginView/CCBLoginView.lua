@@ -256,7 +256,7 @@ function CCBLoginView:ctor()
 	-- print(unpack(t));--a	b	ggr.	g^de
 
 	-- dump(newBattle.getBattleTestNumber());
-
+--[[
 	local numTable = {};
 	numTable[1] = 1;
 	numTable[2] = 1;
@@ -266,7 +266,7 @@ function CCBLoginView:ctor()
 	end
 	print("~~~斐波那锲", numTable[140]);
 	print(2^50);
-
+]]
 end
 
 -- function testFunction(a, b)

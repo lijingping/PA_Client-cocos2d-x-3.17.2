@@ -27,7 +27,10 @@ THE SOFTWARE.
 package org.cocos2dx.lua;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.net.Uri;
 import org.cocos2dx.lib.Cocos2dxActivity;
+import java.io.File;
 
 public class AppActivity extends Cocos2dxActivity{
     static AppActivity  instance;

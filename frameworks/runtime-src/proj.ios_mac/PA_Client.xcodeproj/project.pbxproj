@@ -47,6 +47,80 @@
 		9FF504861A5E881200AFDA55 /* libsimulator Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF5047E1A5E86D600AFDA55 /* libsimulator Mac.a */; };
 		9FF504871A5E88CE00AFDA55 /* libsimulator iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF504801A5E86D600AFDA55 /* libsimulator iOS.a */; };
 		9FFC07361A4A764100AED399 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC07341A4A764100AED399 /* MainMenu.xib */; };
+		B838372824235ED6009AF43A /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370224235ED5009AF43A /* json_writer.cpp */; };
+		B838372924235ED6009AF43A /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370224235ED5009AF43A /* json_writer.cpp */; };
+		B838372A24235ED6009AF43A /* FortMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370324235ED5009AF43A /* FortMgr.cpp */; };
+		B838372B24235ED6009AF43A /* FortMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370324235ED5009AF43A /* FortMgr.cpp */; };
+		B838372C24235ED6009AF43A /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = B838370424235ED5009AF43A /* json_internalmap.inl */; };
+		B838372D24235ED6009AF43A /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = B838370424235ED5009AF43A /* json_internalmap.inl */; };
+		B838372E24235ED6009AF43A /* Props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370524235ED5009AF43A /* Props.cpp */; };
+		B838372F24235ED6009AF43A /* Props.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370524235ED5009AF43A /* Props.cpp */; };
+		B838373024235ED6009AF43A /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370624235ED5009AF43A /* Player.cpp */; };
+		B838373124235ED6009AF43A /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370624235ED5009AF43A /* Player.cpp */; };
+		B838373224235ED6009AF43A /* BuffMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370724235ED5009AF43A /* BuffMgr.cpp */; };
+		B838373324235ED6009AF43A /* BuffMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370724235ED5009AF43A /* BuffMgr.cpp */; };
+		B838373424235ED6009AF43A /* Battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370824235ED5009AF43A /* Battle.cpp */; };
+		B838373524235ED6009AF43A /* Battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370824235ED5009AF43A /* Battle.cpp */; };
+		B838373624235ED6009AF43A /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370924235ED5009AF43A /* json_reader.cpp */; };
+		B838373724235ED6009AF43A /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370924235ED5009AF43A /* json_reader.cpp */; };
+		B838373824235ED6009AF43A /* EnergyBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370A24235ED5009AF43A /* EnergyBody.cpp */; };
+		B838373924235ED6009AF43A /* EnergyBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370A24235ED5009AF43A /* EnergyBody.cpp */; };
+		B838373A24235ED6009AF43A /* BaseClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370B24235ED5009AF43A /* BaseClass.cpp */; };
+		B838373B24235ED6009AF43A /* BaseClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370B24235ED5009AF43A /* BaseClass.cpp */; };
+		B838373C24235ED6009AF43A /* ClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370C24235ED5009AF43A /* ClientKernel.cpp */; };
+		B838373D24235ED6009AF43A /* ClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370C24235ED5009AF43A /* ClientKernel.cpp */; };
+		B838373E24235ED6009AF43A /* MCKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370D24235ED5009AF43A /* MCKernel.cpp */; };
+		B838373F24235ED6009AF43A /* MCKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370D24235ED5009AF43A /* MCKernel.cpp */; };
+		B838374024235ED6009AF43A /* BulletMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370E24235ED5009AF43A /* BulletMgr.cpp */; };
+		B838374124235ED6009AF43A /* BulletMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370E24235ED5009AF43A /* BulletMgr.cpp */; };
+		B838374224235ED6009AF43A /* KeyFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370F24235ED5009AF43A /* KeyFrame.cpp */; };
+		B838374324235ED6009AF43A /* KeyFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838370F24235ED5009AF43A /* KeyFrame.cpp */; };
+		B838374424235ED6009AF43A /* Boss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371024235ED5009AF43A /* Boss.cpp */; };
+		B838374524235ED6009AF43A /* Boss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371024235ED5009AF43A /* Boss.cpp */; };
+		B838374624235ED6009AF43A /* TimeTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371124235ED5009AF43A /* TimeTool.cpp */; };
+		B838374724235ED6009AF43A /* TimeTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371124235ED5009AF43A /* TimeTool.cpp */; };
+		B838374824235ED6009AF43A /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371224235ED5009AF43A /* Shape.cpp */; };
+		B838374924235ED6009AF43A /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371224235ED5009AF43A /* Shape.cpp */; };
+		B838374A24235ED6009AF43A /* UnZipAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371324235ED5009AF43A /* UnZipAsset.cpp */; };
+		B838374B24235ED6009AF43A /* UnZipAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371324235ED5009AF43A /* UnZipAsset.cpp */; };
+		B838374C24235ED6009AF43A /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371424235ED5009AF43A /* DownAsset.cpp */; };
+		B838374D24235ED6009AF43A /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371424235ED5009AF43A /* DownAsset.cpp */; };
+		B838374E24235ED6009AF43A /* PropsMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371524235ED5009AF43A /* PropsMgr.cpp */; };
+		B838374F24235ED6009AF43A /* PropsMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371524235ED5009AF43A /* PropsMgr.cpp */; };
+		B838375024235ED6009AF43A /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371624235ED5009AF43A /* Enemy.cpp */; };
+		B838375124235ED6009AF43A /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371624235ED5009AF43A /* Enemy.cpp */; };
+		B838375224235ED6009AF43A /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = B838371724235ED5009AF43A /* sconscript */; };
+		B838375324235ED6009AF43A /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = B838371724235ED5009AF43A /* sconscript */; };
+		B838375424235ED6009AF43A /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371824235ED5009AF43A /* stdafx.cpp */; };
+		B838375524235ED6009AF43A /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371824235ED5009AF43A /* stdafx.cpp */; };
+		B838375624235ED6009AF43A /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371924235ED5009AF43A /* json_value.cpp */; };
+		B838375724235ED6009AF43A /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371924235ED5009AF43A /* json_value.cpp */; };
+		B838375824235ED6009AF43A /* Buff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371A24235ED5009AF43A /* Buff.cpp */; };
+		B838375924235ED6009AF43A /* Buff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371A24235ED5009AF43A /* Buff.cpp */; };
+		B838375A24235ED6009AF43A /* MobileClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371B24235ED5009AF43A /* MobileClientKernel.cpp */; };
+		B838375B24235ED6009AF43A /* MobileClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371B24235ED5009AF43A /* MobileClientKernel.cpp */; };
+		B838375C24235ED6009AF43A /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371C24235ED5009AF43A /* Bullet.cpp */; };
+		B838375D24235ED6009AF43A /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371C24235ED5009AF43A /* Bullet.cpp */; };
+		B838375E24235ED6009AF43A /* libcode.json in Resources */ = {isa = PBXBuildFile; fileRef = B838371E24235ED5009AF43A /* libcode.json */; };
+		B838375F24235ED6009AF43A /* libcode.json in Resources */ = {isa = PBXBuildFile; fileRef = B838371E24235ED5009AF43A /* libcode.json */; };
+		B838376024235ED6009AF43A /* ship_list.json in Resources */ = {isa = PBXBuildFile; fileRef = B838371F24235ED5009AF43A /* ship_list.json */; };
+		B838376124235ED6009AF43A /* ship_list.json in Resources */ = {isa = PBXBuildFile; fileRef = B838371F24235ED5009AF43A /* ship_list.json */; };
+		B838376224235ED6009AF43A /* skill_data.json in Resources */ = {isa = PBXBuildFile; fileRef = B838372024235ED5009AF43A /* skill_data.json */; };
+		B838376324235ED6009AF43A /* skill_data.json in Resources */ = {isa = PBXBuildFile; fileRef = B838372024235ED5009AF43A /* skill_data.json */; };
+		B838376424235ED6009AF43A /* combat.json in Resources */ = {isa = PBXBuildFile; fileRef = B838372124235ED5009AF43A /* combat.json */; };
+		B838376524235ED6009AF43A /* combat.json in Resources */ = {isa = PBXBuildFile; fileRef = B838372124235ED5009AF43A /* combat.json */; };
+		B838376624235ED6009AF43A /* Fort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838372224235ED5009AF43A /* Fort.cpp */; };
+		B838376724235ED6009AF43A /* Fort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838372224235ED5009AF43A /* Fort.cpp */; };
+		B838376824235ED6009AF43A /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = B838372324235ED5009AF43A /* json_valueiterator.inl */; };
+		B838376924235ED6009AF43A /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = B838372324235ED5009AF43A /* json_valueiterator.inl */; };
+		B838376A24235ED6009AF43A /* FortSkill.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838372424235ED5009AF43A /* FortSkill.cpp */; };
+		B838376B24235ED6009AF43A /* FortSkill.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838372424235ED5009AF43A /* FortSkill.cpp */; };
+		B838376C24235ED6009AF43A /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838372524235ED5009AF43A /* Ship.cpp */; };
+		B838376D24235ED6009AF43A /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838372524235ED5009AF43A /* Ship.cpp */; };
+		B838376E24235ED6009AF43A /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = B838372624235ED5009AF43A /* json_internalarray.inl */; };
+		B838376F24235ED6009AF43A /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = B838372624235ED5009AF43A /* json_internalarray.inl */; };
+		B838377024235ED6009AF43A /* ShipSkill.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838372724235ED5009AF43A /* ShipSkill.cpp */; };
+		B838377124235ED6009AF43A /* ShipSkill.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838372724235ED5009AF43A /* ShipSkill.cpp */; };
 		B8D33E16241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E11241F0C43006F6173 /* lua_pomelo_auto.cpp */; };
 		B8D33E17241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E11241F0C43006F6173 /* lua_pomelo_auto.cpp */; };
 		B8D33E18241F0C44006F6173 /* lua_pomelo_auto_api.lua in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E13241F0C43006F6173 /* lua_pomelo_auto_api.lua */; };
@@ -58,68 +132,6 @@
 		B8D33E21241F0F1D006F6173 /* libpomelo2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33E1E241F0F1D006F6173 /* libpomelo2.a */; };
 		B8D33E7B242066E1006F6173 /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E30242066E0006F6173 /* export.cpp */; };
 		B8D33E7C242066E1006F6173 /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E30242066E0006F6173 /* export.cpp */; };
-		B8D33E7D242066E1006F6173 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E35242066E0006F6173 /* json_writer.cpp */; };
-		B8D33E7E242066E1006F6173 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E35242066E0006F6173 /* json_writer.cpp */; };
-		B8D33E7F242066E1006F6173 /* FortMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E36242066E0006F6173 /* FortMgr.cpp */; };
-		B8D33E80242066E1006F6173 /* FortMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E36242066E0006F6173 /* FortMgr.cpp */; };
-		B8D33E81242066E1006F6173 /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E37242066E0006F6173 /* json_internalmap.inl */; };
-		B8D33E82242066E1006F6173 /* json_internalmap.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E37242066E0006F6173 /* json_internalmap.inl */; };
-		B8D33E85242066E1006F6173 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E39242066E0006F6173 /* Player.cpp */; };
-		B8D33E86242066E1006F6173 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E39242066E0006F6173 /* Player.cpp */; };
-		B8D33E87242066E1006F6173 /* Battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3A242066E0006F6173 /* Battle.cpp */; };
-		B8D33E88242066E1006F6173 /* Battle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3A242066E0006F6173 /* Battle.cpp */; };
-		B8D33E89242066E1006F6173 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3B242066E0006F6173 /* json_reader.cpp */; };
-		B8D33E8A242066E1006F6173 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3B242066E0006F6173 /* json_reader.cpp */; };
-		B8D33E8B242066E1006F6173 /* EnergyBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3C242066E0006F6173 /* EnergyBody.cpp */; };
-		B8D33E8C242066E1006F6173 /* EnergyBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3C242066E0006F6173 /* EnergyBody.cpp */; };
-		B8D33E8D242066E1006F6173 /* BaseClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3D242066E0006F6173 /* BaseClass.cpp */; };
-		B8D33E8E242066E1006F6173 /* BaseClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E3D242066E0006F6173 /* BaseClass.cpp */; };
-		B8D33E93242066E1006F6173 /* BulletNormal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E40242066E0006F6173 /* BulletNormal.cpp */; };
-		B8D33E94242066E1006F6173 /* BulletNormal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E40242066E0006F6173 /* BulletNormal.cpp */; };
-		B8D33E95242066E1006F6173 /* BulletMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E41242066E0006F6173 /* BulletMgr.cpp */; };
-		B8D33E96242066E1006F6173 /* BulletMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E41242066E0006F6173 /* BulletMgr.cpp */; };
-		B8D33E97242066E1006F6173 /* TimeTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E42242066E0006F6173 /* TimeTool.cpp */; };
-		B8D33E98242066E1006F6173 /* TimeTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E42242066E0006F6173 /* TimeTool.cpp */; };
-		B8D33E99242066E1006F6173 /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E43242066E0006F6173 /* Shape.cpp */; };
-		B8D33E9A242066E1006F6173 /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E43242066E0006F6173 /* Shape.cpp */; };
-		B8D33EA1242066E1006F6173 /* Tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E47242066E0006F6173 /* Tool.cpp */; };
-		B8D33EA2242066E1006F6173 /* Tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E47242066E0006F6173 /* Tool.cpp */; };
-		B8D33EA3242066E1006F6173 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E48242066E0006F6173 /* stdafx.cpp */; };
-		B8D33EA4242066E1006F6173 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E48242066E0006F6173 /* stdafx.cpp */; };
-		B8D33EA5242066E1006F6173 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E49242066E0006F6173 /* json_value.cpp */; };
-		B8D33EA6242066E1006F6173 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E49242066E0006F6173 /* json_value.cpp */; };
-		B8D33EA9242066E1006F6173 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E4B242066E0006F6173 /* Bullet.cpp */; };
-		B8D33EAA242066E1006F6173 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E4B242066E0006F6173 /* Bullet.cpp */; };
-		B8D33EAB242066E1006F6173 /* libcode.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4D242066E0006F6173 /* libcode.json */; };
-		B8D33EAC242066E1006F6173 /* libcode.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4D242066E0006F6173 /* libcode.json */; };
-		B8D33EAD242066E1006F6173 /* ship_list.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4E242066E0006F6173 /* ship_list.json */; };
-		B8D33EAE242066E1006F6173 /* ship_list.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4E242066E0006F6173 /* ship_list.json */; };
-		B8D33EAF242066E1006F6173 /* skill_data.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4F242066E0006F6173 /* skill_data.json */; };
-		B8D33EB0242066E1006F6173 /* skill_data.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E4F242066E0006F6173 /* skill_data.json */; };
-		B8D33EB1242066E1006F6173 /* combat.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E50242066E0006F6173 /* combat.json */; };
-		B8D33EB2242066E1006F6173 /* combat.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E50242066E0006F6173 /* combat.json */; };
-		B8D33EB3242066E1006F6173 /* Fort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E51242066E0006F6173 /* Fort.cpp */; };
-		B8D33EB4242066E1006F6173 /* Fort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E51242066E0006F6173 /* Fort.cpp */; };
-		B8D33EB5242066E1006F6173 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E52242066E0006F6173 /* json_valueiterator.inl */; };
-		B8D33EB6242066E1006F6173 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E52242066E0006F6173 /* json_valueiterator.inl */; };
-		B8D33EB7242066E1006F6173 /* BaseData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E53242066E0006F6173 /* BaseData.cpp */; };
-		B8D33EB8242066E1006F6173 /* BaseData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E53242066E0006F6173 /* BaseData.cpp */; };
-		B8D33EB9242066E1006F6173 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E54242066E0006F6173 /* Ship.cpp */; };
-		B8D33EBA242066E1006F6173 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E54242066E0006F6173 /* Ship.cpp */; };
-		B8D33EBB242066E1006F6173 /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E55242066E0006F6173 /* json_internalarray.inl */; };
-		B8D33EBC242066E1006F6173 /* json_internalarray.inl in Resources */ = {isa = PBXBuildFile; fileRef = B8D33E55242066E0006F6173 /* json_internalarray.inl */; };
-		B8D33EBD242066E1006F6173 /* BulletBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E56242066E0006F6173 /* BulletBase.cpp */; };
-		B8D33EBE242066E1006F6173 /* BulletBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33E56242066E0006F6173 /* BulletBase.cpp */; };
-		B8D33ECC24208305006F6173 /* UnZipAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC724208304006F6173 /* UnZipAsset.cpp */; };
-		B8D33ECD24208305006F6173 /* UnZipAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC724208304006F6173 /* UnZipAsset.cpp */; };
-		B8D33ECE24208305006F6173 /* MCKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC824208304006F6173 /* MCKernel.cpp */; };
-		B8D33ECF24208305006F6173 /* MCKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC824208304006F6173 /* MCKernel.cpp */; };
-		B8D33ED024208305006F6173 /* MobileClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC924208304006F6173 /* MobileClientKernel.cpp */; };
-		B8D33ED124208305006F6173 /* MobileClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33EC924208304006F6173 /* MobileClientKernel.cpp */; };
-		B8D33ED224208305006F6173 /* ClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECA24208304006F6173 /* ClientKernel.cpp */; };
-		B8D33ED324208305006F6173 /* ClientKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECA24208304006F6173 /* ClientKernel.cpp */; };
-		B8D33ED424208305006F6173 /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECB24208304006F6173 /* DownAsset.cpp */; };
-		B8D33ED524208305006F6173 /* DownAsset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D33ECB24208304006F6173 /* DownAsset.cpp */; };
 		B8D33ED62420A21F006F6173 /* libpomelo2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33E1E241F0F1D006F6173 /* libpomelo2.a */; };
 		B8D33EDA2420A655006F6173 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D33ED92420A655006F6173 /* libcurl.a */; };
 		C07828F818B4D72E00BD2287 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C07828F418B4D72E00BD2287 /* main.m */; };
@@ -275,6 +287,81 @@
 		9FF504831A5E87B100AFDA55 /* ConsoleWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleWindowController.m; sourceTree = "<group>"; };
 		9FFC07351A4A764100AED399 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9FFC07371A4A765100AED399 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		B83836DA24235ED5009AF43A /* Props.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Props.h; sourceTree = "<group>"; };
+		B83836DB24235ED5009AF43A /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
+		B83836DC24235ED5009AF43A /* Buff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buff.h; sourceTree = "<group>"; };
+		B83836DD24235ED5009AF43A /* KeyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyFrame.h; sourceTree = "<group>"; };
+		B83836DE24235ED5009AF43A /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		B83836DF24235ED5009AF43A /* UnZipAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnZipAsset.h; sourceTree = "<group>"; };
+		B83836E024235ED5009AF43A /* Boss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boss.h; sourceTree = "<group>"; };
+		B83836E124235ED5009AF43A /* InitialData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialData.h; sourceTree = "<group>"; };
+		B83836E224235ED5009AF43A /* MobileClientKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileClientKernel.h; sourceTree = "<group>"; };
+		B83836E324235ED5009AF43A /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		B83836E424235ED5009AF43A /* Battle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Battle.h; sourceTree = "<group>"; };
+		B83836E524235ED5009AF43A /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		B83836E624235ED5009AF43A /* PropsMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropsMgr.h; sourceTree = "<group>"; };
+		B83836E724235ED5009AF43A /* BuffMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuffMgr.h; sourceTree = "<group>"; };
+		B83836E824235ED5009AF43A /* DownAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownAsset.h; sourceTree = "<group>"; };
+		B83836E924235ED5009AF43A /* ShipSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipSkill.h; sourceTree = "<group>"; };
+		B83836EA24235ED5009AF43A /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		B83836EB24235ED5009AF43A /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		B83836EC24235ED5009AF43A /* FortMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FortMgr.h; sourceTree = "<group>"; };
+		B83836ED24235ED5009AF43A /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		B83836EF24235ED5009AF43A /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		B83836F024235ED5009AF43A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		B83836F124235ED5009AF43A /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
+		B83836F224235ED5009AF43A /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		B83836F324235ED5009AF43A /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		B83836F424235ED5009AF43A /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		B83836F524235ED5009AF43A /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		B83836F624235ED5009AF43A /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		B83836F724235ED5009AF43A /* TimeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTool.h; sourceTree = "<group>"; };
+		B83836F824235ED5009AF43A /* EnergyBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyBody.h; sourceTree = "<group>"; };
+		B83836F924235ED5009AF43A /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		B83836FA24235ED5009AF43A /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
+		B83836FB24235ED5009AF43A /* ClientKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientKernel.h; sourceTree = "<group>"; };
+		B83836FC24235ED5009AF43A /* MCKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCKernel.h; sourceTree = "<group>"; };
+		B83836FD24235ED5009AF43A /* BaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseClass.h; sourceTree = "<group>"; };
+		B83836FE24235ED5009AF43A /* FortSkill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FortSkill.h; sourceTree = "<group>"; };
+		B83836FF24235ED5009AF43A /* Fort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fort.h; sourceTree = "<group>"; };
+		B838370024235ED5009AF43A /* BulletMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletMgr.h; sourceTree = "<group>"; };
+		B838370224235ED5009AF43A /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		B838370324235ED5009AF43A /* FortMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FortMgr.cpp; sourceTree = "<group>"; };
+		B838370424235ED5009AF43A /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
+		B838370524235ED5009AF43A /* Props.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Props.cpp; sourceTree = "<group>"; };
+		B838370624235ED5009AF43A /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		B838370724235ED5009AF43A /* BuffMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuffMgr.cpp; sourceTree = "<group>"; };
+		B838370824235ED5009AF43A /* Battle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Battle.cpp; sourceTree = "<group>"; };
+		B838370924235ED5009AF43A /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
+		B838370A24235ED5009AF43A /* EnergyBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnergyBody.cpp; sourceTree = "<group>"; };
+		B838370B24235ED5009AF43A /* BaseClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseClass.cpp; sourceTree = "<group>"; };
+		B838370C24235ED5009AF43A /* ClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientKernel.cpp; sourceTree = "<group>"; };
+		B838370D24235ED5009AF43A /* MCKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCKernel.cpp; sourceTree = "<group>"; };
+		B838370E24235ED5009AF43A /* BulletMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletMgr.cpp; sourceTree = "<group>"; };
+		B838370F24235ED5009AF43A /* KeyFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFrame.cpp; sourceTree = "<group>"; };
+		B838371024235ED5009AF43A /* Boss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Boss.cpp; sourceTree = "<group>"; };
+		B838371124235ED5009AF43A /* TimeTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeTool.cpp; sourceTree = "<group>"; };
+		B838371224235ED5009AF43A /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
+		B838371324235ED5009AF43A /* UnZipAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnZipAsset.cpp; sourceTree = "<group>"; };
+		B838371424235ED5009AF43A /* DownAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownAsset.cpp; sourceTree = "<group>"; };
+		B838371524235ED5009AF43A /* PropsMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PropsMgr.cpp; sourceTree = "<group>"; };
+		B838371624235ED5009AF43A /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
+		B838371724235ED5009AF43A /* sconscript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sconscript; sourceTree = "<group>"; };
+		B838371824235ED5009AF43A /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		B838371924235ED5009AF43A /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
+		B838371A24235ED5009AF43A /* Buff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Buff.cpp; sourceTree = "<group>"; };
+		B838371B24235ED5009AF43A /* MobileClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobileClientKernel.cpp; sourceTree = "<group>"; };
+		B838371C24235ED5009AF43A /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		B838371E24235ED5009AF43A /* libcode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = libcode.json; sourceTree = "<group>"; };
+		B838371F24235ED5009AF43A /* ship_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ship_list.json; sourceTree = "<group>"; };
+		B838372024235ED5009AF43A /* skill_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skill_data.json; sourceTree = "<group>"; };
+		B838372124235ED5009AF43A /* combat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = combat.json; sourceTree = "<group>"; };
+		B838372224235ED5009AF43A /* Fort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fort.cpp; sourceTree = "<group>"; };
+		B838372324235ED5009AF43A /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
+		B838372424235ED5009AF43A /* FortSkill.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FortSkill.cpp; sourceTree = "<group>"; };
+		B838372524235ED5009AF43A /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
+		B838372624235ED5009AF43A /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
+		B838372724235ED5009AF43A /* ShipSkill.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShipSkill.cpp; sourceTree = "<group>"; };
 		B8D33E0C241F0C43006F6173 /* CCPomelo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCPomelo.h; path = ../Classes/CCPomelo.h; sourceTree = "<group>"; };
 		B8D33E10241F0C43006F6173 /* lua_pomelo_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_pomelo_auto.hpp; sourceTree = "<group>"; };
 		B8D33E11241F0C43006F6173 /* lua_pomelo_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_pomelo_auto.cpp; sourceTree = "<group>"; };
@@ -286,71 +373,6 @@
 		B8D33E20241F0F1D006F6173 /* libopenssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopenssl.a; path = "../../cocos2d-x/cocos/libpomelo2/prebuilt/libopenssl.a"; sourceTree = "<group>"; };
 		B8D33E30242066E0006F6173 /* export.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = export.cpp; path = ../Classes/export.cpp; sourceTree = "<group>"; };
 		B8D33E33242066E0006F6173 /* export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = export.h; path = ../Classes/export.h; sourceTree = "<group>"; };
-		B8D33E35242066E0006F6173 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
-		B8D33E36242066E0006F6173 /* FortMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FortMgr.cpp; sourceTree = "<group>"; };
-		B8D33E37242066E0006F6173 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
-		B8D33E39242066E0006F6173 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
-		B8D33E3A242066E0006F6173 /* Battle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Battle.cpp; sourceTree = "<group>"; };
-		B8D33E3B242066E0006F6173 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
-		B8D33E3C242066E0006F6173 /* EnergyBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnergyBody.cpp; sourceTree = "<group>"; };
-		B8D33E3D242066E0006F6173 /* BaseClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseClass.cpp; sourceTree = "<group>"; };
-		B8D33E40242066E0006F6173 /* BulletNormal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletNormal.cpp; sourceTree = "<group>"; };
-		B8D33E41242066E0006F6173 /* BulletMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletMgr.cpp; sourceTree = "<group>"; };
-		B8D33E42242066E0006F6173 /* TimeTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeTool.cpp; sourceTree = "<group>"; };
-		B8D33E43242066E0006F6173 /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
-		B8D33E47242066E0006F6173 /* Tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tool.cpp; sourceTree = "<group>"; };
-		B8D33E48242066E0006F6173 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
-		B8D33E49242066E0006F6173 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
-		B8D33E4B242066E0006F6173 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
-		B8D33E4D242066E0006F6173 /* libcode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = libcode.json; sourceTree = "<group>"; };
-		B8D33E4E242066E0006F6173 /* ship_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ship_list.json; sourceTree = "<group>"; };
-		B8D33E4F242066E0006F6173 /* skill_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skill_data.json; sourceTree = "<group>"; };
-		B8D33E50242066E0006F6173 /* combat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = combat.json; sourceTree = "<group>"; };
-		B8D33E51242066E0006F6173 /* Fort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fort.cpp; sourceTree = "<group>"; };
-		B8D33E52242066E0006F6173 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
-		B8D33E53242066E0006F6173 /* BaseData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseData.cpp; sourceTree = "<group>"; };
-		B8D33E54242066E0006F6173 /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
-		B8D33E55242066E0006F6173 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
-		B8D33E56242066E0006F6173 /* BulletBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletBase.cpp; sourceTree = "<group>"; };
-		B8D33E58242066E1006F6173 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
-		B8D33E59242066E1006F6173 /* BulletNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletNormal.h; sourceTree = "<group>"; };
-		B8D33E5A242066E1006F6173 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
-		B8D33E5C242066E1006F6173 /* InitialData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialData.h; sourceTree = "<group>"; };
-		B8D33E5E242066E1006F6173 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		B8D33E5F242066E1006F6173 /* Battle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Battle.h; sourceTree = "<group>"; };
-		B8D33E60242066E1006F6173 /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
-		B8D33E61242066E1006F6173 /* CommonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonData.h; sourceTree = "<group>"; };
-		B8D33E63242066E1006F6173 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
-		B8D33E64242066E1006F6173 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
-		B8D33E65242066E1006F6173 /* FortMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FortMgr.h; sourceTree = "<group>"; };
-		B8D33E66242066E1006F6173 /* BaseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseData.h; sourceTree = "<group>"; };
-		B8D33E67242066E1006F6173 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
-		B8D33E69242066E1006F6173 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
-		B8D33E6A242066E1006F6173 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		B8D33E6B242066E1006F6173 /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
-		B8D33E6C242066E1006F6173 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
-		B8D33E6D242066E1006F6173 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
-		B8D33E6E242066E1006F6173 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
-		B8D33E6F242066E1006F6173 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
-		B8D33E70242066E1006F6173 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
-		B8D33E71242066E1006F6173 /* TimeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTool.h; sourceTree = "<group>"; };
-		B8D33E72242066E1006F6173 /* EnergyBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyBody.h; sourceTree = "<group>"; };
-		B8D33E73242066E1006F6173 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
-		B8D33E74242066E1006F6173 /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
-		B8D33E77242066E1006F6173 /* BaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseClass.h; sourceTree = "<group>"; };
-		B8D33E78242066E1006F6173 /* Fort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fort.h; sourceTree = "<group>"; };
-		B8D33E79242066E1006F6173 /* BulletBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletBase.h; sourceTree = "<group>"; };
-		B8D33E7A242066E1006F6173 /* BulletMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletMgr.h; sourceTree = "<group>"; };
-		B8D33EC2242082F5006F6173 /* UnZipAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnZipAsset.h; sourceTree = "<group>"; };
-		B8D33EC3242082F5006F6173 /* ClientKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientKernel.h; sourceTree = "<group>"; };
-		B8D33EC4242082F5006F6173 /* MCKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCKernel.h; sourceTree = "<group>"; };
-		B8D33EC5242082F5006F6173 /* DownAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownAsset.h; sourceTree = "<group>"; };
-		B8D33EC6242082F5006F6173 /* MobileClientKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileClientKernel.h; sourceTree = "<group>"; };
-		B8D33EC724208304006F6173 /* UnZipAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnZipAsset.cpp; sourceTree = "<group>"; };
-		B8D33EC824208304006F6173 /* MCKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MCKernel.cpp; sourceTree = "<group>"; };
-		B8D33EC924208304006F6173 /* MobileClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobileClientKernel.cpp; sourceTree = "<group>"; };
-		B8D33ECA24208304006F6173 /* ClientKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientKernel.cpp; sourceTree = "<group>"; };
-		B8D33ECB24208304006F6173 /* DownAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownAsset.cpp; sourceTree = "<group>"; };
 		B8D33ED92420A655006F6173 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "../../cocos2d-x/external/curl/prebuilt/ios/libcurl.a"; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C07828F418B4D72E00BD2287 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -490,6 +512,113 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B83836D924235ED5009AF43A /* include */ = {
+			isa = PBXGroup;
+			children = (
+				B83836DA24235ED5009AF43A /* Props.h */,
+				B83836DB24235ED5009AF43A /* Ship.h */,
+				B83836DC24235ED5009AF43A /* Buff.h */,
+				B83836DD24235ED5009AF43A /* KeyFrame.h */,
+				B83836DE24235ED5009AF43A /* stdafx.h */,
+				B83836DF24235ED5009AF43A /* UnZipAsset.h */,
+				B83836E024235ED5009AF43A /* Boss.h */,
+				B83836E124235ED5009AF43A /* InitialData.h */,
+				B83836E224235ED5009AF43A /* MobileClientKernel.h */,
+				B83836E324235ED5009AF43A /* Event.h */,
+				B83836E424235ED5009AF43A /* Battle.h */,
+				B83836E524235ED5009AF43A /* Define.h */,
+				B83836E624235ED5009AF43A /* PropsMgr.h */,
+				B83836E724235ED5009AF43A /* BuffMgr.h */,
+				B83836E824235ED5009AF43A /* DownAsset.h */,
+				B83836E924235ED5009AF43A /* ShipSkill.h */,
+				B83836EA24235ED5009AF43A /* Player.h */,
+				B83836EB24235ED5009AF43A /* Shape.h */,
+				B83836EC24235ED5009AF43A /* FortMgr.h */,
+				B83836ED24235ED5009AF43A /* Bullet.h */,
+				B83836EE24235ED5009AF43A /* json */,
+				B83836F724235ED5009AF43A /* TimeTool.h */,
+				B83836F824235ED5009AF43A /* EnergyBody.h */,
+				B83836F924235ED5009AF43A /* Enemy.h */,
+				B83836FA24235ED5009AF43A /* json_batchallocator.h */,
+				B83836FB24235ED5009AF43A /* ClientKernel.h */,
+				B83836FC24235ED5009AF43A /* MCKernel.h */,
+				B83836FD24235ED5009AF43A /* BaseClass.h */,
+				B83836FE24235ED5009AF43A /* FortSkill.h */,
+				B83836FF24235ED5009AF43A /* Fort.h */,
+				B838370024235ED5009AF43A /* BulletMgr.h */,
+			);
+			name = include;
+			path = ../Classes/include;
+			sourceTree = "<group>";
+		};
+		B83836EE24235ED5009AF43A /* json */ = {
+			isa = PBXGroup;
+			children = (
+				B83836EF24235ED5009AF43A /* reader.h */,
+				B83836F024235ED5009AF43A /* config.h */,
+				B83836F124235ED5009AF43A /* features.h */,
+				B83836F224235ED5009AF43A /* value.h */,
+				B83836F324235ED5009AF43A /* autolink.h */,
+				B83836F424235ED5009AF43A /* json.h */,
+				B83836F524235ED5009AF43A /* writer.h */,
+				B83836F624235ED5009AF43A /* forwards.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		B838370124235ED5009AF43A /* src */ = {
+			isa = PBXGroup;
+			children = (
+				B838370224235ED5009AF43A /* json_writer.cpp */,
+				B838370324235ED5009AF43A /* FortMgr.cpp */,
+				B838370424235ED5009AF43A /* json_internalmap.inl */,
+				B838370524235ED5009AF43A /* Props.cpp */,
+				B838370624235ED5009AF43A /* Player.cpp */,
+				B838370724235ED5009AF43A /* BuffMgr.cpp */,
+				B838370824235ED5009AF43A /* Battle.cpp */,
+				B838370924235ED5009AF43A /* json_reader.cpp */,
+				B838370A24235ED5009AF43A /* EnergyBody.cpp */,
+				B838370B24235ED5009AF43A /* BaseClass.cpp */,
+				B838370C24235ED5009AF43A /* ClientKernel.cpp */,
+				B838370D24235ED5009AF43A /* MCKernel.cpp */,
+				B838370E24235ED5009AF43A /* BulletMgr.cpp */,
+				B838370F24235ED5009AF43A /* KeyFrame.cpp */,
+				B838371024235ED5009AF43A /* Boss.cpp */,
+				B838371124235ED5009AF43A /* TimeTool.cpp */,
+				B838371224235ED5009AF43A /* Shape.cpp */,
+				B838371324235ED5009AF43A /* UnZipAsset.cpp */,
+				B838371424235ED5009AF43A /* DownAsset.cpp */,
+				B838371524235ED5009AF43A /* PropsMgr.cpp */,
+				B838371624235ED5009AF43A /* Enemy.cpp */,
+				B838371724235ED5009AF43A /* sconscript */,
+				B838371824235ED5009AF43A /* stdafx.cpp */,
+				B838371924235ED5009AF43A /* json_value.cpp */,
+				B838371A24235ED5009AF43A /* Buff.cpp */,
+				B838371B24235ED5009AF43A /* MobileClientKernel.cpp */,
+				B838371C24235ED5009AF43A /* Bullet.cpp */,
+				B838371D24235ED5009AF43A /* data */,
+				B838372224235ED5009AF43A /* Fort.cpp */,
+				B838372324235ED5009AF43A /* json_valueiterator.inl */,
+				B838372424235ED5009AF43A /* FortSkill.cpp */,
+				B838372524235ED5009AF43A /* Ship.cpp */,
+				B838372624235ED5009AF43A /* json_internalarray.inl */,
+				B838372724235ED5009AF43A /* ShipSkill.cpp */,
+			);
+			name = src;
+			path = ../Classes/src;
+			sourceTree = "<group>";
+		};
+		B838371D24235ED5009AF43A /* data */ = {
+			isa = PBXGroup;
+			children = (
+				B838371E24235ED5009AF43A /* libcode.json */,
+				B838371F24235ED5009AF43A /* ship_list.json */,
+				B838372024235ED5009AF43A /* skill_data.json */,
+				B838372124235ED5009AF43A /* combat.json */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		B8D33E0F241F0C43006F6173 /* lua-bindings */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,103 +637,6 @@
 				B8D33E14241F0C43006F6173 /* CCPomelo.lua */,
 			);
 			path = api;
-			sourceTree = "<group>";
-		};
-		B8D33E34242066E0006F6173 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				B8D33ECA24208304006F6173 /* ClientKernel.cpp */,
-				B8D33ECB24208304006F6173 /* DownAsset.cpp */,
-				B8D33EC824208304006F6173 /* MCKernel.cpp */,
-				B8D33EC924208304006F6173 /* MobileClientKernel.cpp */,
-				B8D33EC724208304006F6173 /* UnZipAsset.cpp */,
-				B8D33E35242066E0006F6173 /* json_writer.cpp */,
-				B8D33E36242066E0006F6173 /* FortMgr.cpp */,
-				B8D33E37242066E0006F6173 /* json_internalmap.inl */,
-				B8D33E39242066E0006F6173 /* Player.cpp */,
-				B8D33E3A242066E0006F6173 /* Battle.cpp */,
-				B8D33E3B242066E0006F6173 /* json_reader.cpp */,
-				B8D33E3C242066E0006F6173 /* EnergyBody.cpp */,
-				B8D33E3D242066E0006F6173 /* BaseClass.cpp */,
-				B8D33E40242066E0006F6173 /* BulletNormal.cpp */,
-				B8D33E41242066E0006F6173 /* BulletMgr.cpp */,
-				B8D33E42242066E0006F6173 /* TimeTool.cpp */,
-				B8D33E43242066E0006F6173 /* Shape.cpp */,
-				B8D33E47242066E0006F6173 /* Tool.cpp */,
-				B8D33E48242066E0006F6173 /* stdafx.cpp */,
-				B8D33E49242066E0006F6173 /* json_value.cpp */,
-				B8D33E4B242066E0006F6173 /* Bullet.cpp */,
-				B8D33E4C242066E0006F6173 /* data */,
-				B8D33E51242066E0006F6173 /* Fort.cpp */,
-				B8D33E52242066E0006F6173 /* json_valueiterator.inl */,
-				B8D33E53242066E0006F6173 /* BaseData.cpp */,
-				B8D33E54242066E0006F6173 /* Ship.cpp */,
-				B8D33E55242066E0006F6173 /* json_internalarray.inl */,
-				B8D33E56242066E0006F6173 /* BulletBase.cpp */,
-			);
-			name = src;
-			path = ../Classes/src;
-			sourceTree = "<group>";
-		};
-		B8D33E4C242066E0006F6173 /* data */ = {
-			isa = PBXGroup;
-			children = (
-				B8D33E4D242066E0006F6173 /* libcode.json */,
-				B8D33E4E242066E0006F6173 /* ship_list.json */,
-				B8D33E4F242066E0006F6173 /* skill_data.json */,
-				B8D33E50242066E0006F6173 /* combat.json */,
-			);
-			path = data;
-			sourceTree = "<group>";
-		};
-		B8D33E57242066E1006F6173 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				B8D33EC3242082F5006F6173 /* ClientKernel.h */,
-				B8D33EC5242082F5006F6173 /* DownAsset.h */,
-				B8D33EC4242082F5006F6173 /* MCKernel.h */,
-				B8D33EC6242082F5006F6173 /* MobileClientKernel.h */,
-				B8D33EC2242082F5006F6173 /* UnZipAsset.h */,
-				B8D33E58242066E1006F6173 /* Ship.h */,
-				B8D33E59242066E1006F6173 /* BulletNormal.h */,
-				B8D33E5A242066E1006F6173 /* stdafx.h */,
-				B8D33E5C242066E1006F6173 /* InitialData.h */,
-				B8D33E5E242066E1006F6173 /* Event.h */,
-				B8D33E5F242066E1006F6173 /* Battle.h */,
-				B8D33E60242066E1006F6173 /* Define.h */,
-				B8D33E61242066E1006F6173 /* CommonData.h */,
-				B8D33E63242066E1006F6173 /* Player.h */,
-				B8D33E64242066E1006F6173 /* Shape.h */,
-				B8D33E65242066E1006F6173 /* FortMgr.h */,
-				B8D33E66242066E1006F6173 /* BaseData.h */,
-				B8D33E67242066E1006F6173 /* Bullet.h */,
-				B8D33E68242066E1006F6173 /* json */,
-				B8D33E71242066E1006F6173 /* TimeTool.h */,
-				B8D33E72242066E1006F6173 /* EnergyBody.h */,
-				B8D33E73242066E1006F6173 /* json_batchallocator.h */,
-				B8D33E74242066E1006F6173 /* Tool.h */,
-				B8D33E77242066E1006F6173 /* BaseClass.h */,
-				B8D33E78242066E1006F6173 /* Fort.h */,
-				B8D33E79242066E1006F6173 /* BulletBase.h */,
-				B8D33E7A242066E1006F6173 /* BulletMgr.h */,
-			);
-			name = include;
-			path = ../Classes/include;
-			sourceTree = "<group>";
-		};
-		B8D33E68242066E1006F6173 /* json */ = {
-			isa = PBXGroup;
-			children = (
-				B8D33E69242066E1006F6173 /* reader.h */,
-				B8D33E6A242066E1006F6173 /* config.h */,
-				B8D33E6B242066E1006F6173 /* features.h */,
-				B8D33E6C242066E1006F6173 /* value.h */,
-				B8D33E6D242066E1006F6173 /* autolink.h */,
-				B8D33E6E242066E1006F6173 /* json.h */,
-				B8D33E6F242066E1006F6173 /* writer.h */,
-				B8D33E70242066E1006F6173 /* forwards.h */,
-			);
-			path = json;
 			sourceTree = "<group>";
 		};
 		C03781AF18BF654500FE4F13 /* Products */ = {
@@ -679,10 +711,10 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B83836D924235ED5009AF43A /* include */,
+				B838370124235ED5009AF43A /* src */,
 				B8D33E30242066E0006F6173 /* export.cpp */,
 				B8D33E33242066E0006F6173 /* export.h */,
-				B8D33E57242066E1006F6173 /* include */,
-				B8D33E34242066E0006F6173 /* src */,
 				B8D33E15241F0C43006F6173 /* CCPomelo.cpp */,
 				B8D33E0C241F0C43006F6173 /* CCPomelo.h */,
 				B8D33E0F241F0C43006F6173 /* lua-bindings */,
@@ -848,18 +880,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B838376324235ED6009AF43A /* skill_data.json in Resources */,
+				B838376924235ED6009AF43A /* json_valueiterator.inl in Resources */,
 				9FF504841A5E87B100AFDA55 /* ConsoleWindow.xib in Resources */,
-				B8D33EBC242066E1006F6173 /* json_internalarray.inl in Resources */,
-				B8D33EB6242066E1006F6173 /* json_valueiterator.inl in Resources */,
-				B8D33E82242066E1006F6173 /* json_internalmap.inl in Resources */,
+				B838376124235ED6009AF43A /* ship_list.json in Resources */,
+				B838372D24235ED6009AF43A /* json_internalmap.inl in Resources */,
 				1A8A4EDA1F6F9AEB0044495E /* config.json in Resources */,
-				B8D33EB0242066E1006F6173 /* skill_data.json in Resources */,
-				B8D33EAE242066E1006F6173 /* ship_list.json in Resources */,
+				B838376524235ED6009AF43A /* combat.json in Resources */,
 				B8D33E19241F0C44006F6173 /* lua_pomelo_auto_api.lua in Resources */,
 				5023817617EBBE3400990C9B /* Icon.icns in Resources */,
 				1A8A4EDE1F6F9AEF0044495E /* src in Resources */,
-				B8D33EAC242066E1006F6173 /* libcode.json in Resources */,
-				B8D33EB2242066E1006F6173 /* combat.json in Resources */,
+				B838375324235ED6009AF43A /* sconscript in Resources */,
+				B838375F24235ED6009AF43A /* libcode.json in Resources */,
+				B838376F24235ED6009AF43A /* json_internalarray.inl in Resources */,
 				1A8A4EDD1F6F9AEF0044495E /* res in Resources */,
 				B8D33E1B241F0C44006F6173 /* CCPomelo.lua in Resources */,
 				9FFC07361A4A764100AED399 /* MainMenu.xib in Resources */,
@@ -870,18 +903,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B838376224235ED6009AF43A /* skill_data.json in Resources */,
+				B838376824235ED6009AF43A /* json_valueiterator.inl in Resources */,
 				1AF87BAB1F6F8733007BE51C /* LaunchScreenBackground.png in Resources */,
-				B8D33EBB242066E1006F6173 /* json_internalarray.inl in Resources */,
-				B8D33EB5242066E1006F6173 /* json_valueiterator.inl in Resources */,
-				B8D33E81242066E1006F6173 /* json_internalmap.inl in Resources */,
+				B838376024235ED6009AF43A /* ship_list.json in Resources */,
+				B838372C24235ED6009AF43A /* json_internalmap.inl in Resources */,
 				1AF87BAA1F6F8733007BE51C /* LaunchScreen.storyboard in Resources */,
-				B8D33EAF242066E1006F6173 /* skill_data.json in Resources */,
-				B8D33EAD242066E1006F6173 /* ship_list.json in Resources */,
+				B838376424235ED6009AF43A /* combat.json in Resources */,
 				B8D33E18241F0C44006F6173 /* lua_pomelo_auto_api.lua in Resources */,
 				1A8A4EDC1F6F9AEE0044495E /* src in Resources */,
 				1ACE45A31FC3F2D000F87E53 /* Images.xcassets in Resources */,
-				B8D33EAB242066E1006F6173 /* libcode.json in Resources */,
-				B8D33EB1242066E1006F6173 /* combat.json in Resources */,
+				B838375224235ED6009AF43A /* sconscript in Resources */,
+				B838375E24235ED6009AF43A /* libcode.json in Resources */,
+				B838376E24235ED6009AF43A /* json_internalarray.inl in Resources */,
 				1A8A4ED91F6F9AEB0044495E /* config.json in Resources */,
 				B8D33E1A241F0C44006F6173 /* CCPomelo.lua in Resources */,
 				1A8A4EDB1F6F9AEE0044495E /* res in Resources */,
@@ -911,37 +945,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8D33EB8242066E1006F6173 /* BaseData.cpp in Sources */,
-				B8D33E8A242066E1006F6173 /* json_reader.cpp in Sources */,
-				B8D33E80242066E1006F6173 /* FortMgr.cpp in Sources */,
+				B838374D24235ED6009AF43A /* DownAsset.cpp in Sources */,
+				B838373D24235ED6009AF43A /* ClientKernel.cpp in Sources */,
+				B838372B24235ED6009AF43A /* FortMgr.cpp in Sources */,
+				B838375D24235ED6009AF43A /* Bullet.cpp in Sources */,
+				B838376B24235ED6009AF43A /* FortSkill.cpp in Sources */,
+				B838377124235ED6009AF43A /* ShipSkill.cpp in Sources */,
+				B838374724235ED6009AF43A /* TimeTool.cpp in Sources */,
+				B838375724235ED6009AF43A /* json_value.cpp in Sources */,
+				B838375B24235ED6009AF43A /* MobileClientKernel.cpp in Sources */,
 				C07828FA18B4D72E00BD2287 /* SimulatorApp.mm in Sources */,
+				B838375524235ED6009AF43A /* stdafx.cpp in Sources */,
+				B838373724235ED6009AF43A /* json_reader.cpp in Sources */,
 				B8D33E7C242066E1006F6173 /* export.cpp in Sources */,
 				B8D33E17241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */,
-				B8D33ECF24208305006F6173 /* MCKernel.cpp in Sources */,
-				B8D33E8C242066E1006F6173 /* EnergyBody.cpp in Sources */,
-				B8D33ED524208305006F6173 /* DownAsset.cpp in Sources */,
-				B8D33EA4242066E1006F6173 /* stdafx.cpp in Sources */,
-				B8D33ED324208305006F6173 /* ClientKernel.cpp in Sources */,
-				B8D33E9A242066E1006F6173 /* Shape.cpp in Sources */,
-				B8D33EBA242066E1006F6173 /* Ship.cpp in Sources */,
-				B8D33E86242066E1006F6173 /* Player.cpp in Sources */,
-				B8D33ED124208305006F6173 /* MobileClientKernel.cpp in Sources */,
+				B838374524235ED6009AF43A /* Boss.cpp in Sources */,
+				B838372F24235ED6009AF43A /* Props.cpp in Sources */,
+				B838373124235ED6009AF43A /* Player.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 				9FF504851A5E87B100AFDA55 /* ConsoleWindowController.m in Sources */,
-				B8D33E94242066E1006F6173 /* BulletNormal.cpp in Sources */,
+				B838373F24235ED6009AF43A /* MCKernel.cpp in Sources */,
 				C07828F818B4D72E00BD2287 /* main.m in Sources */,
-				B8D33E96242066E1006F6173 /* BulletMgr.cpp in Sources */,
-				B8D33E7E242066E1006F6173 /* json_writer.cpp in Sources */,
-				B8D33E8E242066E1006F6173 /* BaseClass.cpp in Sources */,
-				B8D33EA2242066E1006F6173 /* Tool.cpp in Sources */,
+				B838373524235ED6009AF43A /* Battle.cpp in Sources */,
+				B838374924235ED6009AF43A /* Shape.cpp in Sources */,
+				B838373324235ED6009AF43A /* BuffMgr.cpp in Sources */,
+				B838374124235ED6009AF43A /* BulletMgr.cpp in Sources */,
+				B838372924235ED6009AF43A /* json_writer.cpp in Sources */,
+				B838373924235ED6009AF43A /* EnergyBody.cpp in Sources */,
+				B838375124235ED6009AF43A /* Enemy.cpp in Sources */,
+				B838375924235ED6009AF43A /* Buff.cpp in Sources */,
+				B838374324235ED6009AF43A /* KeyFrame.cpp in Sources */,
+				B838374B24235ED6009AF43A /* UnZipAsset.cpp in Sources */,
 				B8D33E1D241F0C44006F6173 /* CCPomelo.cpp in Sources */,
-				B8D33EA6242066E1006F6173 /* json_value.cpp in Sources */,
-				B8D33ECD24208305006F6173 /* UnZipAsset.cpp in Sources */,
-				B8D33EB4242066E1006F6173 /* Fort.cpp in Sources */,
-				B8D33EAA242066E1006F6173 /* Bullet.cpp in Sources */,
-				B8D33EBE242066E1006F6173 /* BulletBase.cpp in Sources */,
-				B8D33E98242066E1006F6173 /* TimeTool.cpp in Sources */,
-				B8D33E88242066E1006F6173 /* Battle.cpp in Sources */,
+				B838376724235ED6009AF43A /* Fort.cpp in Sources */,
+				B838373B24235ED6009AF43A /* BaseClass.cpp in Sources */,
+				B838374F24235ED6009AF43A /* PropsMgr.cpp in Sources */,
+				B838376D24235ED6009AF43A /* Ship.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,37 +988,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8D33EB7242066E1006F6173 /* BaseData.cpp in Sources */,
-				B8D33E89242066E1006F6173 /* json_reader.cpp in Sources */,
-				B8D33E7F242066E1006F6173 /* FortMgr.cpp in Sources */,
+				B838374C24235ED6009AF43A /* DownAsset.cpp in Sources */,
+				B838373C24235ED6009AF43A /* ClientKernel.cpp in Sources */,
+				B838372A24235ED6009AF43A /* FortMgr.cpp in Sources */,
+				B838375C24235ED6009AF43A /* Bullet.cpp in Sources */,
+				B838376A24235ED6009AF43A /* FortSkill.cpp in Sources */,
+				B838377024235ED6009AF43A /* ShipSkill.cpp in Sources */,
+				B838374624235ED6009AF43A /* TimeTool.cpp in Sources */,
+				B838375624235ED6009AF43A /* json_value.cpp in Sources */,
+				B838375A24235ED6009AF43A /* MobileClientKernel.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
+				B838375424235ED6009AF43A /* stdafx.cpp in Sources */,
+				B838373624235ED6009AF43A /* json_reader.cpp in Sources */,
 				B8D33E7B242066E1006F6173 /* export.cpp in Sources */,
 				B8D33E16241F0C44006F6173 /* lua_pomelo_auto.cpp in Sources */,
-				B8D33ECE24208305006F6173 /* MCKernel.cpp in Sources */,
-				B8D33E8B242066E1006F6173 /* EnergyBody.cpp in Sources */,
-				B8D33ED424208305006F6173 /* DownAsset.cpp in Sources */,
-				B8D33EA3242066E1006F6173 /* stdafx.cpp in Sources */,
-				B8D33ED224208305006F6173 /* ClientKernel.cpp in Sources */,
-				B8D33E99242066E1006F6173 /* Shape.cpp in Sources */,
-				B8D33EB9242066E1006F6173 /* Ship.cpp in Sources */,
-				B8D33E85242066E1006F6173 /* Player.cpp in Sources */,
-				B8D33ED024208305006F6173 /* MobileClientKernel.cpp in Sources */,
+				B838374424235ED6009AF43A /* Boss.cpp in Sources */,
+				B838372E24235ED6009AF43A /* Props.cpp in Sources */,
+				B838373024235ED6009AF43A /* Player.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
-				B8D33E93242066E1006F6173 /* BulletNormal.cpp in Sources */,
+				B838373E24235ED6009AF43A /* MCKernel.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
-				B8D33E95242066E1006F6173 /* BulletMgr.cpp in Sources */,
-				B8D33E7D242066E1006F6173 /* json_writer.cpp in Sources */,
-				B8D33E8D242066E1006F6173 /* BaseClass.cpp in Sources */,
-				B8D33EA1242066E1006F6173 /* Tool.cpp in Sources */,
+				B838373424235ED6009AF43A /* Battle.cpp in Sources */,
+				B838374824235ED6009AF43A /* Shape.cpp in Sources */,
+				B838373224235ED6009AF43A /* BuffMgr.cpp in Sources */,
+				B838374024235ED6009AF43A /* BulletMgr.cpp in Sources */,
+				B838372824235ED6009AF43A /* json_writer.cpp in Sources */,
+				B838373824235ED6009AF43A /* EnergyBody.cpp in Sources */,
+				B838375024235ED6009AF43A /* Enemy.cpp in Sources */,
+				B838375824235ED6009AF43A /* Buff.cpp in Sources */,
+				B838374224235ED6009AF43A /* KeyFrame.cpp in Sources */,
+				B838374A24235ED6009AF43A /* UnZipAsset.cpp in Sources */,
 				B8D33E1C241F0C44006F6173 /* CCPomelo.cpp in Sources */,
-				B8D33EA5242066E1006F6173 /* json_value.cpp in Sources */,
-				B8D33ECC24208305006F6173 /* UnZipAsset.cpp in Sources */,
-				B8D33EB3242066E1006F6173 /* Fort.cpp in Sources */,
-				B8D33EA9242066E1006F6173 /* Bullet.cpp in Sources */,
-				B8D33EBD242066E1006F6173 /* BulletBase.cpp in Sources */,
-				B8D33E97242066E1006F6173 /* TimeTool.cpp in Sources */,
-				B8D33E87242066E1006F6173 /* Battle.cpp in Sources */,
+				B838376624235ED6009AF43A /* Fort.cpp in Sources */,
+				B838373A24235ED6009AF43A /* BaseClass.cpp in Sources */,
+				B838374E24235ED6009AF43A /* PropsMgr.cpp in Sources */,
+				B838376C24235ED6009AF43A /* Ship.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

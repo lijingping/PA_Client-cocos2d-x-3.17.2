@@ -1,173 +1,165 @@
+#include "stdafx.h"
 #include "BulletMgr.h"
-#include "Battle.h"
 
 
-CBulletMgr::CBulletMgr(int nSide, CBattle* pBattle)
+CBulletMgr::CBulletMgr()
+: m_nP_BulletCount(0)
+, m_nE_BulletCount(0)
+, m_nBulletType(0)
 {
-	m_nSide = nSide;
-	m_pBattle = pBattle;
-	m_nBulletCount = 0;
 }
 
 
 CBulletMgr::~CBulletMgr()
 {
-	vector<CBulletNormal*>::iterator iter = m_vecBullet.begin();
-	for (; iter != m_vecBullet.end(); iter++)
+	if (m_nBulletType == ENEMY_BULLET)
 	{
-		delete((*iter));
-		(*iter) = nullptr;
+		cleanUpEnemyBulletMap();
 	}
-	m_vecBullet.clear();
-}
-
-void CBulletMgr::update(double dTime)
-{
-	for (int i = 0; i < m_vecBullet.size(); i++)
+	else if (m_nBulletType == PLAYER_BULLET)
 	{
-		m_vecBullet[i]->update(dTime);
+		cleanUpPlayerBulletMap();
 	}
 }
 
-void CBulletMgr::createBullet(int nID, int nType, double dPosX, double dPosY, int nFirerID, int nFirerIndex, double dAtk, CFort* pTargetFort)
+void CBulletMgr::initData(bool isEnemyBullet)
 {
-	CBulletNormal* pBullet = new CBulletNormal(m_nSide, nID, nType, m_pBattle);
-	m_nBulletCount = m_nBulletCount + 1;
-	pBullet->setBeginPos(dPosX, dPosY);
-	//pBullet->firerAndTarget(pFirerFort, pTargetFort);
-	pBullet->setBulletIndex(m_nBulletCount);
-	pBullet->setFirerID(nFirerID);
-	pBullet->setFirerIndex(nFirerIndex);
-	if (pTargetFort == nullptr)
+	if (isEnemyBullet)
 	{
-		pBullet->setIsBulletToShip(true);
-		pBullet->setTheVecOfShip();
+		m_nBulletType = bulletType::ENEMY_BULLET;
 	}
 	else
 	{
-		pBullet->setTargetFort(pTargetFort);
+		m_nBulletType = bulletType::PLAYER_BULLET;
 	}
-	
-/*	double dAtk = 0.0;
-	if (m_nSide == EPlayerKind::SELF)
-	{
-		dAtk = m_pBattle->getPlayerSelf()->getFortMgr()->getFortAtkByID(nFirerID, nFirerIndex);
-	}
-	else if (m_nSide == EPlayerKind::ENEMY)
-	{
-	 	dAtk = m_pBattle->getPlayerHost()->getFortMgr()->getFortAtkByID(nFirerID, nFirerIndex);
-	}
-	*/
-	pBullet->setBulletDamage(dAtk);
-	if (m_nSide == EPlayerKind::SELF)
-	{
-		pBullet->setBulletSpeed(m_pBattle->getPlayerSelf()->getFortMgr()->getFortByID(nFirerID, nFirerIndex)->getBulletSpeed());
-	}
-	else if (m_nSide == EPlayerKind::ENEMY)
-	{
-		pBullet->setBulletSpeed(m_pBattle->getPlayerHost()->getFortMgr()->getFortByID(nFirerID, nFirerIndex)->getBulletSpeed());
-	}
-
-	m_vecBullet.insert(m_vecBullet.end(), pBullet);
-//	insertBulletEvent(nID, m_nBulletCount, dPosX, dPosY, EBulletEvent::BULLET_BORN);
-	m_pBattle->runBulletEventHandler(m_nSide, EBulletEvent::BULLET_BORN, nID, m_nBulletCount);
 }
 
-/*void CBulletMgr::createBulletToShip(int nID, int nType, double dPosX, double dPosY, int nFirerID, int nFirerIndex, double dShipPosX, double dShipPosY)
+void CBulletMgr::createBullet(int bulletID, int fortIndex, double dSpeed)
 {
-}
-*/
-
-void CBulletMgr::createShipBullet(int nBulletID, int nType, double dPosX, double dPosY, CFort * pTargetFort)
-{
-	CBulletNormal* pBullet = new CBulletNormal(m_nSide, nBulletID, nType, m_pBattle);
-	m_nBulletCount = m_nBulletCount + 1;
-	pBullet->setBeginPos(dPosX, dPosY);
-	pBullet->setIsShipBullet(true);
-	pBullet->setTargetFort(pTargetFort);
-	pBullet->setBulletIndex(m_nBulletCount);
-	double dAtk = 0.0;
-	if (m_nSide == EPlayerKind::SELF)
+	if (m_nBulletType == ENEMY_BULLET)
 	{
-		dAtk = m_pBattle->getPlayerSelf()->getShip()->getAtk();
-		pBullet->setBulletSpeed(m_pBattle->getPlayerSelf()->getShip()->getBulletSpeed());
+		CBullet *pBullet = new CBullet();
+		pBullet->createBullet(bulletID, true, fortIndex, m_nE_BulletCount);
+		pBullet->setBulletSpeed(dSpeed);
+		m_mapEnemyBullet.insert(map<int, CBullet*>::value_type(m_nE_BulletCount, pBullet));
+		m_nE_BulletCount += 1;
 	}
-	else if (m_nSide == EPlayerKind::ENEMY)
+	else if (m_nBulletType == PLAYER_BULLET)
 	{
-		dAtk = m_pBattle->getPlayerHost()->getShip()->getAtk();
-		pBullet->setBulletSpeed(m_pBattle->getPlayerHost()->getShip()->getBulletSpeed());
+		CBullet *pBullet = new CBullet();
+		pBullet->createBullet(bulletID, false, fortIndex, m_nP_BulletCount);
+		pBullet->setBulletSpeed(dSpeed);
+//		pBullet->setBulletPower(bulletPower);
+		m_mapPlayerBullet.insert(map<int, CBullet*>::value_type(m_nP_BulletCount, pBullet));
+		m_nP_BulletCount += 1;
 	}
-	pBullet->setBulletDamage(dAtk);
-	m_vecBullet.insert(m_vecBullet.end(), pBullet);
-	//insertBulletEvent(nBulletID, m_nBulletCount, dPosX, dPosY, EBulletEvent::BULLET_BORN);
-	m_pBattle->runBulletEventHandler(m_nSide, EBulletEvent::BULLET_BORN, nBulletID, m_nBulletCount);
 }
 
-void CBulletMgr::removeBulletFromVec(int nID, int nIndex)
+void CBulletMgr::update(double dt)
 {
-	vector<CBulletNormal*>::iterator iter = m_vecBullet.begin();
-
-	for (; iter != m_vecBullet.end();)
+	if (m_nBulletType == ENEMY_BULLET)
 	{
-		if ((*iter)->getBulletID() == nID && (*iter)->getBulletIndex() == nIndex)
+		map<int, CBullet*>::iterator iter = m_mapEnemyBullet.begin();
+		for (; iter != m_mapEnemyBullet.end(); iter++)
 		{
-			//insertBulletEvent((*iter)->getBulletID(), (*iter)->getBulletIndex(), (*iter)->getPosX(), (*iter)->getPosY(), EBulletEvent::BULLET_BOMB);
-			m_pBattle->runBulletEventHandler(m_nSide, EBulletEvent::BULLET_BOMB, (*iter)->getBulletID(), (*iter)->getBulletIndex());
-			delete((*iter));
-			(*iter) = nullptr;
-			iter = m_vecBullet.erase(iter);	
-			break;
+			(*iter).second->update(dt);
 		}
-		else
+	}
+	else if (m_nBulletType == PLAYER_BULLET)
+	{
+		map<int, CBullet*>::iterator iter = m_mapPlayerBullet.begin();
+		for (; iter != m_mapPlayerBullet.end(); iter++)
 		{
-			iter++;
+			(*iter).second->update(dt);
 		}
 	}
 }
 
-void CBulletMgr::removeBrokenTargetBullet(int nTargetID, int nTargetIndex)
+void CBulletMgr::cleanUpPlayerBulletMap()
 {
-	vector<CBulletNormal*>::iterator iter = m_vecBullet.begin();
-
-	for (; iter != m_vecBullet.end();)
+	map<int, CBullet*>::iterator iter = m_mapPlayerBullet.begin();
+	for (; iter != m_mapPlayerBullet.end(); iter++)
 	{
-		if ((*iter)->getTargetFortID() == nTargetID && (*iter)->getTargetFortIndex() == nTargetIndex)
+		delete((*iter).second);
+		(*iter).second = nullptr;
+	}
+	m_mapPlayerBullet.clear();
+}
+
+void CBulletMgr::cleanUpEnemyBulletMap()
+{
+	map<int, CBullet*>::iterator iter = m_mapEnemyBullet.begin();
+	for (; iter != m_mapEnemyBullet.end(); iter++)
+	{
+		delete((*iter).second);
+		(*iter).second = nullptr;
+	}
+	m_mapEnemyBullet.clear();
+}
+
+void CBulletMgr::deleteBulletByIndex(int index)
+{
+	if (m_nBulletType == ENEMY_BULLET)
+	{
+		map<int, CBullet*>::size_type iterEnemy = index;
+		delete(m_mapEnemyBullet[iterEnemy]);
+		m_mapEnemyBullet[iterEnemy] = nullptr;
+		m_mapEnemyBullet.erase(iterEnemy);
+	}
+	else if(m_nBulletType == PLAYER_BULLET)
+	{
+		map<int, CBullet*>::iterator iterPlayer = m_mapPlayerBullet.begin();
+		for (; iterPlayer != m_mapPlayerBullet.end(); iterPlayer++)
 		{
-		//	insertBulletEvent((*iter)->getBulletID(), (*iter)->getBulletIndex(), (*iter)->getPosX(), (*iter)->getPosY(), EBulletEvent::BULLET_BOMB);
-			m_pBattle->runBulletEventHandler(m_nSide, EBulletEvent::BULLET_REMOVE, (*iter)->getBulletID(), (*iter)->getBulletIndex());
-			delete((*iter));
-			(*iter) = nullptr;
-			iter = m_vecBullet.erase(iter);
-		}
-		else
-		{
-			iter++;
+			if ((*iterPlayer).second->getBulletIndex() == index)
+			{
+				delete((*iterPlayer).second);
+				(*iterPlayer).second = nullptr;
+				m_mapPlayerBullet.erase(iterPlayer);
+				break;
+			}
 		}
 	}
 }
 
-vector<CBulletNormal*> CBulletMgr::getBulletVec()
+map<int, CBullet*> CBulletMgr::getEnemyBullet()
 {
-	return m_vecBullet;
+	return m_mapEnemyBullet;
 }
 
-vector<SBulletEventData> CBulletMgr::getBulletEvent()
+map<int, CBullet*> CBulletMgr::getPlayerBullet()
 {
-	return m_vecBulletEvent;
+	return m_mapPlayerBullet;
 }
 
-void CBulletMgr::insertBulletEvent(int nID, int nIndex, double dPosX, double dPosY, int nEvent)
+int CBulletMgr::getPlayerBulletCount()
 {
-	SBulletEventData sEventData;
-	sEventData.nBulletID = nID;
-	sEventData.nBulletIndex = nIndex;
-	sEventData.dPosX = dPosX;
-	sEventData.dPosY = dPosY;
-	sEventData.nEventID = nEvent;
-	m_vecBulletEvent.insert(m_vecBulletEvent.end(), sEventData);
+	return m_nP_BulletCount;
 }
 
-void CBulletMgr::clearBulletEventVec()
+void CBulletMgr::setPlayerBulletCount(int nNumber)
 {
-	m_vecBulletEvent.clear();
+	m_nP_BulletCount = nNumber;
 }
+
+int CBulletMgr::getEnemyBulletCount()
+{
+	return m_nE_BulletCount;
+}
+
+void CBulletMgr::setEnemyBulletCount(int nNumber)
+{
+	m_nE_BulletCount = nNumber;
+}
+
+void CBulletMgr::resetPlayerBullet(CBullet * pBullet, int whichBullet)
+{
+	m_mapPlayerBullet.insert(map<int, CBullet*>::value_type(/*m_nP_BulletCount - */whichBullet, pBullet));
+}
+
+void CBulletMgr::resetEnemyBullet(CBullet * pBullet, int whichBullet)
+{
+	m_mapEnemyBullet.insert(map<int, CBullet*>::value_type(/*m_nE_BulletCount - */whichBullet, pBullet));
+}
+
+

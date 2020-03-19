@@ -21,7 +21,7 @@ enum ShipState
 {
 	SHIP_NORMAL_STATE = 0, //正常状态（无状态）
 };
-/*
+
 enum Buff
 {
 	FORT_ATK_ENHANCE = 1,     //火力增幅状态
@@ -41,11 +41,10 @@ enum Debuff
 	PLAYER_UNMISSILE = 11     //禁用导弹
 };
 
- */
 const int SCREEN_SIZE_WIDTH = 1280;
 const int SCREEN_SIZE_HEIGHT = 720;
 
-//const int BATTLE_TIME = 180;
+const int BATTLE_TIME = 180;
 
 const int MYSHIP_POS_X = 150;
 const int MYSHIP_POS_Y = SCREEN_SIZE_HEIGHT / 2;

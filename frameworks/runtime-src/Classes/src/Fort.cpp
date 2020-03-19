@@ -1,1123 +1,1811 @@
+#include "stdafx.h"
 #include "Fort.h"
 #include "Battle.h"
 
-CFort::CFort()
+#include <stdio.h>
+
+CFort::CFort(bool isEnemy, int fortIndex, string wrongCodePath)
+	: m_dHp(0)
+	, m_dEnergy(0.0)
+	, m_dInterval(0.0)
+	, m_dUnInjuryRate(0.0)
+	, m_dFortDamage(0.0)
+
+	, m_dFireTime(0.0)
+	, m_isFire(false)
+	, m_isLive(true)
+	
+	, m_isFortParalysis(false)
+	, m_isFortBurning(false)
+	, m_isFortAckUp(false)
+	, m_isFortAckDown(false)
+	, m_isFortUnEnergy(false)
+	, m_isFortUnrepaire(false)
+	, m_isFortRepairing(false)
+	, m_isFortShield(false)
+	, m_isFortRelive(false)
+	, m_isFortSkillFire(false)
+	, m_isFortBreakArmor(false)
+	, m_isFortPassiveSkillStronger(false)
+	, m_isHavePassiveSkillStronger(false)
+
+	, m_dBurningCountTime(0.0)
+	, m_dRepairingCountTime(0.0)
+	, m_dReliveCountDown(FORT_RELIVE_TIME)
+	, m_dReliveHp(0.0)
+	, m_dAckDownValue(0.0)
+	, m_dAckUpValue(0.0)
+
+	, m_dAddPassiveEnergyTime(0.0)
+	, m_dMomentAddHp(0.0)
+	, m_dSkillAddHp(0.0)
+	, m_dPropAddHp(0.0)
+	, m_dContinueAddHp(0.0)    // ³ÖÀm»ØÑª           ¡¤
+	, m_dSelfAddEnergy(0.0)    // ×ÔÉíÌí¼ÓµÄÄÜÁ¿     ¡¤
+	, m_dEnergyAddEnergy(0.0)  // ÄÜÁ¿ówÌí¼ÓµÄÄÜÁ¿ów ¡¤
+	, m_dPropAddEnergy(0.0)    // µÀ¾ßÌí¼ÓÄÜÁ¿       ¡¤
+	, m_dAttackAddEnergy(0.0)  // ¹¥“ôÌí¼ÓµÄÄÜÁ¿     ¡¤
+	, m_dBeDamageAddEnergy(0.0)// ±»“ôÌí¼ÓµÄÄÜÁ¿     ¡¤
+	, m_dBulletDamage(0.0)     // ×Óµ¯ÉËº¦
+	, m_dPropBulletDamage(0.0) // µÀ¾ßÅÚµ¯ÉËº¦
+	, m_dBuffBurnDamage(0.0)   // È¼ÉÕbuffÉËº¦
+	, m_dNPC_Damage(0.0)       // NPCÉËº¦
+	, m_dShipSkillDamage(0.0)  // Õ½½¢¼¼ÄÜÉËº¦
+	, m_dShipSkillAddHp(0.0)   // Õ½½¢¼¼ÄÜ¼ÓÑª
+	, m_dShipSkillAddEnergy(0.0)// Õ½½¢¼¼ÄÜ¼ÓÄÜÁ¿
+	//, m_dSecondCountForRelive(0.1)// ¸´»îÊ±¼äÒ»Ãë·¢Ò»´Î
 {
+	m_isEnemy = isEnemy;
+	m_nFortIndex = fortIndex;
 
+	m_nFortID = 0;
+	m_nFortBulletID = 0;
+	m_nFortType = 0;
+	m_nFortLevel = 0;
+	m_dFortStarDomainCoe = 0.0;
+	m_dFortQualityCoe = 0.0;
+	m_dFortAckGrowCoe = 0.0;
+	m_dFortHpGrowCoe = 0.0;
+	m_dFortSpeedCoe = 0.0;
+	m_dFortEnergyCoe = 0.0;
+
+	m_dInitAck = 0;
+	m_dInitHp = 0;
+	m_dInitEnergy = 100;
+	m_dInitDefense = 0;
+	m_dInitUnInjuryRate = 0.0;
+	m_dInitDamage = 0.0;
+	m_isAddPassiveSkill = false;
+
+	m_dSkillDamage = 0.0;
+	m_dSkillTime = 0;
+
+	m_strWrongCodePath = wrongCodePath;
+	m_isHaveSuitBuff = false;
+	m_dSuitBuffValue = 0.0;
+	//openFile.open(wrongCodePath, ios::binary);     //"data/libcode.json"
 }
-
-CFort::CFort(int fortSide, int nFortID, int nFortLv, CBattle *pBattle)
-{
-	m_nSide = fortSide;
-	m_nID = nFortID;
-	m_nLv = nFortLv;
-	m_pFortBattle = pBattle;
-	m_dPosX = 0;
-	m_dPosY = 0;
-	fortInitState();
-}
-
 
 CFort::~CFort()
 {
-}
-
-void CFort::init()
-{
-
-}
-
-void CFort::setBattlePoint(CBattle * pBattle)
-{
-	m_pFortBattle = pBattle;
-}
-
-void CFort::update(double dTime)
-{
-	if (m_isFortBorn) // ï¿½ï¿½ï¿½×´Ì¬
+	if (m_pFortSkill)
 	{
-		m_dFortBornTime -= dTime;
-		if (m_dFortBornTime <= 0)
-		{
-			m_isFortBorn = false;
-			m_dFortBornTime = 0;
-			// Õ½ï¿½ï¿½Ç³ï¿½ï¿½Â¼ï¿½
-		//	insertFortEvent(EFortEvent::FORT_BORN, 0);
-			m_pFortBattle->runFortEventHandler(m_nSide ,EFortEvent::FORT_BORN, m_nID, m_nFortIndex, 0);
-		}
-		return;
+		delete(m_pFortSkill);
+		m_pFortSkill = nullptr;
 	}
-	m_dCountStepTime = m_dCountStepTime + dTime;
-	if (m_dCountStepTime >= ONE_STEP_TIME)
+	//openFile.close();
+}
+
+void CFort::update(double dt)
+{
+//	m_vecFortEvent.clear();    // Ã¿Ö¡ Çå¿ÕÊÂ¼þÈÝÆ÷
+	m_isFire = false;
+	if (m_isLive)
 	{
-		m_dCountStepTime -= ONE_STEP_TIME;
-		// ×ªï¿½ï¿½ï¿½×´Ì¬  //////////
+		if (!m_isFortSkillFire && !m_isFortParalysis)
+		{
+			m_dFireTime += dt;
+			if (m_dFireTime >= m_dInterval)
+			{
+				//fire
+				m_isFire = true;
+				m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_FIRE);
 
-		if (m_nFortState == EFortState::FORT_FLY)
-		{
-			justFly(ONE_STEP_TIME);
-		}
-		else if (m_nFortState == EFortState::FORT_PURSUIT_TARGET)
-		{
-			flyToTarget(ONE_STEP_TIME);
-		}
-		else if (m_nFortState == EFortState::FORT_ATTACK)
-		{
-			//Õ½ï¿½ï¿½ï¿½×´Ì¬
-			//ï¿½ï¿½ï¿½×´Ì¬
-			if (m_pLockTarget)   // ï¿½ï¿½ï¿½ï¿½ï¿½Ü»ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
-			{
-				turnFortBody(m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-			}
-			
-			if (m_nFortFireState == EFortAttackState::FORT_FIRE)
-			{
-				m_dFireTimeCount += ONE_STEP_TIME;
-				if (m_dFireTimeCount >= m_dFireInterval)
+				if (m_isEnemy)
 				{
-					// ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					m_pFortBattle->getEnemy()->createBullet(this);
+				}
+				else
+				{
+					m_pFortBattle->getPlayer()->createBullet(this);
+				}
 
-					m_dFireTimeCount -= m_dFireInterval;
-					// ï¿½ï¿½ï¿½ï¿½
-					//insertFortEvent(EFortEvent::FORT_FIRE_EVENT, 0);
+				if (m_dFireTime - m_dInterval <= 0.00001 && m_dFireTime - m_dInterval >= -0.00001)
+				{
+					m_dFireTime = m_dInterval;
+				}
+				m_dFireTime -= m_dInterval;
+				//if (m_dFireTime <= 0.000001 && m_dFireTime >= -0.000001)
+				//{
+				//	m_dFireTime = 0;
+				//}
+			}
+		}
+		if (m_isFortSkillFire)
+		{
+			if ((m_dSkillTime - dt < 0.00001) && (m_dSkillTime - dt > -0.00001))
+			{
+				m_dSkillTime = dt;
+			}
+			m_dSkillTime -= dt;
+			if (m_dSkillTime <= 0)
+			{
+				fortSkillFireEnd();
+			}
+		}
 
-					if (m_isLockShip)   // ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-					{
-						CShip* pShip;
-						if (m_nSide == EPlayerKind::SELF)
-						{
-							pShip = m_pFortBattle->getPlayerHost()->getShip();
-						}
-						else
-						{
-							pShip = m_pFortBattle->getPlayerSelf()->getShip();
-						}
-						double dVecLength = sqrt(m_dFortVecX * m_dFortVecX + m_dFortVecY * m_dFortVecY);
-						double dFireBeginX = m_dPosX + m_nSizeRadius * m_dFortVecX / dVecLength;
-						double dFireBeginY = m_dPosY + m_nSizeRadius * m_dFortVecY / dVecLength;
-						if (m_nSide == EPlayerKind::SELF)
-						{
-							if (m_nFortKind == EFortKinds::FORT_FIGHTSHIP)   // Õ½ï¿½ï¿½
-							{
-								m_pFortBattle->getPlayerSelf()->getBulletMgr()->createBullet(m_nBulletID, m_nBulletType, dFireBeginX, dFireBeginY,
-									m_nID, m_nFortIndex, m_dAtk);
-							}
-							else if (m_nFortKind == EFortKinds::FORT_MACHINE)   // Õ½Ê¿
-							{
-								pShip->beDamageByFortBullet(m_dAtk);
-							}
-						}
-						else
-						{
-							if (m_nFortKind == EFortKinds::FORT_FIGHTSHIP)
-							{
-								m_pFortBattle->getPlayerHost()->getBulletMgr()->createBullet(m_nBulletID, m_nBulletType, dFireBeginX, dFireBeginY,
-									m_nID, m_nFortIndex, m_dAtk);
-							}
-							else
-							{
-								pShip->beDamageByFortBullet(m_dAtk);
-							}
-						}
-					}
-					else // ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-					{
-						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½Î»ï¿½ï¿½ï¿½Ú´ï¿½
-						//turnFortBody(m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-						double dDistance = CTool::countRange(m_dPosX, m_dPosY, m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-						if (dDistance > m_nRange + m_pLockTarget->getSizeRadius())
-						{
-							m_nFortState = EFortState::FORT_PURSUIT_TARGET;
-							m_dFireTimeCount = 0;
-						}
-						double dVecX = m_pLockTarget->getPosX() - m_dPosX;
-						double dVecY = m_pLockTarget->getPosY() - m_dPosY;
-						double dVecLength = sqrt(dVecX * dVecX + dVecY * dVecY);
-						double dFireBeginX = m_dPosX + m_nSizeRadius * dVecX / dVecLength;
-						double dFireBeginY = m_dPosY + m_nSizeRadius * dVecY / dVecLength;
-						if (m_nSide == EPlayerKind::SELF)
-						{
-							if (m_nFortKind == EFortKinds::FORT_FIGHTSHIP)   // Õ½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
-							{
-								m_pFortBattle->getPlayerSelf()->getBulletMgr()->createBullet(m_nBulletID, m_nBulletType, dFireBeginX, dFireBeginY,
-									m_nID, m_nFortIndex, m_dAtk, m_pLockTarget);
-							}
-							else if (m_nFortKind == EFortKinds::FORT_MACHINE)
-							{
-								m_pLockTarget->beHurtByFortBullet(m_dAtk, m_nID, m_nFortIndex, true);
-							}
-						}
-						else if (m_nSide == EPlayerKind::ENEMY)
-						{
-							if (m_nFortKind == EFortKinds::FORT_FIGHTSHIP)
-							{
-								m_pFortBattle->getPlayerHost()->getBulletMgr()->createBullet(m_nBulletID, m_nBulletType, dFireBeginX, dFireBeginY,
-									m_nID, m_nFortIndex, m_dAtk, m_pLockTarget);
-							}
-							else if (m_nFortKind == EFortKinds::FORT_MACHINE)
-							{
-								m_pLockTarget->beHurtByFortBullet(m_dAtk, m_nID, m_nFortIndex, true);
-							}
-						}
-					}
-					m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_FIRE_EVENT, m_nID, m_nFortIndex, 0);
+		if (m_isFortBurning)    // ÅÚÌ¨È¼ÉÕ 
+		{
+			m_dBurningCountTime += dt;
+			if (m_dBurningCountTime >= 0.5)
+			{
+				percentDamage(0.01);
+				if (m_dBurningCountTime - 0.5 <= 0.00001 && m_dBurningCountTime - 0.5 >= -0.00001)
+				{
+					m_dBurningCountTime = 0.5;
+				}
+				m_dBurningCountTime -= 0.5;
+			}
+		}
+
+		if (m_isFortRepairing)  //ÅÚÌ¨ÐÞ¸´»ØÑª
+		{
+			m_dRepairingCountTime += dt;
+			if (m_isFortUnrepaire)
+			{
+				recoveryRepairing();
+				if (m_isEnemy)
+				{
+					m_pFortBattle->getEnemy()->getBuffMgr()->deleteBuffByFortID(m_nFortID, Buff::FORT_REPAIRING);
+				}
+				else
+				{
+					m_pFortBattle->getPlayer()->getBuffMgr()->deleteBuffByFortID(m_nFortID, Buff::FORT_REPAIRING);
 				}
 			}
-			else if (m_nFortFireState == EFortAttackState::FORT_SKILLING)  // ï¿½ï¿½ï¿½ï¿½×´Ì¬
+			else if (m_dRepairingCountTime >= 0.5)
 			{
-				m_dSkillTimeCount = m_dSkillTimeCount + ONE_STEP_TIME;
-				if (m_dSkillTimeCount >= m_dSkillTime)
+				addHp(m_dInitHp * 0.01);
+				if (m_dRepairingCountTime - 0.5 <= 0.00001 && m_dRepairingCountTime - 0.5 >= -0.00001)
 				{
-					//ï¿½ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½
-					m_dSkillTimeCount = 0;
-					m_nFortFireState = EFortAttackState::FORT_FIRE;
-
+					m_dRepairingCountTime = 0.5;
 				}
+				m_dRepairingCountTime -= 0.5;
 			}
 		}
-		if (m_pLockTarget == nullptr && !m_isLockShip) // Ã»ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½Ì¨
+
+		if (m_nFortType == FortType::ATTACK_TYPE)
 		{
-			//countInRangeFort();
-			searchFort();
-			if (m_pLockTarget != nullptr)
+			if (m_isAddPassiveSkill == false)
 			{
-				m_nFortState = EFortState::FORT_PURSUIT_TARGET;
-				turnFortBody(m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-				// ×ªï¿½ï¿½ï¿½Â¼ï¿½
-				//insertFortEvent(EFortEvent::FORT_TURN_BODY, m_dTurnRadian);
-				m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_TURN_BODY, m_nID, m_nFortIndex, m_dTurnRadian);
+				if (m_dHp / m_dInitHp < 0.5)
+				{
+					if (m_isFortPassiveSkillStronger)
+					{
+						m_dFortDamage = m_dFortDamage + m_dInitDamage * 0.30;
+						m_isHavePassiveSkillStronger = true;
+					}
+					else
+					{
+						m_dFortDamage = m_dFortDamage + m_dInitDamage * 0.15;
+					}
+					m_isAddPassiveSkill = true;
+				}
 			}
 			else
 			{
-				// ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-				countShipDistance();
+				if (m_dHp / m_dInitHp >= 0.5)
+				{
+					if (m_isFortPassiveSkillStronger)
+					{
+						if (m_isHavePassiveSkillStronger)
+						{
+							m_dFortDamage = m_dFortDamage - m_dInitDamage * 0.30;
+							m_isHavePassiveSkillStronger = false;
+						}
+						else
+						{
+							m_dFortDamage -= m_dInitDamage * 0.15;
+						}
+					}
+					else
+					{
+						m_dFortDamage = m_dFortDamage - m_dInitDamage * 0.15;
+					}
+					m_isAddPassiveSkill = false;
+				}
+				else
+				{
+					if (m_isFortPassiveSkillStronger)
+					{
+						if (!m_isHavePassiveSkillStronger)
+						{
+							m_dFortDamage = m_dFortDamage + m_dInitDamage * 0.15;
+							m_isHavePassiveSkillStronger = true;
+						}
+					}
+				}
 			}
 		}
-	}
-
-}
-
-void CFort::setPosition(int nPosX, int nPosY)
-{
-	m_dPosX = nPosX;
-	m_dPosY = nPosY;
-}
-
-void CFort::justFly(double dTime)
-{
-	CShip* pShip;
-	if (m_nSide == EPlayerKind::SELF)
-	{
-		pShip = m_pFortBattle->getPlayerHost()->getShip();
-		double dShipLength = pShip->getSizeLength();
-		double dShipWidth = pShip->getSizeWidth();
-		double dDistance = CTool::countRange(m_dPosX, m_dPosY, pShip->getPosX(), pShip->getPosY());
-		if (dDistance >= FLY_TO_SHIP_DIS)
+		else if (m_nFortType == FortType::SKILL_TYPE)
 		{
-			turnFortBody(pShip->getPosX() - dShipLength * 0.5, m_dPosY);
-			m_dPosX = m_dPosX + dTime * m_dSpeed;
-			
-		}
-		else
-		{
-			if (m_dPosX < pShip->getPosX() - dShipLength * 0.5)  // Î»ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½ï¿½ï¿½
+			m_dAddPassiveEnergyTime += dt;
+			if (m_dAddPassiveEnergyTime >= 1)
 			{
-				if (m_dPosY > pShip->getPosY() + dShipWidth * 0.5)   //ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
+				addEnergySelf();
+				if (m_dAddPassiveEnergyTime - 1 <= 0.000001 && m_dAddPassiveEnergyTime - 1 >= -0.000001)
 				{
-					//ï¿½ï¿½×ª
-					turnFortBody(pShip->getPosX() - dShipLength * 0.5, pShip->getPosY() + dShipWidth * 0.5);
-					double dVecLength = sqrt(m_dFortVecX * m_dFortVecX + m_dFortVecY * m_dFortVecY);
-					m_dPosX = m_dPosX + dTime * m_dSpeed * (m_dFortVecX / dVecLength);
-					m_dPosY = m_dPosY + dTime * m_dSpeed * (m_dFortVecY / dVecLength);
+					m_dAddPassiveEnergyTime = 1;
 				}
-				else if (m_dPosY < pShip->getPosY() - dShipWidth * 0.5) // ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-				{
-					//xuanzhuan
-					turnFortBody(pShip->getPosX() - dShipLength * 0.5, pShip->getPosY() - dShipWidth * 0.5);
-					double dVecLength = sqrt(m_dFortVecX * m_dFortVecX + m_dFortVecY * m_dFortVecY);
-					m_dPosX = m_dPosX + dTime * m_dSpeed * (m_dFortVecX / dVecLength);
-					m_dPosY = m_dPosY + dTime * m_dSpeed * (m_dFortVecY / dVecLength);
-				}
-				else                                                   // Õ½ï¿½ï¿½ï¿½Ð¼ï¿½
-				{
-					turnFortBody(pShip->getPosX() - dShipLength * 0.5, m_dPosY);
-					m_dPosX = m_dPosX + dTime * m_dSpeed;
-				}
+				m_dAddPassiveEnergyTime -= 1.0;
 			}
-			else if (m_dPosX >= pShip->getPosX() - dShipLength * 0.5)    // Î»ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ò±ï¿½
-			{
-				if (m_dPosY > pShip->getPosY() + dShipWidth * 0.5)    // ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-				{
-					// ï¿½ï¿½×ª
-					turnFortBody(m_dPosX, pShip->getPosY() + dShipWidth * 0.5);
-					m_dPosY = m_dPosY - dTime * m_dSpeed;
-				}
-				else if (m_dPosY < pShip->getPosY() - dShipWidth * 0.5)  // ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-				{
-					// ï¿½ï¿½×ª
-					turnFortBody(m_dPosX, pShip->getPosY() - dShipWidth * 0.5);
-					m_dPosY = m_dPosY + dTime * m_dSpeed;
-				}
-				else													// ï¿½Ð¼ï¿½
-				{
-
-				}
-			}
-		}
-	}
-	else if (m_nSide == EPlayerKind::ENEMY)            // ï¿½Ð·ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½Ò·ï¿½Õ½ï¿½ï¿½
-	{
-		pShip = m_pFortBattle->getPlayerSelf()->getShip();
-		double dShipLength = pShip->getSizeLength();
-		double dShipWidth = pShip->getSizeWidth();
-		double dDistance = CTool::countRange(m_dPosX, m_dPosY, pShip->getPosX(), pShip->getPosY());
-		if (dDistance >= FLY_TO_SHIP_DIS)
-		{
-			turnFortBody(pShip->getPosX() - dShipLength * 0.5, m_dPosY);
-			m_dPosX = m_dPosX - dTime * m_dSpeed;
-		}
-		else
-		{
-			if (m_dPosX > pShip->getPosX() + dShipLength * 0.5)  // Î»ï¿½ï¿½Õ½ï¿½ï¿½ï¿½Ò±ß½ï¿½ï¿½Ò±ï¿½
-			{
-				if (m_dPosY > pShip->getPosY() + dShipWidth * 0.5)   //ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-				{
-					//ï¿½ï¿½×ª
-					turnFortBody(pShip->getPosX() + dShipLength * 0.5, pShip->getPosY() + dShipWidth * 0.5);
-					double dVecLength = sqrt(m_dFortVecX * m_dFortVecX + m_dFortVecY * m_dFortVecY);
-					m_dPosX = m_dPosX + dTime * m_dSpeed * (m_dFortVecX / dVecLength);
-					m_dPosY = m_dPosY + dTime * m_dSpeed * (m_dFortVecY / dVecLength);
-				}
-				else if (m_dPosY < pShip->getPosY() - dShipWidth * 0.5) // ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-				{
-					//xuanzhuan
-					turnFortBody(pShip->getPosX() + dShipLength * 0.5, pShip->getPosY() - dShipWidth * 0.5);
-					double dVecLength = sqrt(m_dFortVecX * m_dFortVecX + m_dFortVecY * m_dFortVecY);
-					m_dPosX = m_dPosX + dTime * m_dSpeed * (m_dFortVecX / dVecLength);
-					m_dPosY = m_dPosY + dTime * m_dSpeed * (m_dFortVecY / dVecLength);
-				}
-				else                                                   // Õ½ï¿½ï¿½ï¿½Ð¼ï¿½
-				{
-					m_dPosX = m_dPosX - dTime * m_dSpeed;
-				}
-			}
-			else if (m_dPosX >= pShip->getPosX() - dShipLength * 0.5)    // Î»ï¿½ï¿½Õ½ï¿½ï¿½ï¿½Ò±ß½ï¿½ï¿½ï¿½ï¿½
-			{
-				if (m_dPosY > pShip->getPosY() + dShipWidth * 0.5)    // ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-				{
-					// ï¿½ï¿½×ª
-					turnFortBody(m_dPosX, m_dPosY - 10);
-					m_dPosY = m_dPosY - dTime * m_dSpeed;
-				}
-				else if (m_dPosY < pShip->getPosY() - dShipWidth * 0.5)  // ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-				{
-					// ï¿½ï¿½×ª
-					turnFortBody(m_dPosX, m_dPosY + 10);
-					m_dPosY = m_dPosY + dTime * m_dSpeed;
-				}
-				else												   // ï¿½Ð¼ï¿½
-				{
-
-				}
-			}
-		}
-	}
-}
-
-void CFort::flyToTarget(double dTime)
-{
-	//	if (m_pAttackTarget != nullptr)
-	//	{
-	if (m_pLockTarget)
-	{
-		turnFortBody(m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-		//ï¿½ï¿½ï¿½ï¿½m_dSpeedï¿½Ù¶ï¿½ï¿½Æ¶ï¿½
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Æ¶ï¿½Õ½ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		double dVecX = m_pLockTarget->getPosX() - this->getPosX();
-		double dVecY = m_pLockTarget->getPosY() - this->getPosY();
-		//ï¿½É¹ï¿½ï¿½È¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		//Ð±ï¿½ï¿½Öµ
-		double dVecXY = sqrt(dVecX * dVecX + dVecY * dVecY);
-		double dMoveX = dVecX / dVecXY * (dTime * m_dSpeed);
-		double dMoveY = dVecY / dVecXY * (dTime * m_dSpeed);
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ò£¬´Ë´ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½
-		m_dPosX = m_dPosX + dMoveX;
-		m_dPosY = m_dPosY + dMoveY;
-
-		double dDistance = CTool::countRange(m_dPosX, m_dPosY, m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-		if (dDistance <= m_nRange + m_pLockTarget->getSizeRadius())
-		{
-			m_nFortState = EFortState::FORT_ATTACK;
-			//insertFortEvent(EFortEvent::FORT_ATTACK_READY, 0);
-			m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_ATTACK_READY, m_nID, m_nFortIndex, 0);
 		}
 	}
 	else
 	{
-		m_nFortState == EFortState::FORT_FLY;
-	}
-	//	}
-}
-
-void CFort::beHurtByShipBullet(double dInjury)
-{
-	m_dHp = m_dHp - dInjury;
-	//insertFortEvent(EFortEvent::FORT_BE_DAMAGE, dInjury);
-	m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_BE_DAMAGE, m_nID, m_nFortIndex, dInjury);
-	if (m_dHp <= 0)
-	{
-		fortGoDie();
-	}
-	m_isBeLockedByShip = true;
-}
-
-// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½ï¿½Ó¦Ê±ï¿½ä£©
-void CFort::beHurtByFortBullet(double dInjury, int nFirerID, int nFirerIndex, bool isTarget)
-{
-	m_dHp = m_dHp - dInjury;
-//	insertFortEvent(EFortEvent::FORT_BE_DAMAGE, dInjury);
-	m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_BE_DAMAGE, m_nID, m_nFortIndex, dInjury);
-	if (m_dHp <= 0)
-	{
-		fortGoDie();
-		return;
-	}
-	if (isTarget)  // ï¿½ï¿½Ä¿ï¿½ê·½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	{
-		CFort* pFort;
-		if (m_nSide == EPlayerKind::SELF)
+		if (m_isFortRelive)    // ÅÚÌ¨¸´»îµÄ10Ãë
 		{
-			pFort = m_pFortBattle->getPlayerHost()->getFortMgr()->getFortByID(nFirerID, nFirerIndex);
-		}
-		else if (m_nSide == EPlayerKind::ENEMY)
-		{
-			pFort = m_pFortBattle->getPlayerSelf()->getFortMgr()->getFortByID(nFirerID, nFirerIndex);
-		}
-		if (pFort != nullptr)
-		{
-		/*	if (m_pAttackTarget == nullptr)
+			if ((m_dReliveCountDown - dt < 0.00001) && (m_dReliveCountDown - dt > -0.00001))
 			{
-				m_pAttackTarget = pFort;
-				if (m_pLockTarget == nullptr)
-				{
-					m_nFortState = EFortState::FORT_PURSUIT_TARGET;
-					turnFortBody(pFort->getPosX(), pFort->getPosY());
-				}
+				m_dReliveCountDown = dt;
 			}
-			*/
-			putFortInAttackVec(pFort);
+			m_dReliveCountDown -= dt;
+			// for fort relive send message per second
+			//m_dSecondCountForRelive += dt;
+			//if (m_dSecondCountForRelive >= 1)
+			//{
+				//m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_RELIVE_COOLDOWN);
+				//m_dSecondCountForRelive -= 1;
+			//}
+			if (m_dReliveCountDown <= 0)
+			{
+				m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_RELIVE);
+				m_isFortRelive = false;
+				m_isLive = true;
+				m_dHp = m_dReliveHp;
+				m_dReliveHp = 0.0;
+				//m_dSecondCountForRelive = 0.1;
+				m_dReliveCountDown = FORT_RELIVE_TIME;
+			}
 		}
 	}
 }
 
-void CFort::turnFortBody(double dTargetPosX, double dTargetPosY)
+CFortSkill * CFort::getFortSkill()
 {
-	double dVecPosX = dTargetPosX - m_dPosX;
-	double dVecPosY = dTargetPosY - m_dPosY;
-//	double d1 = m_dFortVecX / m_dFortVecY;
-//	double d2 = dVecPosX / dVecPosY;
-//	double d3 = d1 - d2;
-	if (m_dFortVecY == 0 && dVecPosY == 0)
-	{
-		m_dFortVecX = dVecPosX;
-		if (m_dFortVecX < 0)
-		{
-			m_dTurnRadian = -PI * 0.5;
-		}
-		else if (m_dFortVecX > 0)
-		{
-			m_dTurnRadian = PI * 0.5;
-		}
-		return;
-	}
-	if (m_dFortVecX == 0 && dVecPosX == 0)
-	{
-		m_dFortVecY = dVecPosY;
-		if (m_dFortVecY < 0)
-		{
-			m_dTurnRadian = PI;
-		}
-		else if (m_dFortVecY > 0)
-		{
-			m_dTurnRadian = 0;
-		}
-		return;
-	}
-	if ( m_dFortVecY != 0 && dVecPosY != 0 && 
-		abs(m_dFortVecX / m_dFortVecY - dVecPosX / dVecPosY ) < 0.001 ) //  ï¿½ï¿½×ªï¿½Ç¶ï¿½Ð¡ï¿½ï¿½0.05ï¿½ï¿½
-	{
-		return;
-	}
-
-	m_dFortVecX = dVecPosX;    // ï¿½ï¿½Â¼Õ½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
-	m_dFortVecY = dVecPosY;
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	double dVecLength = sqrt(dVecPosX * dVecPosX + dVecPosY * dVecPosY);
-	double dRadian = asin(dVecPosY / dVecLength);
-	if (dVecPosX < 0)
-	{
-		m_dTurnRadian = -PI * 0.5 + dRadian;
-	/*	if (dVecPosY > 0)
-		{
-			m_dTurnRadian =  -PI * 0.5 + dRadian;
-		}
-		else
-		{
-			m_dTurnRadian =  -PI * 0.5 - dRadian;
-		}
-		*/
-	}
-	else
-	{
-		m_dTurnRadian = PI * 0.5 - dRadian;
-	/*	if (dVecPosY > 0)
-		{
-			m_dTurnRadian = PI * 0.5 - dRadian;
-		}
-		else
-		{
-			m_dTurnRadian = PI * 0.5 + dRadian;
-		}
-		*/
-	}
+	return m_pFortSkill;
 }
 
-bool CFort::isStillLive()
+double CFort::damageFort(double damage)
 {
-	if (m_dHp >= 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-void CFort::fortInitState()
-{
-	m_nFortState = EFortState::FORT_FLY;
-	m_nFortFireState = EFortAttackState::FORT_FIRE;
-	m_nBulletType = EShootType::BULLET_SHELL;
-	m_nFortFireType = 0;
-	m_nBuffState = 0;
-	m_dEnergy = 0;
-	m_dCountStepTime = 0.0;
-	m_dFireTimeCount = 0;
-	m_dSkillTimeCount = 0.0;
-	m_dTurnRadian = 0;
-	m_dFortVecX = 0;
-	m_dFortVecY = 0;
-	m_pLockTarget = nullptr;
-	m_pAttackTarget = nullptr;
-	m_isFortBorn = true;
-	m_isBeLockedByShip = false;
-	m_isLockShip = false;
-	if (m_nSide == EPlayerKind::SELF)
-	{
-		m_dTurnRadian = PI * 0.5;
-	}
-	else
-	{
-		m_dTurnRadian = -PI * 0.5;
-	}
-	//string strArmJsonPath = m_pFortBattle->getArmDataPath();
-    //int cFortID = m_nID;
-	//char cFortID[8];
-	//sprintf(cFortID, "%d", m_nID);
-	//string strPath = FileUtils::getInstance()->fullPathForFilename(strArmJsonPath);
-	//string strData = FileUtils::getInstance()->getStringFromFile(strPath);
-	//Document doc;
-	//doc.Parse<0>(strData.c_str());
-	//if (doc.IsObject())
+	double dDamage = damage;
+	//if (m_dHp < damage)
 	//{
-	//	rapidjson::Value& vValue = doc[cFortID];//strID.c_str()
-	//	if (vValue.IsObject())
-		//{
-			int nFortType = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "type"));
-			if (nFortType == 0)
-			{
-				m_nFortKind = EFortKinds::FORT_MACHINE;
-			}
-			else if (nFortType == 1)
-			{
-				m_nFortKind = EFortKinds::FORT_FIGHTSHIP;
-			}
-
-			m_nSizeRadius = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "radius"));
-			m_nSizeLength = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "shape_l"));
-			m_nSizeWidth = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "shape_w"));
-			m_dInitHp = atof(CBattle::getArmsConfigDataValueByKey(m_nID, "hp"));
-			m_dInitAtk = atof(CBattle::getArmsConfigDataValueByKey(m_nID, "atk"));
-			m_dInitFireInterval = atof(CBattle::getArmsConfigDataValueByKey(m_nID, "atk_speed"));
-			m_nRange = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "atk_distance"));
-			// Â·Â¶ÃŽÂ§Ã‰Ã‹ÂºÂ¦Â¡Â°atk_rangeÂ¡Â±
-			m_dInitSpeed = atof(CBattle::getArmsConfigDataValueByKey(m_nID, "speed"));
-			m_nEnergyCost = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "consume"));
-			m_nArmPoint = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "cost"));
-			m_dInitBornTime = atof(CBattle::getArmsConfigDataValueByKey(m_nID, "production_time"));
-			m_nBeDestroyEnergy = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "destruction_reward"));
-			m_nBulletSpeed = atoi(CBattle::getArmsConfigDataValueByKey(m_nID, "bullet_speed"));
-			// Ã‰Ã½Â¼Â¶2Â¼Â¶3Â¼Â¶ÂµÃ„ÃŒÃ¡Ã‰Ã½ÃŠÃ½Â¾Ã  Â¡Â£
-			// lv2_project     lv2_up       lv3_project       lv3_up
-
-			//	m_dSkillTime = vValue["skill_time"));
-		//}
+	//	dDamage = m_dHp;
 	//}
-	m_dHp = m_dInitHp;
-	m_dAtk = m_dInitAtk;
-	m_dFireInterval = m_dInitFireInterval;
-	m_dSpeed = m_dInitSpeed;
-	m_dFortBornTime = m_dInitBornTime;
-	m_nBulletID = m_nID;
+	m_dHp -= dDamage;
+	addEnergyByDamage(dDamage, 2);
+	if (m_dHp <= 0)
+	{
+		m_dHp = 0.0;
+		fortDie();
+	}
+	return dDamage;
 }
 
-void CFort::fortGoDie()
+// ÓÃÓÚÅÚÌ¨×Óµ¯¹¥»÷Ê±, 
+void CFort::damageFortByBullet(double damage)
 {
-	//Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
-	//fortInitState();
-	//insertFortEvent(EFortEvent::FORT_DIE, 0);
-	m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_DIE, m_nID, m_nFortIndex, 0);
-	if (m_nSide == EPlayerKind::SELF)
+	//double resultDamage = damage * (1 - m_dUnInjuryRate);
+	if (m_dBulletDamage == 0)
 	{
-		m_pFortBattle->getPlayerSelf()->armyCountDown(m_nArmPoint); // ï¿½ï¿½ï¿½Õ¾ï¿½Ó¿Õ¼ï¿½
-		m_pFortBattle->getPlayerHost()->addEnergy(m_nBeDestroyEnergy);
-/*		if (m_isBeLockedByShip) // ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		{
-			//Õ½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½
-			m_pFortBattle->getPlayerHost()->getShip()->targetIsBroken(m_nID, m_nFortIndex);
-		}
-		*/
-		CShip *pShip = m_pFortBattle->getPlayerHost()->getShip();
-		if (pShip->getLockTarget() && pShip->getLockTarget()->getFortIndex() == m_nFortIndex)
-		{
-			pShip->targetIsBroken(m_nID, m_nFortIndex);
-		}
-		// ï¿½Ô¼ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½  (ï¿½ï¿½Î´ï¿½ï¿½ï¿½Ç¶ï¿½Í·ï¿½ï¿½)
-/*		if (m_pLockTarget)
-		{
-			m_pLockTarget->attackerIsBroken(m_nID, m_nFortIndex);
-		}
-		*/
-		// ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
-/*		vector<CFort*>::iterator iter = m_vecAttackTarget.begin();
-		for (; iter < m_vecAttackTarget.end(); iter++)
-		{
-			if ((*iter)->getFortIndex() != m_pLockTarget->getFortIndex())
-			{
-				(*iter)->targetIsBroken();
-			}
-		}
-		*/
-		map<int, CFort*> mapForts = m_pFortBattle->getPlayerHostForts();
-		map<int, CFort*>::iterator iter = mapForts.begin();
-		for (; iter != mapForts.end(); iter++)
-		{
-
-			CFort* pTargetFort = (*iter).second->getLockTarget();
-			if (pTargetFort != nullptr)
-			{
-				if (pTargetFort->getID() == m_nID && pTargetFort->getFortIndex() == m_nFortIndex)
-				{
-					(*iter).second->targetIsBroken();
-				}
-			}
-		}
-		m_pFortBattle->getPlayerHost()->getBulletMgr()->removeBrokenTargetBullet(m_nID, m_nFortIndex);// ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½Óµï¿½
-		m_pFortBattle->getPlayerSelf()->getFortMgr()->removeBrokenFort(m_nID, m_nFortIndex);
-	}
-	else if (m_nSide == EPlayerKind::ENEMY)
-	{
-		m_pFortBattle->getPlayerHost()->armyCountDown(m_nArmPoint);
-		m_pFortBattle->getPlayerSelf()->addEnergy(m_nBeDestroyEnergy);
-	/*	if (m_isBeLockedByShip)
-		{
-			m_pFortBattle->getPlayerSelf()->getShip()->targetIsBroken(m_nID, m_nFortIndex);
-		}
-		*/
-		CShip *pShip = m_pFortBattle->getPlayerSelf()->getShip();
-		if (pShip->getLockTarget() && pShip->getLockTarget()->getFortIndex() == m_nFortIndex)
-		{
-			pShip->targetIsBroken(m_nID, m_nFortIndex);
-		}
-/*		if (m_pLockTarget)
-		{
-			m_pLockTarget->attackerIsBroken(m_nID, m_nFortIndex);
-		}
-		*/
-
-		// ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
-/*		vector<CFort*>::iterator iter = m_vecAttackTarget.begin();
-		for (; iter < m_vecAttackTarget.end(); iter++)
-		{
-			if ((*iter)->getFortIndex() != m_pLockTarget->getFortIndex())
-			{
-				(*iter)->targetIsBroken();
-			}
-		}
-		*/
-		map<int, CFort*> mapForts = m_pFortBattle->getPlayerSelfForts();
-		map<int, CFort*>::iterator iter = mapForts.begin();
-		for (; iter != mapForts.end(); iter++)
-		{
-
-			CFort* pTargetFort = (*iter).second->getLockTarget();
-			if (pTargetFort != nullptr)
-			{
-				if (pTargetFort->getID() == m_nID && pTargetFort->getFortIndex() == m_nFortIndex)
-				{
-					(*iter).second->targetIsBroken();
-				}
-			}
-		}
-		// ï¿½Ç·ï¿½ï¿½Æ³ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½Óµï¿½(ï¿½Ø´ï¿½:Òªï¿½ï¿½
-		m_pFortBattle->getPlayerSelf()->getBulletMgr()->removeBrokenTargetBullet(m_nID, m_nFortIndex);
-		m_pFortBattle->getPlayerHost()->getFortMgr()->removeBrokenFort(m_nID, m_nFortIndex);
-	}
-	
-
-}
-
-// Ä¿ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-void CFort::targetIsBroken()
-{
-	m_pLockTarget = nullptr;
-//	m_pAttackTarget = nullptr;
-	m_nFortState = EFortState::FORT_FLY;
-	m_dFireTimeCount = 0;
-
-	// ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ß£ï¿½ Ã»ï¿½ï¿½ï¿½ï¿½Ç°Î»ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
-	//countInRangeFort();
-	//judgeCloseTarget();
-	/*
-	searchFort();
-	if (m_pLockTarget != nullptr)
-	{
-		turnFortBody(m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-		//	insertFortEvent(EFortEvent::FORT_TURN_BODY, m_dTurnRadian);
-		m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_TURN_BODY, m_nID, m_nFortIndex, m_dTurnRadian);
-		double dDistance = CTool::countRange(m_dPosX, m_dPosY, m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-		if (dDistance > m_nRange)
-		{
-			m_nFortState = EFortState::FORT_PURSUIT_TARGET;
-	
-		}
-		else
-		{
-			m_nFortState = EFortState::FORT_ATTACK;
-		//	insertFortEvent(EFortEvent::FORT_ATTACK_READY, 0);
-			m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_ATTACK_READY, m_nID, m_nFortIndex, 0);
-		}
+		m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_BULLET_DAMAGE);
+		m_dBulletDamage = damageFort(damage);
 	}
 	else
 	{
-		//		if (m_pAttackTarget != nullptr)
-		//		{
-		//			turnFortBody(m_pAttackTarget->getPosX(), m_pAttackTarget->getPosY());
-		//			m_nFortState = EFortState::FORT_PURSUIT_TARGET;
-		//		}
-		//		else
-		//		{
-				
-		countShipDistance();
-
-		//	}
+		m_dBulletDamage += damageFort(damage);
 	}
-*/
-	// ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½Ç£ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬¶ï¿½Ã¿ï¿½Ê¼ï¿½ï¿½Ò»ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½
-
 
 }
 
-//ï¿½ï¿½ï¿½ï¿½ï¿½ß±ï¿½ï¿½Ý»ï¿½
-void CFort::attackerIsBroken(int nFort, int nFortIndex)
+// ¼¼ÄÜ¹¥»÷ÉËº¦
+void CFort::damageFortBySkillBurst(double damage)
 {
-	// ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½
-	if (m_pLockTarget->getID() == nFort && m_pLockTarget->getFortIndex() == nFortIndex) //ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_SKILL_DAMAGE);
+	m_dSkillDamage = damageFort(damage);
+}
+// ¼ÓÖØ£¬¶îÍâ°Ù·Ö50ÉËº¦
+void CFort::damageFortBySkillAddDamage(double damage)
+{
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_BE_DEEP_DAMAGE);
+	m_dSkillDamage = damageFort(damage);
+}
+
+// NPC ¹¥»÷
+void CFort::damageFortByNPC(double damage)
+{
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_NPC_DAMAGE);
+	m_dNPC_Damage = damageFort(damage);
+}
+
+// È¼ÉÕbuffÉËº¦
+void CFort::percentDamage(double percent)
+{
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_BUFF_BURN_DAMAGE);
+	double dDamage = m_dInitHp * percent;
+	if (dDamage > 2000)
 	{
-		targetIsBroken();
+		dDamage = 2000;
+	}
+	m_dBuffBurnDamage = damageFort(dDamage);
+}
+
+// µÀ¾ßµ¼µ¯ÅÚµ¯¹¥»÷
+void CFort::damageFortByPropBullet(double dDamage)
+{
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_PROP_BULLET_DAMAGE);
+	//double damage = m_dInitHp * percent;
+	m_dPropBulletDamage = damageFort(dDamage);
+}
+
+void CFort::trueDamageFort(double damage)
+{
+	m_dHp -= damage;
+	if (m_dHp <= 0)
+	{
+		m_dHp = 0.0;
+		fortDie();
+	}
+}
+
+// Õ½½¢¼¼ÄÜ¹¥»÷
+void CFort::damageFortByShipSkill(double dDamage)
+{
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_SHIP_SKILL_DAMAGE);
+	if (dDamage > m_dHp)
+	{
+		m_dHp = 0;
+		fortDie();
 	}
 	else
 	{
-		if (m_vecAttackTarget.size() > 0)
-		{
-			vector<CFort*>::iterator iter = m_vecAttackTarget.begin();
-			//ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ¹ï¿½ï¿½ï¿½ï¿½ï¿½
-			for (; iter < m_vecAttackTarget.end(); )
-			{
-				if (nFort == (*iter)->getID() && nFortIndex == (*iter)->getFortIndex())
-				{
-					iter = m_vecAttackTarget.erase(iter);
-					break;
-				}
-				else
-				{
-					iter++;
-				}
-			}
-		}
+		m_dHp -= dDamage;
 	}
-/*	if (m_vecInRangeForts.size() > 0)
-	{
-		vector<CFort*>::iterator iter = m_vecInRangeForts.begin();
-		for (; iter < m_vecInRangeForts.end(); )
-		{
-			if (nFort == (*iter)->getID() && nFortIndex == (*iter)->getFortIndex())
-			{
-				m_vecInRangeForts.erase(iter);
-				break;
-			}
-			else
-			{
-				iter++;
-			}
-		}
-	}
-	*/
+	m_dShipSkillDamage = dDamage;
 }
 
-
-//ï¿½ï¿½ï¿½ë¹¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-void CFort::putFortInAttackVec(CFort * pFort)  
+void CFort::fortDie()
 {
-	if (pFort->isStillLive())
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_DIE);
+
+	m_dEnergy = 0;
+	m_isLive = false;
+	m_dUnInjuryRate = m_dInitUnInjuryRate;
+	m_dFortDamage = m_dInitDamage;
+	m_dFireTime = 0;
+	m_isAddPassiveSkill = false;
+	m_isFortParalysis = false; 
+	m_isFortBurning = false;   
+	m_isFortAckUp = false;
+	m_isFortAckDown = false;   
+	m_isFortRepairing = false;
+	m_isFortUnrepaire = false;
+	m_isFortUnEnergy = false;
+	m_isFortShield = false;
+	m_isFortRelive = false;
+	m_isFortSkillFire = false;
+	m_dBurningCountTime = 0.0;
+	m_dRepairingCountTime = 0.0;
+	//m_dReliveCountDown = 0.0;
+	m_dReliveHp = 0.0;
+	m_dAddPassiveEnergyTime = 0.0;
+	if (m_isEnemy)
+	{
+		m_pFortBattle->getEnemy()->getBuffMgr()->deleteAllBuffByFortID(m_nFortID);
+		m_pFortBattle->getEnemy()->getShip()->getFortMgr()->setEnemyDieFortID(m_nFortID);
+	}
+	else
+	{
+		m_pFortBattle->getPlayer()->getBuffMgr()->deleteAllBuffByFortID(m_nFortID);
+		m_pFortBattle->getPlayer()->getShip()->getFortMgr()->setPlayerDieFortID(m_nFortID);
+	}
+	
+}
+
+// for repairing
+void CFort::addHp(double dHp)
+{
+	if (!m_isLive ) 
 	{
 		return;
 	}
-	if (m_vecAttackTarget.size() > 0)
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_CONTINUE_ADD_HP);
+	m_dHp += dHp;
+	if (m_dHp > m_dInitHp)
 	{
-		int countFort = 0;
-		for (int i = 0; i < m_vecAttackTarget.size(); i++)
-		{
-			if (m_vecAttackTarget[i]->getID() == pFort->getID() && 
-				m_vecAttackTarget[i]->getFortIndex() == pFort->getFortIndex())
-			{
-				countFort = 1;
-				break;
-			}
-		}
-		if (countFort == 0)
-		{
-			m_vecAttackTarget.insert(m_vecAttackTarget.end(), pFort);
-		}
+		m_dHp = m_dInitHp;
+	}
+	m_dContinueAddHp = dHp;
+}
+
+void CFort::addHpBySkill(double percent)
+{
+	if (!m_isLive || m_isFortUnrepaire)
+	{
+		return;
+	}
+	double spareHp = m_dInitHp - m_dHp;
+	double addSkillHp = m_dInitHp * percent;
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_SKILL_ADD_HP);
+	if (spareHp < addSkillHp)
+	{
+		m_dHp = m_dInitHp;
 	}
 	else
 	{
-		m_vecAttackTarget.insert(m_vecAttackTarget.end(), pFort);
+		m_dHp += addSkillHp;
+	}
+	m_dSkillAddHp = addSkillHp;
+}
+
+void CFort::addHpByShipSkill(double percent)
+{
+	if (!m_isLive || m_isFortUnrepaire)
+	{
+		return;
+	}
+	double addHp = m_dInitHp * percent;
+	double spaceHp = m_dInitHp - m_dHp;  
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_SHIP_SKILL_ADD_HP);
+	if (addHp > spaceHp)
+	{
+		m_dHp = m_dInitHp;
+	}
+	else
+	{
+		m_dHp += addHp;
+	}
+	m_dShipSkillAddHp = addHp;
+}
+// ÔÝÊ±Ã»ÓÃ
+void CFort::addEnergy(double value)
+{
+	if (!m_isLive) // ÄÜÁ¿ÌåµÈ
+	{
+		return;
+	}
+	if (m_isFortUnEnergy || m_dEnergy >= 100)
+	{
+		return;
+	}
+	m_dEnergy += value;
+	if (m_dEnergy > 100)
+	{
+		m_dEnergy = 100.0;
 	}
 }
 
-// ï¿½ï¿½Ì·ï¿½Î§ï¿½ï¿½Õ½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Ã»ï¿½ØºÏµï¿½Õ½ï¿½ï¿½ ï¿½ï¿½ï¿½ò²»¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£©ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½
-/*
-void CFort::inRangeFortInVec(CFort * pFort)
+void CFort::addEnergySelf()
 {
-	if (m_vecInRangeForts.size() > 0)
+	if (!m_isLive)
 	{
-		int nHaveFortAlready = 0;
-		for (int i = 0; i < m_vecInRangeForts.size(); i++)
-		{
-			if (m_vecInRangeForts[i]->getID() == pFort->getID() &&
-				m_vecInRangeForts[i]->getFortIndex() == pFort->getFortIndex())
-			{
-				nHaveFortAlready = 1;
-				break;
-			}
-		}
-		if (nHaveFortAlready == 0)
-		{
-			m_vecInRangeForts.insert(m_vecInRangeForts.end(), pFort);
-		}
+		return;
+	}
+	if (m_isFortUnEnergy)
+	{
+		return;
+	}
+	if (m_dEnergy >= 100)
+	{
+		return;
+	}
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_SELF_ADD_ENERGY);
+	double dEnergy = m_dInitEnergy - m_dEnergy;
+	if (m_isFortPassiveSkillStronger)
+	{
+		m_dEnergy += 2.0;
+		m_dSelfAddEnergy = 2.0;
 	}
 	else
 	{
-		m_vecInRangeForts.insert(m_vecInRangeForts.end(), pFort);
+		m_dEnergy += 1.0;
+		m_dSelfAddEnergy = 1.0;
 	}
+	if (m_dEnergy >= 100)
+	{
+		m_dEnergy = 100;
+		m_dSelfAddEnergy = dEnergy;
+	}
+}
+
+void CFort::addEnergyByEnergy(double value)
+{
+	if (!m_isLive)
+	{
+		return;
+	}
+	if (m_isFortUnEnergy)
+	{
+		return;
+	}
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_ENERGY_ADD_ENERGY);
+	double dEnergy = m_dInitEnergy - m_dEnergy;
+	m_dEnergy += value;
+	if (m_dEnergy > 100)
+	{
+		m_dEnergy = 100;
+	}
+	m_dEnergyAddEnergy = value;
+}
+
+void CFort::addEnergyByDamage(double dDamage, int nType)
+{
+	if (m_isFortUnEnergy)
+	{
+		return;
+	}
+	if (m_dEnergy >= 100)
+	{
+		return;
+	}
+	if (nType == 1)     // ¹¥»÷ÅÚÌ¨»ñµÃÄÜÁ¿
+	{
+		m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_ATTACK_ADD_ENERGY);
+	}
+	else if (nType == 2)   // ÊÜ»÷»ñµÃÄÜÁ¿
+	{
+		m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_BE_DAMAGE_ADD_ENERGY);
+	}
+	double dEnergy = m_dInitEnergy - m_dEnergy;
+	// ÊÜµ½ÉËº¦ * 0.005% + ÄÜÁ¿ÏµÊý + Æ·ÖÊÏµÊý
+	double dAttackEnergy = dDamage * 0.00005 + m_dFortEnergyCoe + m_dFortQualityCoe;
+	m_dEnergy += dAttackEnergy;
+	if (m_dEnergy > 100)
+	{
+		m_dEnergy = 100.0;
+		dAttackEnergy = dEnergy;
+	}
+	if (nType == 1)
+	{
+		m_dAttackAddEnergy = dAttackEnergy;
+	}
+	else if (nType == 2)
+	{
+		m_dBeDamageAddEnergy = dAttackEnergy;
+	}
+}
+// ÔÝÊ±Ã»ÓÃ
+void CFort::addEnergyByProp(double value)
+{
+	if (!m_isLive || m_isFortUnEnergy)
+	{
+		return;
+	}
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_PROP_ADD_ENERGY);
+	double dEnergy = m_dInitEnergy - m_dEnergy;
+	m_dEnergy += value;
+	if (m_dEnergy > 100)
+	{
+		m_dEnergy = 100;
+	}
+	m_dPropAddEnergy = value;
+}
+
+void CFort::addEnergyByShipSkill(double percent)
+{
+	if (!m_isLive || m_isFortUnEnergy)
+	{
+		return;
+	}
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_SHIP_SKILL_ADD_ENERGY);
+	double addEnergy = m_dInitEnergy * percent;
+	double spaceEnergy = m_dInitEnergy - m_dEnergy;
+	if (addEnergy > spaceEnergy)
+	{
+		m_dEnergy = m_dInitEnergy;
+	}
+	else
+	{
+		m_dEnergy += addEnergy;
+	}
+	m_dShipSkillAddEnergy = addEnergy;
+}
+
+
+
+void CFort::setFortID(int ID)
+{
+	m_nFortID = ID;
+}
+
+
+
+int CFort::getFortID()
+{
+	return m_nFortID;
+}
+
+double CFort::getFortHp()
+{
+	return m_dHp;
+}
+
+double CFort::getFortMaxHp()
+{
+	return m_dInitHp;
+}
+
+double CFort::getFortEnergy()
+{
+	return m_dEnergy;
+}
+
+double CFort::getFortMaxEnergy()
+{
+	return m_dInitEnergy;
+}
+
+
+/*
+void CFort::setFortInterval(double interval)
+{
+	m_dInitInterval = interval;
+	m_dInterval = m_dInitInterval;
 }
 */
 
-void CFort::countShipDistance()
+void CFort::fortNormalState()
 {
-	double dDistance = 0.0;
-	CShip* pShip;
-	if (m_nSide == EPlayerKind::SELF)
+	// ³õÊ¼Êý¾Ý£¨ÉËº¦£¬ ¹¥»÷ËÙ¶È£¬ ÄÜÁ¿µÈ µÄÖµ£©
+	m_dFortDamage = m_dInitDamage;
+	m_dInterval = m_dFortSpeedCoe;
+}
+
+void CFort::fortParalysisState()
+{
+	// Ì±»¾£¬ÎÞ·¨Éä»÷&Ê¹ÓÃ¼¼ÄÜ£¨ÄÜÁ¿¿ÉÒÔ»ýÔÜ£©
+	m_isFortParalysis = true;
+	m_dFireTime = 0; 
+}
+
+void CFort::fortBurningState()
+{
+	// È¼ÉÕÉËº¦
+	m_isFortBurning = true;
+	m_dBurningCountTime = 0.0;
+}
+
+void CFort::fortAckEnhanceState(double buffValue)
+{
+	// ÉËº¦Ôö¼Ó
+	m_dFortDamage += m_dInitDamage * (buffValue - m_dAckUpValue);
+	m_dAckUpValue = buffValue;
+	m_isFortAckUp = true;
+}
+
+void CFort::fortAckDisturbState(double buffValue)
+{
+	// ÉËº¦¼õÉÙ
+	m_dFortDamage -= m_dInitDamage * (buffValue - m_dAckDownValue);
+	m_dAckDownValue = buffValue;
+	m_isFortAckDown = true;
+}
+
+// µÀ¾ß»ØÑª
+void CFort::fortRepaire(double percent)
+{
+	if (m_isFortUnrepaire)
 	{
-		pShip = m_pFortBattle->getPlayerHost()->getShip();
-		double dShipPosX = pShip->getPosX();
-		double dShipPosY = pShip->getPosY();
-		double dShipLength = pShip->getSizeLength();
-		double dShipWidth = pShip->getSizeWidth();
-		if (m_dPosX <= dShipPosX - dShipLength * 0.5)
+		return;
+	}
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_PROP_ADD_HP);
+	m_dHp += m_dInitHp * percent;
+	if (m_dHp > m_dInitHp)
+	{
+		m_dHp = m_dInitHp;
+	}
+	m_dPropAddHp = m_dInitHp * percent;
+}
+
+// Ë²¼ä»ØÑª
+void CFort::fortRepaireByEnergy(double percent)
+{
+	if (!m_isLive) // ÄÜÁ¿ÌåµÈ
+	{
+		return;
+	}
+	if (m_isFortUnrepaire )//|| m_dHp >= m_dInitHp
+	{
+		return;
+	}
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_ENERGY_ADD_HP);
+	m_dHp += m_dInitHp * percent;
+	if (m_dHp > m_dInitHp)
+	{
+		m_dHp = m_dInitHp;
+	}
+
+	m_dMomentAddHp = m_dInitHp * percent;
+}
+
+// ³ÖÐøÎ¬ÐÞ£¨»ØÑª£©
+void CFort::fortRepairing()
+{
+	if (m_isFortUnrepaire)
+	{
+		m_isFortRepairing = false;
+		return;
+	}
+	m_isFortRepairing = true;
+}
+
+// »ØÑª¸ÉÈÅ
+void CFort::fortUnrepaire()
+{
+	m_isFortUnrepaire = true;
+}
+
+// ÄÜÁ¿»Ö¸´
+void CFort::fortSupplyEnergy(double value)
+{
+	if (m_isFortUnEnergy)
+	{
+		return;
+	}
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_PROP_ADD_ENERGY);
+	double dEnergy = m_dInitEnergy - m_dEnergy;
+	m_dEnergy += value;
+	if (m_dEnergy > 100)
+	{
+		m_dEnergy = 100;
+	}
+	m_dPropAddEnergy = value;
+}
+
+// ÄÜÁ¿»Ö¸´¸ÉÈÅ
+void CFort::fortUnEnergy()
+{
+	m_isFortUnEnergy = true;
+}
+
+// »¤¶Ü
+void CFort::fortShield(double percent)
+{
+	m_dUnInjuryRate = m_dInitUnInjuryRate + percent;
+	if (m_dUnInjuryRate > 1)
+	{
+		m_dUnInjuryRate = 1;
+	}
+	m_isFortShield = true;
+}
+
+// ¸´»îÅÚÌ¨
+void CFort::fortRelive(double dPercent)
+{
+	if (m_isLive)
+	{
+		return;
+	}
+	m_isFortRelive = true;
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_RELIVE_COOLDOWN);
+	m_dReliveHp = m_dInitHp * dPercent;
+}
+
+void CFort::fortBreakArmorState()
+{
+	if (m_isFortShield)
+	{
+		recoveryShield();
+		if (m_isEnemy)
 		{
-			if (m_dPosY > dShipPosY + dShipWidth * 0.5)
-			{
-				dDistance = CTool::countRange(m_dPosX, m_dPosY, dShipPosX - dShipLength * 0.5, dShipPosY + dShipWidth * 0.5);
-			}
-			else if (m_dPosY < dShipPosY - dShipWidth * 0.5)
-			{
-				dDistance = CTool::countRange(m_dPosX, m_dPosY, dShipPosX - dShipLength * 0.5, dShipPosY - dShipWidth * 0.5);
-			}
-			else
-			{
-				dDistance = dShipPosX - dShipLength * 0.5 - m_dPosX;
-			}
+			m_pFortBattle->getEnemy()->getBuffMgr()->deleteBuffByFortID(m_nFortID, Buff::FORT_SHIELD);
 		}
 		else
 		{
-			if (m_dPosY > dShipPosY + dShipWidth * 0.5)
-			{
-				dDistance = m_dPosY - (dShipPosY + dShipWidth * 0.5);
-			}
-			else if (m_dPosY < dShipPosY - dShipWidth * 0.5)
-			{
-				dDistance = dShipPosY - dShipWidth * 0.5 - m_dPosY;
-			}
-			else
-			{
-				dDistance = 0;
-			}
+			m_pFortBattle->getPlayer()->getBuffMgr()->deleteBuffByFortID(m_nFortID, Buff::FORT_SHIELD);
 		}
 	}
-	else if (m_nSide == EPlayerKind::ENEMY)
-	{
-		pShip = m_pFortBattle->getPlayerSelf()->getShip();
-		double dShipPosX = pShip->getPosX();
-		double dShipPosY = pShip->getPosY();
-		double dShipLength = pShip->getSizeLength();
-		double dShipWidth = pShip->getSizeWidth();
-		if (m_dPosX >= dShipPosX + dShipLength * 0.5)
-		{
-			if (m_dPosY > dShipPosY + dShipWidth * 0.5)
-			{
-				dDistance = CTool::countRange(m_dPosX, m_dPosY, dShipPosX + dShipLength * 0.5, dShipPosY + dShipWidth * 0.5);
-			}
-			else if (m_dPosY < dShipPosY - dShipWidth * 0.5)
-			{
-				dDistance = CTool::countRange(m_dPosX, m_dPosY, dShipPosX + dShipLength * 0.5, dShipPosY - dShipWidth * 0.5);
-			}
-			else
-			{
-				dDistance = m_dPosX - (dShipPosX + dShipLength * 0.5);
-			}
-		}
-		else
-		{
-			if (m_dPosY > dShipPosY + dShipWidth * 0.5)
-			{
-				dDistance = m_dPosY - (dShipPosY + dShipWidth * 0.5);
-			}
-			else if (m_dPosY < dShipPosY - dShipWidth * 0.5)
-			{
-				dDistance = dShipPosY - dShipWidth * 0.5 - m_dPosY;
-			}
-			else
-			{
-				dDistance = 0;
-			}
-		}
-	}
-	if (dDistance <= m_nRange)
-	{
-		m_isLockShip = true;
-		m_nFortState = EFortState::FORT_ATTACK;
-		// ï¿½ï¿½×ªï¿½ï¿½ï¿½å·½ï¿½ï¿½
-		double dShipPosX = pShip->getPosX();
-		double dShipPosY = pShip->getPosY();
-		double dShipLength = pShip->getSizeLength();
-		double dShipWidth = pShip->getSizeWidth();
-		if (m_nSide == EPlayerKind::SELF)
-		{
-			if (m_dPosX <= dShipPosX - dShipLength * 0.5)
-			{
-				if (m_dPosY > dShipPosY + dShipWidth * 0.5)
-				{
-					turnFortBody(dShipPosX - dShipLength * 0.5, dShipPosY + dShipWidth * 0.5);
-				}
-				else if (m_dPosY < dShipPosY - dShipWidth * 0.5)
-				{
-					turnFortBody(dShipPosX - dShipLength * 0.5, dShipPosY - dShipWidth * 0.5);
-				}
-				else
-				{
-					turnFortBody(dShipPosX - dShipLength * 0.5, m_dPosY);
-				}
-			}
-			else
-			{
-				if (m_dPosY > dShipPosY + dShipWidth * 0.5)
-				{
-					turnFortBody(m_dPosX, dShipPosY + dShipWidth * 0.5);
-				}
-				else if (m_dPosY < dShipPosY - dShipWidth * 0.5)
-				{
-					turnFortBody(m_dPosX, dShipPosY - dShipWidth * 0.5);
-				}
-				else
-				{
+	m_dUnInjuryRate = 0;
+	m_isFortBreakArmor = true;
+}
 
-				}
-			}
-		}
-		else if (m_nSide == EPlayerKind::ENEMY)
-		{
-			if (m_dPosX >= dShipPosX + dShipLength * 0.5)
-			{
-				if (m_dPosY > dShipPosY + dShipWidth * 0.5)
-				{
-					turnFortBody(dShipPosX + dShipLength * 0.5, dShipPosY + dShipWidth * 0.5);
-				}
-				else if (m_dPosY < dShipPosY - dShipWidth * 0.5)
-				{
-					turnFortBody(dShipPosX + dShipLength * 0.5, dShipPosY - dShipWidth * 0.5);
-				}
-				else
-				{
-					turnFortBody(dShipPosX + dShipLength * 0.5, m_dPosY);
-				}
-			}
-			else
-			{
-				if (m_dPosY > dShipPosY + dShipWidth * 0.5)
-				{
-					turnFortBody(m_dPosX, dShipPosY + dShipWidth * 0.5);
-				}
-				else if (m_dPosY < dShipPosY - dShipWidth * 0.5)
-				{
-					turnFortBody(m_dPosX, dShipPosY - dShipWidth * 0.5);
-				}
-				else
-				{
-
-				}
-			}
-		}
-		m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_TURN_BODY, m_nID, m_nFortIndex, m_dTurnRadian);
-		//insertFortEvent(EFortEvent::FORT_ATTACK_READY, 0);
-		m_pFortBattle->runFortEventHandler(m_nSide, EFortEvent::FORT_ATTACK_READY, m_nID, m_nFortIndex, 0);
+void CFort::fortPassiveSkillStrongerState()
+{
+	m_isFortPassiveSkillStronger = true;
+	if (m_nFortType == FortType::DEFENSE_TYPE)
+	{
+		m_dUnInjuryRate += 0.05;
 	}
 }
 
-// ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
-void CFort::searchFort()
+int CFort::fortSkillFireBegin(string strBuffPer)
 {
-	map<int, CFort*> mapForts;
-	if (m_nSide == EPlayerKind::SELF)
+	//vector<wrongCodeData> sWrongCodeData = m_pFortBattle->getWrongCodeData();
+	//if (!m_isLive)// || m_dEnergy != 100|| m_isFortParalysis || m_isFortUnEnergy
+	//{
+	//	cout << "fort is die£¨ËÀÍö£©." << endl;
+	//	return sWrongCodeData[0].nFortDie_skill;
+	//}
+	//if (m_isFortParalysis)
+	//{
+	//	cout << "fort is in paralysis£¨Ì±»¾£©" << endl;
+	//	return sWrongCodeData[0].nFortParalysis_skill;
+	//}
+	//if (m_isFortUnEnergy)
+	//{
+	//	cout << "fort is in unenergy£¨ÄÜÁ¿¸ÉÈÅ£©" << endl;
+	//	return sWrongCodeData[0].nFortUnenergy;
+	//}
+	//if (m_dEnergy != 100)
+	//{
+	//	cout << "fort's energy no enough£¨ÄÜÁ¿²»×ã£©" << endl;
+	//	return sWrongCodeData[0].nFortEnergyNotEnough;
+	//}
+	//if (m_isFortSkillFire)
+	//{
+	//	cout << "fort is skilling now£¨ÊÍ·ÅÄÜÁ¿ÖÐ£©" << endl;
+	//	return sWrongCodeData[0].nFortSkilling;
+	//}
+	//int success = sWrongCodeData[0].nSuccess;
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_SKILL);
+	m_isFortSkillFire = true;
+	if (m_pFortBattle->getBattleType() == BattleType::BATTLE_NORMAL)
 	{
-		mapForts = m_pFortBattle->getPlayerHostForts();
+		m_pFortSkill->lockTargetFort();
+		m_pFortSkill->setAddBuff(strBuffPer);
+	}
+	else if (m_pFortBattle->getBattleType() == BattleType::BATTLE_BOSS)
+	{
+		// bossÕ½²»ÓÃËø¶¨ÅÚÌ¨
+	}
+	m_dSkillTime = m_pFortSkill->getSkillTime();
+	m_dEnergy = 0;
+	m_dFireTime = 0;
+	return 1;
+}
+
+void CFort::fortSkillFireEnd()
+{
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_SKILL_END);
+	m_pFortSkill->fireSkill();
+	m_dSkillTime = 0;
+	m_isFortSkillFire = false;
+}
+
+const char * CFort::getIsAddBuff()
+{
+	return m_pFortSkill->isAddBuff();
+}
+
+
+void CFort::recoveryParalysis()
+{
+	m_isFortParalysis = false;
+	m_dInterval = m_dFortSpeedCoe;
+}
+
+void CFort::recoveryBurning()
+{
+	m_isFortBurning = false;
+	
+}
+
+void CFort::recoveryAckUp()
+{
+	m_dFortDamage -= m_dInitDamage * m_dAckUpValue;
+	m_dAckUpValue = 0.0;
+	m_isFortAckUp = false;
+}
+
+void CFort::recoveryAckDown()
+{
+	m_dFortDamage += m_dInitDamage * m_dAckDownValue;
+	m_dAckDownValue = 0;
+	m_isFortAckDown = false;
+}
+
+void CFort::recoveryEnergy()
+{
+}
+
+void CFort::recoveryRepairing()
+{
+	m_dRepairingCountTime = 0;
+	m_isFortRepairing = false;
+}
+
+void CFort::recoveryUnrepaire()
+{
+	m_isFortUnrepaire = false;
+}
+
+void CFort::recoveryUnEnergy()
+{
+	m_isFortUnEnergy = false;
+}
+
+void CFort::recoveryShield()
+{
+	m_dUnInjuryRate = m_dInitUnInjuryRate;
+	m_isFortShield = false;
+}
+
+void CFort::recoveryFortBadBuff()
+{
+	if (m_isFortParalysis)
+	{
+		recoveryParalysis();
+	}
+	if (m_isFortBurning)
+	{
+		recoveryBurning();
+	}
+	if (m_isFortAckDown)
+	{
+		recoveryAckDown();
+	}
+	if (m_isFortUnrepaire)
+	{
+		recoveryUnrepaire();
+	}
+	if (m_isFortUnEnergy)
+	{
+		recoveryUnEnergy();
+	}
+	if (m_isFortBreakArmor)
+	{
+		recoveryFortBreakArmorBuff();
+	}
+}
+
+
+void CFort::recoveryFortGoodBuff()
+{
+	if (m_isFortAckUp)
+	{
+		recoveryAckUp();
+	}
+	if (m_isFortRepairing)
+	{
+		recoveryRepairing();
+	}
+	if (m_isFortShield)
+	{
+		recoveryShield();
+	}
+	if (m_isFortPassiveSkillStronger)
+	{
+		recoveryFortPassiveSkillBuff();
+	}
+}
+
+void CFort::recoveryFortBreakArmorBuff()
+{
+	m_dUnInjuryRate = m_dInitUnInjuryRate;
+	m_isFortBreakArmor = false;
+}
+
+void CFort::recoveryFortPassiveSkillBuff()
+{
+	m_isFortPassiveSkillStronger = false;
+	if (m_nFortType == FortType::DEFENSE_TYPE)
+	{
+		m_dUnInjuryRate -= 0.05;
+	}
+	else if (m_nFortType == FortType::ATTACK_TYPE)
+	{
+		if (m_isHavePassiveSkillStronger)
+		{
+			m_dFortDamage -= m_dInitDamage * 0.15;
+		}
+		m_isHavePassiveSkillStronger = false;
+	}
+}
+
+bool CFort::isParalysisState()
+{
+	return m_isFortParalysis;
+}
+
+bool CFort::isBurningState()
+{
+	return m_isFortBurning;
+}
+
+bool CFort::isAckUpState()
+{
+	return m_isFortAckUp;
+}
+
+bool CFort::isAckDownState()
+{
+	return m_isFortAckDown;
+}
+
+bool CFort::isRepairingState()
+{
+	return m_isFortRepairing;
+}
+
+bool CFort::isUnrepaireState()
+{
+	return m_isFortUnrepaire;
+}
+
+bool CFort::isUnEnergyState()
+{
+	return m_isFortUnEnergy;
+}
+
+bool CFort::isShieldState()
+{
+	return m_isFortShield;
+}
+
+bool CFort::isReliveState()
+{
+	return m_isFortRelive;
+}
+
+bool CFort::isSkillingState()
+{
+	return m_isFortSkillFire;
+}
+
+bool CFort::isBreakArmorState()
+{
+	return m_isFortBreakArmor;
+}
+
+bool CFort::isPassiveSkillStrongerState()
+{
+	return m_isFortPassiveSkillStronger;
+}
+
+void CFort::setFortBulletID(int fortID)
+{
+	m_nFortBulletID = fortID;
+}
+
+int CFort::getFortBulletID()
+{
+	return m_nFortBulletID;
+}
+
+void CFort::setFortData(int nFortID, int nBulletID, int nFortType, int nLevel, int nFortStarDomainCoe, int nSkillLevel, string strPathJson)
+{
+	setFortID(nFortID);
+	setFortBulletID(nBulletID);
+	m_nFortType = nFortType;
+	m_nFortLevel = nLevel;
+	m_dFortStarDomainCoe = nFortStarDomainCoe * 0.01;
+
+	// Æ·ÖÊÏµÊý
+	m_dFortQualityCoe = getQualityCoeByLevel(nLevel);
+
+	if (m_nFortType == FortType::ATTACK_TYPE)
+	{
+		m_dFortAckGrowCoe = AckFORT_AckCOE;
+		m_dFortHpGrowCoe = AckFORT_HpCOE;
+		m_dFortSpeedCoe = AckFORT_SpeCOE;
+		m_dFortEnergyCoe = AckFORT_EneCOE;
+	}
+	else if (m_nFortType == FortType::DEFENSE_TYPE)
+	{
+		m_dFortAckGrowCoe = DefFORT_AckCOE;
+		m_dFortHpGrowCoe = DefFORT_HpCOE;
+		m_dFortSpeedCoe = DefFORT_SpeCOE;
+		m_dFortEnergyCoe = DefFORT_EneCOE;
+	}
+	else if (m_nFortType == FortType::SKILL_TYPE)
+	{
+		m_dFortAckGrowCoe = SkiFORT_AckCOE;
+		m_dFortHpGrowCoe = SkiFORT_HpCOE;
+		m_dFortSpeedCoe = SkiFORT_SpeCOE;
+		m_dFortEnergyCoe = SkiFORT_EneCOE;
+	}
+	// ¼ÆËã  ¹¥»÷Á¦
+	double nOneLevelAck = 100.0 * 1 * m_dFortAckGrowCoe * m_dFortStarDomainCoe * m_dFortQualityCoe;
+	if (m_nFortLevel == 1)
+	{
+		m_dInitAck = nOneLevelAck;
 	}
 	else
 	{
-		mapForts = m_pFortBattle->getPlayerSelfForts();
+		m_dInitAck = nOneLevelAck + 10.0 * m_nFortLevel * m_dFortAckGrowCoe * m_dFortStarDomainCoe * m_dFortQualityCoe;
 	}
-	map<int, CFort*>::iterator iter = mapForts.begin();
-	double dNearerDis = 0.0;
-	for (; iter != mapForts.end(); iter++)
+
+	// Ì××°ÔöÇ¿µÄÐ§¹û¡£
+	if (m_isHaveSuitBuff)
 	{
-		if ((*iter).second->getIsFortBorn()) // ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½Â²ï¿½ï¿½ï¿½ï¿½ï¿½
-		{
-			continue;
-		}
-		double dDistance = CTool::countRange(m_dPosX, m_dPosY, (*iter).second->getPosX(), (*iter).second->getPosY());
-		if (dNearerDis == 0)
-		{
-			m_pLockTarget = (*iter).second;
-			dNearerDis = dDistance;
-		}
-		else
-		{
-			if (dNearerDis > dDistance)
-			{
-				m_pLockTarget = (*iter).second;
-				dNearerDis = dDistance;
-			}
-			else if (dNearerDis == dDistance)       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ð¶ï¿½Ñªï¿½ï¿½
-			{
-				if (m_pLockTarget->getHp() > (*iter).second->getHp())    //Ñªï¿½ï¿½ï¿½Ùµï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-				{
-					m_pLockTarget = (*iter).second;
-				}
-			}
-		}
+		m_dInitAck *= (1 + m_dSuitBuffValue);
 	}
+
+	// ¼ÆËã  ÑªÁ¿
+	m_dInitHp = m_dInitAck * (120.0 - m_nFortLevel * 0.1) * m_dFortHpGrowCoe * m_dFortStarDomainCoe * m_dFortQualityCoe;
+	m_dHp = m_dInitHp;
+
+	// ¼ÆËã  ·ÀÓùÖµ
+	m_dInitDefense = m_dInitHp * 0.05;
+	// ¸³Öµ  ¹¥»÷¼ä¸ô
+	m_dInterval = m_dFortSpeedCoe;
+	// ¼ÆËã  ÉËº¦
+	m_dInitDamage = m_dInitAck * (2 - 100.0 / (m_nFortLevel * 10 + 100.0));
+	m_dFortDamage = m_dInitDamage;
+	// ÃâÉËÂÊ
+	m_dInitUnInjuryRate = (m_dInitDefense / 500 + 1) * 0.01;
+	if (m_nFortType == FortType::DEFENSE_TYPE)	// ·ÀÓùÐÍÅÚÌ¨Ôö¼Ó°Ù·Ö5
+	{
+		m_dInitUnInjuryRate += 0.05;
+	}
+	m_dUnInjuryRate = m_dInitUnInjuryRate;
+	if (m_isEnemy)
+	{
+		m_pFortBattle->getEnemy()->countEnemyMaxHp(m_dInitHp);
+	}
+	else
+	{
+		m_pFortBattle->getPlayer()->countPlayerMaxHp(m_dInitHp);
+	}
+
+	initFortSkill(nSkillLevel, strPathJson, m_dFortStarDomainCoe);
 }
 
-void CFort::insertFortEvent(int nEvent, double dEventNumber)
+// ·µ»ØÆ·ÖÊÏµÊý
+double CFort::getQualityCoeByLevel(int nLevel)
 {
-	SFortEvent sFortEvent;
-	sFortEvent.nEventID = nEvent;
-	sFortEvent.dEventNumber = dEventNumber;
-	m_vecFortEvent.insert(m_vecFortEvent.end(), sFortEvent);
+	if (m_nFortLevel <= 20)
+	{
+		return FORT_QUALITY_D;
+	}
+	else if (m_nFortLevel > 20 && m_nFortLevel <= 40)
+	{
+		return FORT_QUALITY_C;
+	}
+	else if (m_nFortLevel > 40 && m_nFortLevel <= 60)
+	{
+		return FORT_QUALITY_B;
+	}
+	else if (m_nFortLevel > 60 && m_nFortLevel <= 80)
+	{
+		return FORT_QUALITY_A;
+	}
+	else if (m_nFortLevel > 80 && m_nFortLevel < 100)
+	{
+		return FORT_QUALITY_S;
+	}
+	return 0;
 }
 
-vector<SFortEvent> CFort::getFortEvent()
+
+void CFort::setFortPos(int posX, int posY)
 {
-	return m_vecFortEvent;
+	m_nPosX = posX; 
+	m_nPosY = posY;
 }
 
-void CFort::clearFortEvent()
+
+int CFort::getFortPosX()
+{
+	return m_nPosX;
+}
+
+int CFort::getFortPosY()
+{
+	return m_nPosY;
+}
+
+int CFort::getFortIndex()
+{
+	return m_nFortIndex;
+}
+
+double CFort::getFortAck()
+{
+	return m_dFortDamage;
+}
+
+void CFort::fortSizeByID(int fortID)
+{
+	int fortWidth = 0;
+	int fortHeight = 0;
+
+}
+
+
+bool CFort::isFortLive()
+{
+	if (m_dHp <= 0)
+	{
+		m_isLive = false;
+	}
+	return m_isLive;
+}
+
+bool CFort::isFire()
+{
+	return m_isFire;
+}
+
+void CFort::fortBeLiveByShipSkill(double dPercent)
+{
+	m_vecFortEvent.insert(m_vecFortEvent.end(), FortEvent::FORT_RELIVE);
+	m_isLive = true;
+	m_dHp = m_dInitHp * dPercent;
+	m_dEnergy = 100;
+}
+
+double CFort::getUnInjuryCoe()
+{
+	return m_dUnInjuryRate;
+}
+
+void CFort::cleanFortEventVec()
 {
 	m_vecFortEvent.clear();
 }
 
-// Í³ï¿½Æ·ï¿½Î§ï¿½ï¿½ï¿½ï¿½Ì¨
-void CFort::countInRangeFort()
+vector<int> CFort::getFortEventVec()
 {
-	map<int, CFort*> mapForts;
-	if (m_nSide == EPlayerKind::SELF)
-	{
-		mapForts = m_pFortBattle->getPlayerHostForts();
-	}
-	else if (m_nSide == EPlayerKind::ENEMY)
-	{
-		mapForts = m_pFortBattle->getPlayerSelfForts();
-	}
-	double dNearerDis = 0.0;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ú±È½ï¿½
-	map<int, CFort*>::iterator iter = mapForts.begin();
-	for (; iter != mapForts.end(); iter++)
-	{
-		double dDistance = CTool::countRange(m_dPosX, m_dPosY, (*iter).second->getPosX(), (*iter).second->getPosY());
-		if (dDistance <= m_nRange)
-		{
-			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			//inRangeFortInVec((*iter).second);
-			if (dNearerDis == 0)
-			{
-				dNearerDis = dDistance;
-				m_pLockTarget = (*iter).second;
-			}
-	 		else
-			{
-				if (dNearerDis > dDistance)
-				{
-					dNearerDis = dDistance;
-					m_pLockTarget = (*iter).second;
-				}
-			}
-		}
-	}
+	return m_vecFortEvent;
 }
 
-//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ÐµÄµÐ»ï¿½
-void CFort::judgeCloseTarget()
+double CFort::getMomentAddHp() 
 {
-	if (m_vecAttackTarget.size() > 1)
-	{
-		double dNearerDis = 0.0;
-		for (int i = 0; i < m_vecAttackTarget.size(); i++)
-		{
-			double dDistance = CTool::countRange(m_dPosX, m_dPosY, m_vecAttackTarget[i]->getPosX(), m_vecAttackTarget[i]->getPosY());
-			if (dNearerDis == 0)
-			{
-				dNearerDis = dDistance;
-				m_pAttackTarget = m_vecAttackTarget[i];
-			}
-			else
-			{
-				if (dNearerDis > dDistance)
-				{
-					dNearerDis = dDistance;
-					m_pAttackTarget = m_vecAttackTarget[i];
-				}
-			}
-		}
-	}
+	return m_dMomentAddHp;
+}
+
+void CFort::recoverAddHp(double dHp)
+{
+	m_dMomentAddHp = dHp;
+}
+
+double CFort::getSkillAddHp()
+{
+	return m_dSkillAddHp;
+}
+
+void CFort::recoverSkillAddHp(double dHp)
+{
+	m_dSkillAddHp = dHp;
+}
+
+double CFort::getPropAddHp()
+{
+	return m_dPropAddHp;
+}
+
+void CFort::recoverPropAddHp(double dHp)
+{
+	m_dPropAddHp = dHp;
+}
+
+double CFort::getContinueAddHp()
+{
+	return m_dContinueAddHp;
+}
+
+void CFort::recoverContinueAddHp(double dHp)
+{
+	m_dContinueAddHp = dHp;
+}
+
+double CFort::getSelfAddEnergy()
+{
+	return m_dSelfAddEnergy;
+}
+
+void CFort::recoverSelfAddEnergy(double dEnergy)
+{
+	m_dSelfAddEnergy = dEnergy;
+}
+
+double CFort::getEnergyAddEnergy()
+{
+	return m_dEnergyAddEnergy;
+}
+
+void CFort::recoverEnergyAddEnergy(double dEnergy)
+{
+	m_dEnergyAddEnergy = dEnergy;
+}
+
+double CFort::getPropAddEnergy()
+{
+	return m_dPropAddEnergy;
+}
+
+void CFort::recoverPropAddEnergy(double dEnergy)
+{
+	m_dPropAddEnergy = dEnergy;
+}
+
+double CFort::getAttackAddEnergy()
+{
+	return m_dAttackAddEnergy;
+}
+
+void CFort::recoverAttackAddEnergy(double dEnergy)
+{
+	m_dAttackAddEnergy = dEnergy;
+}
+
+double CFort::getBeDamageAddEnergy()
+{
+	return m_dBeDamageAddEnergy;
+}
+
+void CFort::recoverBeDamageAddEnergy(double dEnergy)
+{
+	m_dBeDamageAddEnergy = dEnergy;
+}
+
+double CFort::getBulletDamage()
+{
+	return m_dBulletDamage;
+}
+
+void CFort::recoverBulletDamage(double dDamage)
+{
+	m_dBulletDamage = dDamage;
+}
+
+double CFort::getPropBulletDamage()
+{
+	return m_dPropBulletDamage;
+}
+
+void CFort::recoverPropBuleltDamage(double dDamage)
+{
+	m_dPropBulletDamage = dDamage;
+}
+
+double CFort::getBuffBurnDamage()
+{
+	return m_dBuffBurnDamage;
+}
+
+void CFort::recoverBuffBurnDamage(double dDamage)
+{
+	m_dBuffBurnDamage = dDamage;
+}
+
+double CFort::getNPCDamage()
+{
+	return m_dNPC_Damage;
+}
+
+void CFort::recoverNPCDamage(double dDamage)
+{
+	m_dNPC_Damage = dDamage;
+}
+
+double CFort::getSkillDamage()
+{
+	return m_dSkillDamage;
+}
+
+void CFort::recoverSkillDamage(double dDamage)
+{
+	m_dSkillDamage = dDamage;
+}
+
+double CFort::getReliveCountDown()
+{
+	return m_dReliveCountDown;
+}
+
+double CFort::getShipSkillDamage()
+{
+	return m_dShipSkillDamage;
+}
+
+void CFort::recoverShipSkillDamage(double dDamage)
+{
+	m_dShipSkillDamage = dDamage;
+}
+
+double CFort::getShipSkillAddHp()
+{
+	return m_dShipSkillAddHp;
+}
+
+void CFort::recoverShipSkillAddHp(double dHp)
+{
+	m_dShipSkillAddHp = dHp;
+}
+
+double CFort::getShipSkillAddEnergy()
+{
+	return m_dShipSkillAddEnergy;
+}
+
+void CFort::recoverShipSkillAddEnergy(double dEnergy)
+{
+	m_dShipSkillAddEnergy = dEnergy;
+}
+
+void CFort::setFortBattle(CBattle * pBattle)
+{
+	m_pFortBattle = pBattle;
+}
+
+// ³õÊ¼»¯ÅÚÌ¨¼¼ÄÜ
+void CFort::initFortSkill(int nLevel, string strPath, double starDomainCoe)
+{
+	m_pFortSkill = new CFortSkill(this, nLevel, strPath, starDomainCoe);
+	m_pFortSkill->setSkillBattle(m_pFortBattle);
+}
+
+// ¹¥»÷£¬ÉúÃü£¬ ·ÀÓù¶¼Ôö¼Ó suitBuffValue Öµ
+void CFort::setHaveSuitBuff(bool is, double suitBuffValue)
+{
+	m_isHaveSuitBuff = is;
+	m_dSuitBuffValue = suitBuffValue;
+}
+
+void CFort::injuryAdditionInBossBattle(double dPercent)
+{
+	m_dInitDamage *= (1 + dPercent);
+	m_dFortDamage = m_dInitDamage;
+}
+
+
+////////////////////////////////
+          //¶ÏÏßÁ¬½Ó//
+////////////////////////////////
+void CFort::resetFortEventVec(int nEvent)
+{
+	m_vecFortEvent.insert(m_vecFortEvent.end(), nEvent);
+}
+
+bool CFort::isEnemy()
+{
+	return m_isEnemy;
+}
+
+void CFort::resetFortType(int nFortType)
+{
+	m_nFortType = nFortType;
+}
+
+int CFort::getFortType()
+{
+	return m_nFortType;
+}
+
+void CFort::resetFortLevel(int nLevel)
+{
+	m_nFortLevel = nLevel;
+}
+
+int CFort::getFortLevel()
+{
+	return m_nFortLevel;
+}
+
+void CFort::resetFortStarDomainCoe(double dStarDomainCoe)
+{
+	m_dFortStarDomainCoe = dStarDomainCoe * 0.01;
+}
+
+double CFort::getStarDomainCoe()
+{
+	return m_dFortStarDomainCoe * 100;
+}
+
+void CFort::resetFortQualityCoe(double dQualityCoe)
+{
+	m_dFortQualityCoe = dQualityCoe;
+}
+
+double CFort::getQualityCoe()
+{
+	return m_dFortQualityCoe;
+}
+
+void CFort::resetFortAckGrowCoe(double dAckGrowCoe)
+{
+	m_dFortAckGrowCoe = dAckGrowCoe;
+}
+
+double CFort::getAckGrowCoe()
+{
+	return m_dFortAckGrowCoe;
+}
+
+void CFort::resetFortHpGrowCoe(double dHpGrowCoe)
+{
+	m_dFortHpGrowCoe = dHpGrowCoe;
+}
+
+double CFort::getHpGrowCoe()
+{
+	return m_dFortHpGrowCoe;
+}
+
+void CFort::resetFortSpeedCoe(double dSpeedCoe)
+{
+	m_dFortSpeedCoe = dSpeedCoe;
+}
+
+double CFort::getSpeedCoe()
+{
+	return m_dFortSpeedCoe;
+}
+
+void CFort::resetFortEnergyCoe(double dEnergyCoe)
+{
+	m_dFortEnergyCoe = dEnergyCoe;
+}
+
+double CFort::getEnergyCoe()
+{
+	return m_dFortEnergyCoe;
+}
+
+void CFort::resetHp(double dHp)
+{
+	m_dHp = dHp;
+}
+
+void CFort::resetEnergy(double dEnergy)
+{
+	m_dEnergy = dEnergy;
+}
+
+void CFort::resetFortInterval(double dInterval)
+{
+	m_dInterval = dInterval;
+}
+
+double CFort::getInterval()
+{
+	return m_dInterval;
+}
+
+void CFort::resetUninjuryRate(double dUninjuryRate)
+{
+	m_dUnInjuryRate = dUninjuryRate;
+}
+
+void CFort::resetFortAck(double dAck)
+{
+	m_dFortDamage = dAck;
+}
+
+void CFort::resetFortLife(bool isLife)
+{
+	m_isLive = isLife;
+}
+
+void CFort::resetFireTime(double dFireTime)
+{
+	m_dFireTime = dFireTime;
+}
+
+double CFort::getFireTime()
+{
+	return m_dFireTime;
+}
+
+void CFort::resetInitAck(double dAck)
+{
+	m_dInitAck = dAck;
+}
+
+double CFort::getInitAck()
+{
+	return m_dInitAck;
+}
+
+void CFort::resetInitHp(double dInitHp)
+{
+	m_dInitHp = dInitHp;
+}
+
+void CFort::resetDefense(double dDefense)
+{
+	m_dInitDefense = dDefense;
+}
+
+double CFort::getDefense()
+{
+	return m_dInitDefense;
+}
+
+void CFort::resetInitUnInjuryRate(double dRate)
+{
+	m_dInitUnInjuryRate = dRate;
+}
+
+double CFort::getInitUnInjuryRate()
+{
+	return m_dInitUnInjuryRate;
+}
+
+void CFort::resetInitDamage(double dInitDamage)
+{
+	m_dInitDamage = dInitDamage;
+}
+
+double CFort::getInitDamage()
+{
+	return m_dInitDamage;
+}
+
+void CFort::resetAddPassiveSkill(bool isAdd)
+{
+	m_isAddPassiveSkill = isAdd;
+}
+
+bool CFort::isAddPassiveSkill()
+{
+	return m_isAddPassiveSkill;
+}
+
+void CFort::resetFortParalysis(bool isParalysis)
+{
+	m_isFortParalysis = isParalysis;
+}
+
+void CFort::resetFortBurning(bool isBurning)
+{
+	m_isFortBurning = isBurning;
+}
+
+void CFort::resetAckUp(bool isAckUp)
+{
+	m_isFortAckUp = isAckUp;
+}
+
+void CFort::resetAckDown(bool isAckDown)
+{
+	m_isFortAckDown = isAckDown;
+}
+
+void CFort::resetRepairing(bool isRepairing)
+{
+	m_isFortRepairing = isRepairing;
+}
+
+void CFort::resetUnrepaire(bool isUnrepaire)
+{
+	m_isFortUnrepaire = isUnrepaire;
+}
+
+void CFort::resetUnEnergy(bool isUnenergy)
+{
+	m_isFortUnEnergy = isUnenergy;
+}
+
+void CFort::resetShield(bool isShield)
+{
+	m_isFortShield = isShield;
+}
+
+void CFort::resetRelive(bool isRelive)
+{
+	m_isFortRelive = isRelive;
+}
+
+void CFort::resetSkillFire(bool isSkillFire)
+{
+	m_isFortSkillFire = isSkillFire;
+}
+
+void CFort::resetBreakArmor(bool isBreakArmor)
+{
+	m_isFortBreakArmor = isBreakArmor;
+}
+
+void CFort::resetPassiveSkillStronger(bool isPassiveSkillStronger)
+{
+	m_isFortPassiveSkillStronger = isPassiveSkillStronger;
+}
+
+bool CFort::isHavePassiveSkillStronger()
+{
+	return m_isHavePassiveSkillStronger;
+}
+
+void CFort::resetHavePassiveSkillStronger(bool isHave)
+{
+	m_isHavePassiveSkillStronger = isHave;
+}
+
+double CFort::getBurningCountTime()
+{
+	return m_dBurningCountTime;
+}
+
+void CFort::setBurningCountTime(double dTime)
+{
+	m_dBurningCountTime = dTime;
+}
+
+double CFort::getRepairingCountTime()
+{
+	return m_dRepairingCountTime;
+}
+
+void CFort::setRepairingCountTime(double dTime)
+{
+	m_dRepairingCountTime = dTime;
+}
+
+void CFort::setReliveCountDown(double dTime)
+{
+	m_dReliveCountDown = dTime;
+}
+
+double CFort::getReliveHp()
+{
+	return m_dReliveHp;
+}
+
+void CFort::setReliveHp(double dHp)
+{
+	m_dReliveHp = dHp;
+}
+
+double CFort::getAckDownValue()
+{
+	return m_dAckDownValue;
+}
+
+void CFort::setAckDownValue(double dValue)
+{
+	m_dAckDownValue = dValue;
+}
+
+double CFort::getAckUpValue()
+{
+	return m_dAckUpValue;
+}
+
+void CFort::setAckUpValue(double dValue)
+{
+	m_dAckUpValue = dValue;
+}
+
+double CFort::getAddPassiveEnergyTime()
+{
+	return m_dAddPassiveEnergyTime;
+}
+
+void CFort::setAddPassiveEnergyTime(double dTime)
+{
+	m_dAddPassiveEnergyTime = dTime;
+}
+
+//double CFort::getSecondCountForRelive()
+//{
+//	return m_dSecondCountForRelive;
+//}
+//
+//void CFort::setSecondCountForRelive(double dTime)
+//{
+//	m_dSecondCountForRelive = dTime;
+//}
+
+double CFort::getSkillTime()
+{
+	return m_dSkillTime;
+}
+
+void CFort::setSkillTime(double dTime)
+{
+	m_dSkillTime = dTime;
 }

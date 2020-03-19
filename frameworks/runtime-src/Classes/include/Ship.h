@@ -1,45 +1,66 @@
-#pragma once
+ï»¿#pragma once
 
-#include "BaseData.h"
-#include "CommonData.h"
-#include "Tool.h"
-#include <vector>
-#include "Fort.h"
-//#include <sstream>
-#include <fstream>
+#ifndef Ship_h
+#define Ship_h
+
+//#include "BaseClass.h"
+#include "InitialData.h"
+#include "FortMgr.h"
+#include "ShipSkill.h"
+#include <string>
 
 using namespace std;
 
 class CBattle;
 
-class CShip :public CBaseData
+class CShip       // : public CShape
 {
 public:
+	enum ShipType
+	{
+		PLAYER_SHIP = 0,
+		ENEMY_SHIP
+	};
 	CShip();
-	CShip(int nPlayerSide, int nShipID, int nShipLv, CBattle *pBattle);
 	~CShip();
+	void update(double dt);
 
-	void init();
-	void loadJsonData();
-	void update(double dTime);
-	void setShipBattle(CBattle* pBattle);
+	void initData(int nShipType, string wrongCodePath);
+	//æ”»æ“Šæˆ°è‰¦è¨ˆç®—å‚·å®³
+	void damageShip(int damage);
+	//è®¾ç½®shipçš„ID
+	void setShipData(string strShipDataPath, int nID, int nShipSkillLevel, int fort1, int fort2, int fort3);
 
-	void attackFort();
-	void beDamageByFortBullet(int nInjury);
-	void targetIsBroken(int nFortID = 1000, int nFortIndex = 1000);
-	void turnBarrelDir(double dPosX, double dPosY);
+	void setPos(int posX, int posY);
+	int getShipPosX();
+	int getShipPosY();
 
-	void shipDeath();
+	int getShipSkin();
+	CFortsMgr* getFortMgr();
+
+	void setShipBattle(CBattle *pBattle);
+	//è®¡ç®—èƒ½é‡ã€‚
+	//void countShipEnergyByHp();
+	void createShipSkill(double buffValue, double buffTime, double fireTime);
+
+	void useShipSkill();
+
+private:  // ç§æœ‰æˆå‘˜å˜é‡
+	CFortsMgr* m_pFortMgr;
+	int m_nShipID;
+	int m_nShipHp;
+	bool m_isDeath;
+	bool m_isEnemy;
+	int m_nShipPosX;
+	int m_nShipPosY;
+	int m_nShipSkin;
+
+	CBattle *m_pShipBattle;
+
+	CShipSkill *m_pShipSkill;
+	int m_nShipSkillLevel;
 	
-	SYNTHE_SIZE(double, m_dShipFireTime, ShipFireTime);
-	SYNTHE_SIZE(double, m_dShipSkillTime, ShipSkillTime);// Õ½½¢¼¼ÄÜÊ±¼ä
-	SYNTHE_SIZE(int, m_nShipState, ShipState);         // Õ½½¢×´Ì¬
-	SYNTHE_SIZE(int, m_nShipFireKind, ShipFireKind);   // Õ½½¢¹¥»÷Ä£Ê½
-	SYNTHE_SIZE(CFort*, m_pLockTarget, LockTarget);    // Ëø¶¨¹¥»÷¶ÔÏó
-	SYNTHE_SIZE(double, m_dBarrelRadian, BarrelRadian);// ÅÚÍ²µÄ½Ç¶È  
-
-private:
-	CBattle* m_pShipBattle;
-	vector<CFort*> m_vecInRangeFort;
 };
 
+
+#endif /* ship_h */

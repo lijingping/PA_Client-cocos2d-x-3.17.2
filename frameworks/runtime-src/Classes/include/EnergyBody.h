@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <time.h>
 
 #include "InitialData.h"

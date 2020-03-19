@@ -1,40 +1,47 @@
 #pragma once
 
-#include <vector>
-#include "BulletNormal.h"
-#include "Event.h"
+#include "Bullet.h"
+#include <map>
+using namespace std;
 
-class CBattle;
+
 class CBulletMgr
 {
 public:
-	CBulletMgr(int nSide, CBattle* pBattle);
+	enum bulletType
+	{
+		PLAYER_BULLET,
+		ENEMY_BULLET,
+		BOSS_BULLET
+	};
+	CBulletMgr();
 	~CBulletMgr();
+	void initData(bool nBulletType);
+	
+	void createBullet(int bulletID, int fortIndex, double dSpeed = 1000);
+	void update(double dt);
 
-	void update(double dTime);
+	void cleanUpPlayerBulletMap();
+	void cleanUpEnemyBulletMap();
+	void deleteBulletByIndex(int index);
 
-	// Éä»÷ÅÚÌ¨
-	void createBullet(int nID, int nType, double dPosX, double dPosY, int nFirerID, int nFirerIndex, double dAtk, CFort* pTargetFort = nullptr);
-	// Éä»÷Õ½½¢
-//	void createBulletToShip(int nID, int nType, double dPosX, double dPosY, int nFirerID, int nFirerIndex, double dShipPosX, double dShipPosY);
-	// Õ½½¢µÄ×Óµ¯
-	void createShipBullet(int nID, int nType, double dPosX, double dPosY, CFort* pTargetFort);
+	map<int, CBullet*> getEnemyBullet();
+	map<int, CBullet*> getPlayerBullet();
 
-	void removeBulletFromVec(int nID, int nIndex);
-	// ÒÆ³ýÉäÍùÕóÍöÕ½»ú×Óµ¯
-	void removeBrokenTargetBullet(int nTargetID, int nTargetIndex);
+	int getPlayerBulletCount();
+	void setPlayerBulletCount(int nNumber);
+	int getEnemyBulletCount();
+	void setEnemyBulletCount(int nNumber);
 
-	vector<CBulletNormal*> getBulletVec();
-
-	vector<SBulletEventData> getBulletEvent();
-	void insertBulletEvent(int nID, int nIndex, double dPosX, double dPosY, int nEvent);
-	void clearBulletEventVec();
+	void resetPlayerBullet(CBullet *pBullet, int whichBullet);
+	void resetEnemyBullet(CBullet *pBullet, int whichBullet);
 
 private:
-	int m_nSide;
-	CBattle* m_pBattle;
-	vector<CBulletNormal*> m_vecBullet;
-	int m_nBulletCount;
-	vector<SBulletEventData> m_vecBulletEvent;
+	map<int, CBullet*> m_mapPlayerBullet;
+	map<int, CBullet*> m_mapEnemyBullet;
+
+	int m_nP_BulletCount;
+	int m_nE_BulletCount;
+	int m_nBulletType;
 };
 

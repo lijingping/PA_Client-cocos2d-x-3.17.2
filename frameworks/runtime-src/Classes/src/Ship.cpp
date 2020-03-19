@@ -1,234 +1,180 @@
+ï»¿#include "stdafx.h"
 #include "Ship.h"
 #include "Battle.h"
-#include "FortMgr.h"
+
+#include <stdio.h>
 
 CShip::CShip()
+	: m_isEnemy(false)
+	, m_nShipID(0)
+	, m_nShipHp(0)
+	, m_nShipPosX(0)
+	, m_nShipPosY(0)
+	, m_nShipSkin(0)
+	, m_isDeath(false)
+	, m_nShipSkillLevel(0)
 {
-	m_nBulletType = EShootType::BULLET_SHELL;
+
 }
-
-CShip::CShip(int nPlayerSide, int nShipID, int nShipLv, CBattle *pBattle)
-{
-	m_nSide = nPlayerSide;
-	m_nID = nShipID;
-	m_nLv = nShipLv;
-	m_pShipBattle = pBattle;
-
-	m_dEnergy = 0;
-	m_dShipFireTime = 0;
-	if (m_nSide == EPlayerKind::SELF)
-	{
-		m_dPosX = SELF_SHIP_POS_X;
-		m_dPosY = SHIP_POS_Y;
-		m_dBarrelRadian = PI * 0.5;
-	}
-	else if (m_nSide == EPlayerKind::ENEMY)
-	{
-		m_dPosX = HOST_SHIP_POS_X;
-		m_dPosY = SHIP_POS_Y;
-		m_dBarrelRadian = -PI * 0.5;
-	}
-	m_pLockTarget = nullptr;
-	m_nShipFireKind = EShipFireKinds::SINGLE_DAMAGE;
-	m_nBulletType = EShootType::BULLET_SHELL;
-	m_nShipState = EShipState::NORMAL_STATE;
-	m_dShipSkillTime = 0;
-	m_nBulletID = m_nID;
-	init();
-}
-
 
 CShip::~CShip()
 {
-	
+	if (m_pFortMgr)
+	{
+		delete(m_pFortMgr);
+		m_pFortMgr = nullptr;
+	}
+	if (m_pShipSkill)
+	{
+		delete(m_pShipSkill);
+		m_pShipSkill = nullptr;
+	}
 }
 
-void CShip::init()
+void CShip::update(double dt)
 {
-	loadJsonData();
+	m_pFortMgr->update(dt);
+	m_pShipSkill->update(dt);
 }
 
-void CShip::loadJsonData()
+void CShip::initData(int nShipType, string wrongCodePath)
 {
-	//string strShipJsonPath = m_pShipBattle->getShipDataPath();
-	//char cShipID[8];
-	//sprintf(cShipID, "%d", m_nID);
-	//string strPath = FileUtils::getInstance()->fullPathForFilename(strShipJsonPath);
-	//string strData = FileUtils::getInstance()->getStringFromFile(strPath);
-	//Document doc;
-	//doc.Parse<0>(strData.c_str());
-	//if (doc.IsObject())
+	if (nShipType == ShipType::PLAYER_SHIP)
+	{
+		m_isEnemy = false;
+		setPos(MYSHIP_POS_X, MYSHIP_POS_Y);
+		m_pFortMgr = new CFortsMgr(m_isEnemy, wrongCodePath);
+	}
+	else if (nShipType == ShipType::ENEMY_SHIP)
+	{
+		m_isEnemy = true;
+		setPos(ENEMYSHIP_POS_X, ENEMYSHIP_POS_Y);
+		m_pFortMgr = new CFortsMgr(m_isEnemy, wrongCodePath);
+	}
+	m_pFortMgr->setFortMgrBattle(m_pShipBattle);
+	m_pFortMgr->createForts();
+}
+
+void CShip::damageShip(int damage)
+{
+	m_nShipHp -= damage;
+}
+
+void CShip::setShipData(string strShipDataPath, int nID, int nShipSkillLevel, int fort1, int fort2, int fort3)
+{
+	cout << "in CShip.cpp " << strShipDataPath << " shipID ï¼š" << nID << " skillLevel: " << nShipSkillLevel << "  " << fort1 << "  " << fort2 << "  " << fort3 << endl;
+	m_nShipID = nID;
+	m_nShipSkillLevel = nShipSkillLevel;
+
+	int equipForts[5] = { fort1, fort2, fort3 };
+
+	//string strShipID;
+	//stringstream ss;
+	//ss << m_nShipID;
+	//ss >> strShipID;
+
+	//Json::Reader reader;
+	//Json::Value root;
+
+	//ifstream openFile;
+
+	//openFile.open(strShipDataPath, ios::binary);
+
+	//if (openFile.is_open())
 	//{
-		//rapidjson::Value& vValue = doc[cShipID];//strID.c_str()
-		//if (vValue.IsObject())
-		//{
-			m_nSizeRadius = atoi(CBattle::getShipConfigDataValueByKey(m_nID, "radius"));
-			m_nSizeLength = atoi(CBattle::getShipConfigDataValueByKey(m_nID, "shape_l"));
-			m_nSizeWidth = atoi(CBattle::getShipConfigDataValueByKey(m_nID, "shape_w"));
-			m_dInitHp = atof(CBattle::getShipConfigDataValueByKey(m_nID, "hp"));
-			m_dInitAtk = atof(CBattle::getShipConfigDataValueByKey(m_nID, "atk"));
-			m_dInitFireInterval = atof(CBattle::getShipConfigDataValueByKey(m_nID, "atk_speed"));
-			m_nRange = atoi(CBattle::getShipConfigDataValueByKey(m_nID, "atk_distance"));
-			m_nBulletSpeed = atoi(CBattle::getShipConfigDataValueByKey(m_nID, "bullet_speed"));
-			// ·¶Î§ÉËº¦·¶Î§Öµ¡¢ ÒÆ¶¯ËÙ¶È
-
-		//	m_dSkillTime = vValue["skill_time"));
-		//}
+	//	cout << "ship_list.json open success" << endl;
 	//}
-	m_dHp = m_dInitHp;
-	m_dAtk = m_dInitAtk;
-	m_dFireInterval = m_dInitFireInterval;
+	//if (!reader.parse(openFile, root))
+	//{
+	//	cout << "ship parse ship skill json faild .......in setShipData function()" << endl;;
+	//	return;
+	//}
+	//string strShipName = root[strShipID]["ship_name"].asString();
+	//string strShipSkillName = root[strShipID]["skill_name"].asString();
+	char cShipID[8];
+	sprintf(cShipID, "%d", m_nShipID);
+	//itoa(m_nShipID, c, 10);
+	//double skillValue = root[cShipID]["skill_base_value_per"].asDouble();
+	//double skillTime = root[cShipID]["last_time"].asDouble();
+	//double upSkillValue = root[cShipID]["upgrade_base_value_per"].asDouble();
+	//double upSkillTime = root[cShipID]["upgrade_last_time"].asDouble();
+	//int fortID1 = root[cShipID]["fort_id1"].asInt();
+	//int fortID2 = root[cShipID]["fort_id2"].asInt();
+	//int fortID3 = root[cShipID]["fort_id3"].asInt();
+	//double suitBuffValue = root[cShipID]["suite_attri_per"].asDouble() * 0.01;
+
+	string strPath = FileUtils::getInstance()->fullPathForFilename(strShipDataPath);
+	string strData = FileUtils::getInstance()->getStringFromFile(strPath);
+	Document doc;
+	doc.Parse<0>(strData.c_str());
+
+	if (!doc.IsObject())
+	{
+		return;
+	}
+	rapidjson::Value& vValue = doc[cShipID];
+
+	double skillValue = vValue["skill_base_value_per"].GetDouble();
+	double skillTime = vValue["last_time"].GetDouble();
+	double upSkillValue = vValue["upgrade_base_value_per"].GetDouble();
+	double upSkillTime = vValue["upgrade_last_time"].GetDouble();
+	int fortID1 = vValue["fort_id1"].GetInt();
+	int fortID2 = vValue["fort_id2"].GetInt();
+	int fortID3 = vValue["fort_id3"].GetInt();
+	double suitBuffValue = vValue["suite_attri_per"].GetDouble() * 0.01;
+	double fireTime = vValue["time"].GetDouble();
+
+
+	int countSameFort = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		if (equipForts[i] == fortID1)
+		{
+			countSameFort += 1;
+		}
+		else if (equipForts[i] == fortID2)
+		{
+			countSameFort += 1;
+		}
+		else if (equipForts[i] == fortID3)
+		{
+			countSameFort += 1;
+		}
+	}
+	if (countSameFort == 3)
+	{
+		m_pFortMgr->setFortSuitBuff(suitBuffValue);
+	}
+	createShipSkill(skillValue + (nShipSkillLevel - 1) * upSkillValue, skillTime + (nShipSkillLevel - 1) * upSkillTime, fireTime);
+	std::cout << " new æˆ˜èˆ°æŠ€èƒ½   æˆåŠŸ " << endl;
+	//openFile.close();
 }
 
-void CShip::update(double dTime)
+void CShip::setPos(int posX, int posY)
 {
-	//¶àÍ·»¹ÊÇµ¥Í·£¿µ¥Í·£º¶à¸öÄ¿±êÑ¡×î½ü£¿
-	if (m_nShipFireKind == EShipFireKinds::SINGLE_DAMAGE)// µ¥Í·
-	{
-		if (m_pLockTarget == nullptr)
-		{
-			// ËÑË÷£¨µ¥Í·¹¥»÷£©ÆÕÍ¨¹¥»÷µÄ¶ÔÏó£¬²»Éæ¼°Í³¼ÆÔÚÉä³Ì·¶Î§ÄÚµÄËùÓÐµÐ»ú¡£ºóÆÚÓÐÐèÒªÔÚÌí¼Ó
-			map<int, CFort*> mapForts;
-			if (m_nSide == EPlayerKind::SELF)
-			{
-				mapForts = m_pShipBattle->getPlayerHostForts();
-			}
-			else if (m_nSide == EPlayerKind::ENEMY)
-			{
-				mapForts = m_pShipBattle->getPlayerSelfForts();
-			}
-			map<int, CFort*>::iterator iter = mapForts.begin();
-			int recodeRange = 0;
-			for (; iter != mapForts.end(); iter++)
-			{
-				double dRange = CTool::countRange(m_dPosX, m_dPosY, (*iter).second->getPosX(), (*iter).second->getPosY());
-				if (dRange <= m_nRange)
-				{
-					if (recodeRange == 0)
-					{
-						recodeRange = dRange;
-						m_pLockTarget = (*iter).second;
-					}
-					else
-					{
-						if (dRange < recodeRange)
-						{
-							recodeRange = dRange;
-							m_pLockTarget = (*iter).second;
-						}
-					}
-				}
-			}
-			if (m_pLockTarget != nullptr)
-			{
-				m_nShipState = EShipState::FIRE_STATE;
-				// Ðý×ªÊÂ¼þ¡£
-				//turnBarrelDir(m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-				////////
-			}
-		}
-	}
-	else if (m_nShipFireKind == EShipFireKinds::DOUBLE_DAMAGE)  // Í·¶à
-	{
-		// Éä³Ì·¶Î§ÄÚµÄµÐ»ú£¬È«²¿¹¥»÷¡£Í¬Ò»Ê±¼ä¹¥»÷¡££¨´ýÉè£º¹¥»÷×î¿¿½üµÄÇ°Á½¸ö£©
-		map<int, CFort*> mapForts;
-		if (m_nSide == EPlayerKind::SELF)
-		{
-			mapForts = m_pShipBattle->getPlayerHostForts();
-		}
-		else if (m_nSide == EPlayerKind::ENEMY)
-		{
-			mapForts = m_pShipBattle->getPlayerSelfForts();
-		}
-		map<int, CFort*>::iterator iter = mapForts.begin();
-		for (; iter != mapForts.end(); iter++)
-		{
-			if (CTool::isInRange(m_dPosX, m_dPosY, (*iter).second->getPosX(), (*iter).second->getPosY(), m_nRange))
-			{
-				if (m_vecInRangeFort.size() > 0)
-				{
-					bool isFortIn = false;
-					for (int i = 0; i < m_vecInRangeFort.size(); i++)
-					{
-						if (m_vecInRangeFort[i]->getID() == (*iter).second->getID() && 
-							m_vecInRangeFort[i]->getFortIndex() == (*iter).second->getFortIndex())
-						{
-							isFortIn = true;
-							break;
-						}
-					}
-					if (!isFortIn)
-					{
-						m_vecInRangeFort.insert(m_vecInRangeFort.end(), (*iter).second);
-					}
-				}
-				else
-				{
-					m_vecInRangeFort.insert(m_vecInRangeFort.end(), (*iter).second);// ÈûÈëvec  ÈÝÆ÷
-				}
-			}
-		}
-	}
-	if (m_nShipState == EShipState::FIRE_STATE)
-	{
-		if (m_nShipFireKind == EShipFireKinds::SINGLE_DAMAGE)
-		{
-			if (m_pLockTarget)
-			{
-				if (m_pLockTarget->isStillLive())
-				{
-					m_dShipFireTime = m_dShipFireTime + dTime;
-					//turnBarrelDir(m_pLockTarget->getPosX(), m_pLockTarget->getPosY());
-					if (m_dShipFireTime >= m_dFireInterval)
-					{
-						m_dShipFireTime = m_dShipFireTime - m_dFireInterval;
-						//¹¥»÷(·¢Éä×Óµ¯)
-						////////////////////
-						// ¼ÆËã×Óµ¯·½ÏòµÄÏòÁ¿  (ÓÐÅÚÍ²µÄ¼ÆËã£©
-		/*				double dVecX = m_pLockTarget->getPosX() - m_dPosX;
-						double dVecY = m_pLockTarget->getPosY() - m_dPosY;
-						double dVecDirection = sqrt(dVecX * dVecX + dVecY * dVecY);
-						double dPosX = m_dPosX + SHIP_HALF_WIDTH * dVecX / dVecDirection;
-						double dPosY = m_dPosY + SHIP_HALF_WIDTH * dVecY / dVecDirection;
-						*/
-						if (m_nSide == EPlayerKind::SELF)
-						{
-							m_pShipBattle->getPlayerSelf()->getBulletMgr()->createShipBullet(m_nID, m_nBulletType, m_dPosX + m_nSizeLength * 0.5, m_dPosY, m_pLockTarget);
-						}
-						else if (m_nSide == EPlayerKind::ENEMY)
-						{
-							m_pShipBattle->getPlayerHost()->getBulletMgr()->createShipBullet(m_nID, m_nBulletType, m_dPosX - m_nSizeLength * 0.5, m_dPosY, m_pLockTarget);
-						}
-					}
-				}
-			}
-		}
-		else if (m_nShipFireKind == EShipFireKinds::DOUBLE_DAMAGE)
-		{
-			if (m_vecInRangeFort.size() > 0)
-			{
-				m_dShipFireTime = m_dShipFireTime + dTime;
-				if (m_dShipFireTime >= m_dFireInterval)
-				{
-					m_dShipFireTime = m_dShipFireTime - m_dFireInterval;
-					for (int i = 0; i < m_vecInRangeFort.size(); i++)
-					{
-						//m_vecInRangeFort[i]
-					}
-				}
-			}
-		}
-	}
-	else if (m_nShipState = EShipState::SKILLING_STATE)
-	{
-		m_dShipSkillTime += dTime;
-		if (m_dShipSkillTime >= m_dSkillTime)
-		{
-					//  ¼¼ÄÜ
-			m_dShipSkillTime = 0;
+	m_nShipPosX = posX;
+	m_nShipPosY = posY;
+}
 
-		}
-	}
+int CShip::getShipPosX()
+{
+	return m_nShipPosX;
+}
+
+int CShip::getShipPosY()
+{
+	return m_nShipPosY;
+}
+
+
+int CShip::getShipSkin()
+{
+	return m_nShipSkin;
+}
+
+CFortsMgr * CShip::getFortMgr()
+{
+	return m_pFortMgr;
 }
 
 void CShip::setShipBattle(CBattle * pBattle)
@@ -236,67 +182,13 @@ void CShip::setShipBattle(CBattle * pBattle)
 	m_pShipBattle = pBattle;
 }
 
-void CShip::attackFort()
+void CShip::createShipSkill(double buffValue, double buffTime, double fireTime)
 {
+	m_pShipSkill = new CShipSkill(m_isEnemy, m_nShipID, m_pShipBattle);
+	m_pShipSkill->setSkillData(buffValue, buffTime, fireTime);
 }
 
-void CShip::beDamageByFortBullet(int nInjury)
+void CShip::useShipSkill()
 {
-	m_dHp = m_dHp - nInjury;
-	if (m_dHp <= 0)
-	{
-		shipDeath();
-	}
-}
-
-void CShip::targetIsBroken(int nFortID, int nFortIndex)
-{
-	if (m_nShipFireKind == EShipFireKinds::SINGLE_DAMAGE)
-	{
-		m_pLockTarget = nullptr;
-		m_nShipState = EShipState::NORMAL_STATE;
-	}
-	else if (m_nShipFireKind == EShipFireKinds::DOUBLE_DAMAGE)
-	{
-		vector<CFort*>::iterator iter = m_vecInRangeFort.begin();
-		for (; iter != m_vecInRangeFort.end(); )
-		{
-			if ((*iter)->getID() == nFortID && (*iter)->getFortIndex() == nFortIndex)
-			{
-				iter = m_vecInRangeFort.erase(iter);
-				break;
-			}
-			else
-			{
-				iter++;
-			}
-		}
-		if (m_vecInRangeFort.size() <= 0)
-		{
-			m_nShipState = EShipState::NORMAL_STATE;
-		}
-	}
-	m_dShipFireTime = 0;
-}
-
- // ÅÚÍ²×ª¶¯ºÍ¸úËæ
-void CShip::turnBarrelDir(double dPosX, double dPosY)
-{
-	double dVecX = dPosX - m_dPosX;
-	double dVecY = dPosY - m_dPosY;
-	double dVec = sqrt(dVecX * dVecX + dVecY * dVecY);
-	double dRadian = asin(dVecY / dVec);
-	if (dVecX < 0)
-	{
-		m_dBarrelRadian = PI - dRadian;
-	}
-	else
-	{
-		m_dBarrelRadian = dRadian;
-	}
-}
-
-void CShip::shipDeath()
-{
-	m_pShipBattle->gameOver();
+	m_pShipSkill->startUpdate();
 }

@@ -130,11 +130,17 @@ include_directories(
         ${COCOS2DX_ROOT_PATH}/cocos/scripting/lua-bindings/auto
         ${COCOS2DX_ROOT_PATH}/cocos/scripting/lua-bindings/manual
         ${COCOS2DX_ROOT_PATH}/cocos/libpomelo2/include
-        # ${COCOS2DX_ROOT_PATH}/external/curl/include/${PLATFORM_FOLDER}
         ${COCOS2DX_ROOT_PATH}/external/lua/luajit/include
         ${COCOS2DX_ROOT_PATH}/external/lua/tolua
         ${COCOS2DX_ROOT_PATH}/tools/simulator/libsimulator/lib
 )
+
+if(IOS)
+  include_directories(
+    ${COCOS2DX_ROOT_PATH}/external/curl/include/ios
+  )
+endif()
+
 if(ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml
     set(APP_NAME cocos2dlua)
@@ -242,4 +248,18 @@ if(LINUX OR WINDOWS)
     set(APP_RES_DIR "$<TARGET_FILE_DIR:${APP_NAME}>/Resources")
     cocos_copy_target_res(${APP_NAME} COPY_TO ${APP_RES_DIR}/res FOLDERS ${res_res_folders})
     cocos_copy_target_res(${APP_NAME} COPY_TO ${APP_RES_DIR}/src FOLDERS ${res_src_folders})
+endif()
+
+if(ANDROID)
+  add_library(curl STATIC IMPORTED GLOBAL)
+  set_target_properties(curl
+  PROPERTIES IMPORTED_LOCATION "${COCOS2DX_ROOT_PATH}/external/curl/prebuilt/android/${ANDROID_ABI}/libcurl.a"
+  )
+  target_link_libraries(${APP_NAME} curl)
+elseif(IOS)
+  add_library(curl STATIC IMPORTED GLOBAL)
+  set_target_properties(curl
+  PROPERTIES IMPORTED_LOCATION "${COCOS2DX_ROOT_PATH}/external/curl/prebuilt/ios/libcurl.a"
+  )
+  target_link_libraries(${APP_NAME} curl)
 endif()

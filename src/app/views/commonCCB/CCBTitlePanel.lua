@@ -20,6 +20,8 @@ function CCBTitlePanel:ctor(title)
 	end
 	self.m_ccbNodeFriendship:setVisible(false);
 	self:setInfo();
+
+	self.m_ccbScale9SpriteBg:setPositionX(self.m_ccbScale9SpriteBg:getInsetLeft()*0.5)
 end
 
 function CCBTitlePanel:setInfo()

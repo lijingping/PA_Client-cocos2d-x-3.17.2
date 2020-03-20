@@ -89,8 +89,6 @@
 		B838374F24235ED6009AF43A /* PropsMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371524235ED5009AF43A /* PropsMgr.cpp */; };
 		B838375024235ED6009AF43A /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371624235ED5009AF43A /* Enemy.cpp */; };
 		B838375124235ED6009AF43A /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371624235ED5009AF43A /* Enemy.cpp */; };
-		B838375224235ED6009AF43A /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = B838371724235ED5009AF43A /* sconscript */; };
-		B838375324235ED6009AF43A /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = B838371724235ED5009AF43A /* sconscript */; };
 		B838375424235ED6009AF43A /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371824235ED5009AF43A /* stdafx.cpp */; };
 		B838375524235ED6009AF43A /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371824235ED5009AF43A /* stdafx.cpp */; };
 		B838375624235ED6009AF43A /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B838371924235ED5009AF43A /* json_value.cpp */; };
@@ -346,7 +344,6 @@
 		B838371424235ED5009AF43A /* DownAsset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DownAsset.cpp; sourceTree = "<group>"; };
 		B838371524235ED5009AF43A /* PropsMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PropsMgr.cpp; sourceTree = "<group>"; };
 		B838371624235ED5009AF43A /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
-		B838371724235ED5009AF43A /* sconscript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sconscript; sourceTree = "<group>"; };
 		B838371824235ED5009AF43A /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
 		B838371924235ED5009AF43A /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
 		B838371A24235ED5009AF43A /* Buff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Buff.cpp; sourceTree = "<group>"; };
@@ -590,7 +587,6 @@
 				B838371424235ED5009AF43A /* DownAsset.cpp */,
 				B838371524235ED5009AF43A /* PropsMgr.cpp */,
 				B838371624235ED5009AF43A /* Enemy.cpp */,
-				B838371724235ED5009AF43A /* sconscript */,
 				B838371824235ED5009AF43A /* stdafx.cpp */,
 				B838371924235ED5009AF43A /* json_value.cpp */,
 				B838371A24235ED5009AF43A /* Buff.cpp */,
@@ -890,7 +886,6 @@
 				B8D33E19241F0C44006F6173 /* lua_pomelo_auto_api.lua in Resources */,
 				5023817617EBBE3400990C9B /* Icon.icns in Resources */,
 				1A8A4EDE1F6F9AEF0044495E /* src in Resources */,
-				B838375324235ED6009AF43A /* sconscript in Resources */,
 				B838375F24235ED6009AF43A /* libcode.json in Resources */,
 				B838376F24235ED6009AF43A /* json_internalarray.inl in Resources */,
 				1A8A4EDD1F6F9AEF0044495E /* res in Resources */,
@@ -913,7 +908,6 @@
 				B8D33E18241F0C44006F6173 /* lua_pomelo_auto_api.lua in Resources */,
 				1A8A4EDC1F6F9AEE0044495E /* src in Resources */,
 				1ACE45A31FC3F2D000F87E53 /* Images.xcassets in Resources */,
-				B838375224235ED6009AF43A /* sconscript in Resources */,
 				B838375E24235ED6009AF43A /* libcode.json in Resources */,
 				B838376E24235ED6009AF43A /* json_internalarray.inl in Resources */,
 				1A8A4ED91F6F9AEB0044495E /* config.json in Resources */,

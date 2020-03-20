@@ -235,7 +235,8 @@ function CCBProduceView2:createSlider()
     self.m_produceCountSlider:loadProgressBarTexture(ResourceMgr:getSliderBar());
     self.m_produceCountSlider:loadSlidBallTextures(ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall());
 
-	self.m_produceCountSlider:setPercent(1);
+	self.m_produceCountSlider:setPercent(1)
+        :setCapInsets(cc.rect(18, 0, 18, 0));
 	self.m_produceCountSlider:setMaxPercent(self.m_canProduceMaxCount);
 
 	local function changeEvent(pSender, eventType)

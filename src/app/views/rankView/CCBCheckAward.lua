@@ -45,7 +45,8 @@ function CCBCheckAward:ctor()
     self.m_itemCountSlider:loadBarTexture(ResourceMgr:getSliderBarBg());
     self.m_itemCountSlider:loadProgressBarTexture(ResourceMgr:getSliderBar());
     --self.m_itemCountSlider:loadSlidBallTextures(ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall());
-	self.m_itemCountSlider:setPercent((rankInfo.curExp/rankInfo.levelUpExp)*100);
+	self.m_itemCountSlider:setPercent((rankInfo.curExp/rankInfo.levelUpExp)*100)
+        :setCapInsets(cc.rect(18, 0, 18, 0));
     self.m_ccbNodeSlider:addChild(self.m_itemCountSlider);
 
 	local action1 = cc.RepeatForever:create(cc.Sequence:create(cc.MoveBy:create(0.5, cc.p(-5, 0)), cc.MoveBy:create(0.5, cc.p(5, 0))));

@@ -62,7 +62,8 @@ function CCBAmountControl:createSlider()
     self.m_BuyCountSlider:loadProgressBarTexture(barPath);
     self.m_BuyCountSlider:loadSlidBallTextures(ballPath, ballPath, ballPath);
 
-	self.m_BuyCountSlider:setPercent(1 / self.m_maxItemBuy * 100);
+	self.m_BuyCountSlider:setPercent(1 / self.m_maxItemBuy * 100)
+        :setCapInsets(cc.rect(18, 0, 18, 0));
 	-- self.m_BuyCountSlider:setMaxPercent(100);
 
 	local function changeEvent(pSender, eventType)

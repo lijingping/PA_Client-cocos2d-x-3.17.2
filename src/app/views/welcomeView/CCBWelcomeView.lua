@@ -60,7 +60,8 @@ function CCBWelcomeView:ctor()
 		:setPosition(width/2, 80)
     	:loadBarTexture(ResourceMgr:getSliderBarBg());
     self.m_totalBar:loadProgressBarTexture(ResourceMgr:getSliderBar());
-    self.m_totalBar:loadSlidBallTextures(ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall());
+    self.m_totalBar:loadSlidBallTextures(ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall())
+        :setCapInsets(cc.rect(18, 0, 18, 0));
     self.m_progressLayer:addChild(self.m_totalBar);
 
 	local barSize = self.m_totalBar:getContentSize();

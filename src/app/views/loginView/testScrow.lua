@@ -134,6 +134,7 @@ function testScrow:ctor()
     	:loadProgressBarTexture(ResourceMgr:getDemoEnergySliderBar())
     	:loadSlidBallTextures(ResourceMgr:getDemoEnergySliderBall()
     	, ResourceMgr:getDemoEnergySliderBall(), ResourceMgr:getDemoEnergySliderBall())
+    	:setCapInsets(cc.rect(18, 0, 18, 0))
     self.m_ccbNodeEnergyBar:addChild(self.m_energyBar);
 
     local itemId = {1104, 1007, 1013};
@@ -419,6 +420,7 @@ function testScrow:createHPBar(parent, size, pos, isScale9Bg,isScale9HP)
     	--:loadSlidBallTextures(ResourceMgr:getDemoEnergySliderBall()
     	--	, ResourceMgr:getDemoEnergySliderBall(), ResourceMgr:getDemoEnergySliderBall())
     	--:setPercent(100)
+    	:setCapInsets(cc.rect(18, 0, 18, 0))
     	:addTo(node);
     return node;
 end

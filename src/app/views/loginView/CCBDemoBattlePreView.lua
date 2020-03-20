@@ -130,7 +130,8 @@ function CCBDemoBattlePreView:ViewLoad()
     	:loadBarTexture(ResourceMgr:getSliderBarBg());
     self.m_loadingBar:loadProgressBarTexture(ResourceMgr:getSliderBar());
     self.m_loadingBar:loadSlidBallTextures(ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall());
-    self.m_loadingBar:setPercent(self.m_percent);
+    self.m_loadingBar:setPercent(self.m_percent)
+        :setCapInsets(cc.rect(18, 0, 18, 0));
     self.m_layoutMarks:addChild(self.m_loadingBar);
 
 	self.m_resCount = 0;

@@ -91,7 +91,8 @@ function CCBProduceSpeedUp:ctor(cell)
     self.m_itemCountSlider:loadBarTexture(ResourceMgr:getSliderBarBg());
     self.m_itemCountSlider:loadProgressBarTexture(ResourceMgr:getSliderBar());
     self.m_itemCountSlider:loadSlidBallTextures(ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall());
-	self.m_itemCountSlider:setPercent(1);
+	self.m_itemCountSlider:setPercent(1)
+        :setCapInsets(cc.rect(18, 0, 18, 0));
 
 	local reduceSecond = 900; --一个道具减少15分钟
 	print("produceTime", self.m_showProduceLeftTime);

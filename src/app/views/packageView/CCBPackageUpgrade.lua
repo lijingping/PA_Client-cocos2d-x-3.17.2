@@ -137,7 +137,8 @@ function CCBPackageUpgrade:createSlider()
 	self.m_countSlider:loadBarTexture(barBgPath);
 	self.m_countSlider:loadSlidBallTextures(ballPath);
 	self.m_countSlider:loadProgressBarTexture(barPath);
-	self.m_countSlider:setPercent(self.m_curComposeProp / self.m_itemUpgradeMaxCount * 100);
+	self.m_countSlider:setPercent(self.m_curComposeProp / self.m_itemUpgradeMaxCount * 100)
+        :setCapInsets(cc.rect(18, 0, 18, 0));
 	self.m_countSlider:addEventListener(function(sender, eventType) self:moveSliderBallCallBack(sender, eventType); end);
 	self.m_ccbNodeSlider:addChild(self.m_countSlider);
 end

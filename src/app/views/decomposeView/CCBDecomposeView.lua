@@ -327,7 +327,8 @@ function CCBDecomposeView:createSlider()
     self.m_countSlider:loadProgressBarTexture(ResourceMgr:getSliderBar());
     self.m_countSlider:loadSlidBallTextures(ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall(), ResourceMgr:getSliderBall());
 
-	self.m_countSlider:setPercent(1);
+	self.m_countSlider:setPercent(1)
+        :setCapInsets(cc.rect(18, 0, 18, 0));
 	self.m_countSlider:setMaxPercent(self.m_nDecomposeMaxCount);
 
 	local function changeEvent(pSender, eventType)

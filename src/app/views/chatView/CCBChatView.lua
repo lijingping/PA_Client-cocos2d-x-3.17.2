@@ -154,16 +154,12 @@ function CCBChatView:ownerTableCellAtIndex(cell, idx, data)
 		name:addTo(cell, 2, 2);
 
 		msgBg = ccui.Scale9Sprite:create("res/resources/chatView/chat_dialog_frame2_24_10_16_10.png");
-		msgBg:setAnchorPoint(cc.p(0, 1));
-		msgBg:setCapInsets(cc.rect(20, 20, 20, 4));
-		msgBg:addTo(cell, 3, 3);
 
 		msg = cc.LabelTTF:create();
 		msg:setFontSize(MSG_FONT_SIZE);
 		msg:setAnchorPoint(cc.p(0, 0.5));
 		msg:setHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
 		msg:setDimensions(cc.size(MAX_LINE_WIDTH, 0));
-		msg:addTo(msgBg, 1, 1);
 	else
 		rankIconBg = cell:getChildByTag(1);
 		rankIconBgSize = rankIconBg:getContentSize();
@@ -173,7 +169,13 @@ function CCBChatView:ownerTableCellAtIndex(cell, idx, data)
 		name = cell:getChildByTag(2);
 		msgBg = cell:getChildByTag(3);
 		msg = msgBg:getChildByTag(1);
-		msgBg:initWithFile("res/resources/chatView/chat_dialog_frame2_24_10_16_10.png");
+
+        msg:retain()
+        msg:removeFromParent()
+        msgBg:removeSelf()
+
+		--msgBg:initWithFile(cc.rect(24, 10, 16, 10), "res/resources/chatView/chat_dialog_frame2_24_10_16_10.png");
+		msgBg = ccui.Scale9Sprite:create("res/resources/chatView/chat_dialog_frame2_24_10_16_10.png");
 	end
 
 	local cellWidth = self.m_ccbScaleSpriteView:getContentSize().width;
@@ -187,13 +189,19 @@ function CCBChatView:ownerTableCellAtIndex(cell, idx, data)
 	rankIconBg:setPositionY(bgHeight);
 	name:setPositionY(bgHeight-5);
 	
+	msgBg:setAnchorPoint(cc.p(0, 1));
+	msgBg:setCapInsets(cc.rect(24, 10, 16, 10));
+	msgBg:setPositionY(name:getPositionY()-MSG_FONT_HEIGHT-3);
+
 	local size = cc.size(bgWidth+MSG_FONT_HEIGHT*2, labelHeight);
 	msgBg:setPreferredSize(size);
-	msgBg:setPositionY(name:getPositionY()-MSG_FONT_HEIGHT-3);
-	msgBg:setPositionX(cellWidth -rankIconBgSize.width - size.width);
+	msgBg:setPositionX(cellWidth -rankIconBgSize.width - size.width)
+	
+	msgBg:addTo(cell, 3, 3);
 
 	msg:setPositionX(MSG_FONT_HEIGHT*0.8);
 	msg:setPositionY(labelHeight/2);
+	msg:addTo(msgBg, 1, 1);
 	return cell;
 end
 
@@ -228,16 +236,12 @@ function CCBChatView:otherTableCellAtIndex(cell, idx, data)
 		name:addTo(cell, 2, 2);
 
 		msgBg = ccui.Scale9Sprite:create("res/resources/chatView/chat_dialog_frame1_24_10_16_10.png");
-		msgBg:setAnchorPoint(cc.p(0, 1));
-		msgBg:setCapInsets(cc.rect(20, 20, 20, 4));
-		msgBg:addTo(cell, 3, 3);
 
 		msg = cc.LabelTTF:create();
 		msg:setFontSize(MSG_FONT_SIZE);
 		msg:setAnchorPoint(cc.p(0, 0.5));
 		msg:setHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
 		msg:setDimensions(cc.size(MAX_LINE_WIDTH, 0));
-		msg:addTo(msgBg, 1, 1);
 	else
 		rankIconBg = cell:getChildByTag(1);
 		rankIconBgSize = rankIconBg:getContentSize();
@@ -247,11 +251,16 @@ function CCBChatView:otherTableCellAtIndex(cell, idx, data)
 		name = cell:getChildByTag(2);
 		msgBg = cell:getChildByTag(3);
 		msg = msgBg:getChildByTag(1);
-		msgBg:initWithFile("res/resources/chatView/chat_dialog_frame1_24_10_16_10.png");
+
+		--msgBg:initWithFile(cc.rect(24, 10, 16, 10), "res/resources/chatView/chat_dialog_frame1_24_10_16_10.png");
+		msg:retain()
+        msg:removeFromParent()
+        msgBg:removeSelf()
+
+        msgBg = ccui.Scale9Sprite:create("res/resources/chatView/chat_dialog_frame1_24_10_16_10.png");
 	end
 	rankIconBg:setPositionX(0);
 	name:setPositionX(rankIconBgSize.width+20);
-	msgBg:setPositionX(rankIconBgSize.width);
 
 	name:setColor(cc.c3b(114, 243, 255)):setString("["..data.player_info.nickname.."]");
 	msg:setColor(cc.c3b(114, 243, 255)):setString(data.msg);
@@ -259,13 +268,20 @@ function CCBChatView:otherTableCellAtIndex(cell, idx, data)
 	local bgWidth, bgHeight, labelHeight = self:getStrSize(idx+1);
 	rankIconBg:setPositionY(bgHeight);
 	name:setPositionY(bgHeight-5);
-	
+
+	msgBg:setAnchorPoint(cc.p(0, 1));
+	msgBg:setCapInsets(cc.rect(24, 10, 16, 10));
+	msgBg:setPositionX(rankIconBgSize.width)
+	msgBg:setPositionY(name:getPositionY()-MSG_FONT_HEIGHT-3);
+
 	local size = cc.size(bgWidth+MSG_FONT_HEIGHT*2, labelHeight);
 	msgBg:setPreferredSize(size);
-	msgBg:setPositionY(name:getPositionY()-MSG_FONT_HEIGHT-3);
+
+	msgBg:addTo(cell, 3, 3);
 
 	msg:setPositionX(MSG_FONT_HEIGHT*1.3);
 	msg:setPositionY(labelHeight/2);
+	msg:addTo(msgBg, 1, 1);
 	return cell;
 end
 function CCBChatView:tableCellAtIndex(table, idx)
